@@ -7,6 +7,7 @@
 <title>GUILLTAC | Equipo Táctico Bolivia</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -19,10 +20,12 @@ body{
     color:#222;
 }
 
+/* HEADER */
+
 header{
     background:#111;
     color:white;
-    padding:18px 6%;
+    padding:15px 6%;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -60,13 +63,17 @@ header{
     margin-top:3px;
 }
 
-.cart{
-    background:#fff;
+.cart-button{
+    background:white;
     color:#111;
-    padding:10px 16px;
+    border:none;
+    padding:11px 16px;
     border-radius:6px;
     font-weight:bold;
+    cursor:pointer;
 }
+
+/* HERO */
 
 .hero{
     min-height:430px;
@@ -103,12 +110,14 @@ header{
     display:inline-block;
     margin-top:28px;
     padding:14px 25px;
-    background:#fff;
+    background:white;
     color:#111;
     text-decoration:none;
     font-weight:bold;
     border-radius:5px;
 }
+
+/* SECCIONES */
 
 section{
     padding:55px 7%;
@@ -127,6 +136,8 @@ section{
     color:#666;
     margin-top:8px;
 }
+
+/* CATEGORIAS */
 
 .categories{
     display:grid;
@@ -147,6 +158,8 @@ section{
 .category:hover{
     transform:translateY(-4px);
 }
+
+/* PRODUCTOS */
 
 .products{
     display:grid;
@@ -180,6 +193,11 @@ section{
     margin-bottom:8px;
 }
 
+.product-info p{
+    color:#555;
+    line-height:1.5;
+}
+
 .price{
     font-size:22px;
     font-weight:bold;
@@ -195,7 +213,14 @@ section{
     border-radius:5px;
     cursor:pointer;
     font-weight:bold;
+    margin-top:5px;
 }
+
+.buy:hover{
+    background:#333;
+}
+
+/* G-TAC */
 
 .g-tac{
     background:#171717;
@@ -210,6 +235,129 @@ section{
     line-height:1.6;
 }
 
+/* CARRITO */
+
+.cart-panel{
+    display:none;
+    position:fixed;
+    top:0;
+    right:0;
+    width:400px;
+    max-width:100%;
+    height:100vh;
+    background:white;
+    z-index:2000;
+    box-shadow:-5px 0 20px rgba(0,0,0,.25);
+    padding:25px;
+    overflow-y:auto;
+}
+
+.cart-panel.active{
+    display:block;
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    border-bottom:1px solid #ddd;
+    padding-bottom:15px;
+}
+
+.close-cart{
+    border:none;
+    background:#eee;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.cart-item{
+    border-bottom:1px solid #ddd;
+    padding:15px 0;
+}
+
+.cart-item h4{
+    margin-bottom:8px;
+}
+
+.cart-item-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.quantity{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.quantity button{
+    width:30px;
+    height:30px;
+    border:1px solid #ccc;
+    background:#eee;
+    cursor:pointer;
+    border-radius:4px;
+}
+
+.remove{
+    background:#111 !important;
+    color:white;
+    border:none !important;
+}
+
+.cart-total{
+    font-size:24px;
+    font-weight:bold;
+    margin:25px 0;
+    padding-top:15px;
+    border-top:2px solid #111;
+}
+
+.whatsapp{
+    display:block;
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:5px;
+    background:#111;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.whatsapp:hover{
+    background:#333;
+}
+
+.empty-cart{
+    text-align:center;
+    color:#777;
+    padding:40px 10px;
+}
+
+/* OSCURECER FONDO */
+
+.overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:1500;
+}
+
+.overlay.active{
+    display:block;
+}
+
+/* FOOTER */
+
 footer{
     background:#0b0b0b;
     color:#aaa;
@@ -217,6 +365,8 @@ footer{
     padding:30px;
     font-size:14px;
 }
+
+/* MOVIL */
 
 @media(max-width:900px){
 
@@ -233,11 +383,16 @@ footer{
 @media(max-width:600px){
 
     header{
-        padding:14px 5%;
+        padding:12px 5%;
     }
 
     .logo h1{
         font-size:19px;
+    }
+
+    .logo-mark{
+        width:42px;
+        height:42px;
     }
 
     .hero{
@@ -257,17 +412,27 @@ footer{
     section{
         padding:40px 6%;
     }
+
+    .cart-panel{
+        width:100%;
+    }
 }
+
 </style>
 </head>
 
 <body>
 
+
+<!-- HEADER -->
+
 <header>
 
     <div class="logo">
 
-        <div class="logo-mark">G</div>
+        <div class="logo-mark">
+            G
+        </div>
 
         <div>
             <h1>GUILLTAC</h1>
@@ -276,12 +441,14 @@ footer{
 
     </div>
 
-   <button class="cart" onclick="abrirCarrito()">
-    🛒 Carrito (<span id="cart-count">0</span>)
-</button>
+    <button class="cart-button" onclick="abrirCarrito()">
+        🛒 Carrito (<span id="cart-count">0</span>)
+    </button>
 
 </header>
 
+
+<!-- HERO -->
 
 <section class="hero">
 
@@ -289,7 +456,10 @@ footer{
 
         <span>EQUIPAMIENTO PROFESIONAL</span>
 
-        <h2>PREPARADOS<br>PARA LA ACCIÓN.</h2>
+        <h2>
+            PREPARADOS<br>
+            PARA LA ACCIÓN.
+        </h2>
 
         <p>
             Equipamiento táctico, APH y profesional
@@ -306,13 +476,17 @@ footer{
 </section>
 
 
+<!-- CATEGORIAS -->
+
 <section>
 
     <div class="section-title">
 
         <h2>CATEGORÍAS</h2>
 
-        <p>Encuentra el equipamiento que necesitas</p>
+        <p>
+            Encuentra el equipamiento que necesitas
+        </p>
 
     </div>
 
@@ -340,19 +514,25 @@ footer{
 </section>
 
 
+<!-- PRODUCTOS -->
+
 <section id="productos">
 
     <div class="section-title">
 
         <h2>PRODUCTOS DESTACADOS</h2>
 
-        <p>Equipamiento seleccionado por GUILLTAC</p>
+        <p>
+            Equipamiento seleccionado por GUILLTAC
+        </p>
 
     </div>
 
 
     <div class="products">
 
+
+        <!-- PRODUCTO 1 -->
 
         <div class="product">
 
@@ -362,7 +542,9 @@ footer{
 
             <div class="product-info">
 
-                <h3>Pantalón Táctico Urbano</h3>
+                <h3>
+                    Pantalón Táctico Urbano
+                </h3>
 
                 <p>
                     Pantalón resistente para uso profesional.
@@ -372,8 +554,18 @@ footer{
                     Bs 130
                 </div>
 
-                <button class="buy" onclick="agregarAlCarrito('Pantalón Táctico Urbano', 130)">
-                AGREGAR AL CARRITO
+                <button
+                    class="buy"
+                    onclick="agregarAlCarrito('Pantalón Táctico Urbano',130)"
+                >
+                    AGREGAR AL CARRITO
+                </button>
+
+                <button
+                    class="buy"
+                    onclick="consultarWhatsApp('Pantalón Táctico Urbano',130)"
+                >
+                    CONSULTAR POR WHATSAPP
                 </button>
 
             </div>
@@ -381,6 +573,7 @@ footer{
         </div>
 
 
+        <!-- PRODUCTO 2 -->
 
         <div class="product">
 
@@ -390,7 +583,9 @@ footer{
 
             <div class="product-info">
 
-                <h3>Kit APH Individual</h3>
+                <h3>
+                    Kit APH Individual
+                </h3>
 
                 <p>
                     Equipamiento básico de atención prehospitalaria.
@@ -400,8 +595,18 @@ footer{
                     Bs 95
                 </div>
 
-                <button class="buy">
-                    CONSULTAR
+                <button
+                    class="buy"
+                    onclick="agregarAlCarrito('Kit APH Individual',95)"
+                >
+                    AGREGAR AL CARRITO
+                </button>
+
+                <button
+                    class="buy"
+                    onclick="consultarWhatsApp('Kit APH Individual',95)"
+                >
+                    CONSULTAR POR WHATSAPP
                 </button>
 
             </div>
@@ -409,6 +614,7 @@ footer{
         </div>
 
 
+        <!-- PRODUCTO 3 -->
 
         <div class="product">
 
@@ -418,7 +624,9 @@ footer{
 
             <div class="product-info">
 
-                <h3>Linterna Táctica</h3>
+                <h3>
+                    Linterna Táctica
+                </h3>
 
                 <p>
                     Iluminación compacta para uso profesional.
@@ -428,8 +636,18 @@ footer{
                     Bs 85
                 </div>
 
-                <button class="buy">
-                    CONSULTAR
+                <button
+                    class="buy"
+                    onclick="agregarAlCarrito('Linterna Táctica',85)"
+                >
+                    AGREGAR AL CARRITO
+                </button>
+
+                <button
+                    class="buy"
+                    onclick="consultarWhatsApp('Linterna Táctica',85)"
+                >
+                    CONSULTAR POR WHATSAPP
                 </button>
 
             </div>
@@ -437,6 +655,7 @@ footer{
         </div>
 
 
+        <!-- PRODUCTO 4 -->
 
         <div class="product">
 
@@ -446,7 +665,9 @@ footer{
 
             <div class="product-info">
 
-                <h3>Mochila Táctica</h3>
+                <h3>
+                    Mochila Táctica
+                </h3>
 
                 <p>
                     Mochila resistente para transporte de equipo.
@@ -456,8 +677,18 @@ footer{
                     Bs 180
                 </div>
 
-                <button class="buy">
-                    CONSULTAR
+                <button
+                    class="buy"
+                    onclick="agregarAlCarrito('Mochila Táctica',180)"
+                >
+                    AGREGAR AL CARRITO
+                </button>
+
+                <button
+                    class="buy"
+                    onclick="consultarWhatsApp('Mochila Táctica',180)"
+                >
+                    CONSULTAR POR WHATSAPP
                 </button>
 
             </div>
@@ -470,9 +701,13 @@ footer{
 </section>
 
 
+<!-- G-TAC -->
+
 <section class="g-tac">
 
-    <h2>G-TAC</h2>
+    <h2>
+        G-TAC
+    </h2>
 
     <p>
         Nuestra línea propia de equipamiento táctico,
@@ -483,9 +718,66 @@ footer{
 </section>
 
 
+<!-- CARRITO -->
+
+<div class="overlay" id="overlay" onclick="cerrarCarrito()"></div>
+
+
+<div class="cart-panel" id="cart-panel">
+
+    <div class="cart-header">
+
+        <h2>
+            🛒 Mi Carrito
+        </h2>
+
+        <button
+            class="close-cart"
+            onclick="cerrarCarrito()"
+        >
+            ✕
+        </button>
+
+    </div>
+
+
+    <div id="cart-items">
+
+        <div class="empty-cart">
+            Tu carrito está vacío.
+        </div>
+
+    </div>
+
+
+    <div class="cart-total">
+
+        Total:
+        <span id="cart-total">
+            Bs 0
+        </span>
+
+    </div>
+
+
+    <button
+        class="whatsapp"
+        onclick="comprarPorWhatsApp()"
+    >
+        📱 COMPRAR POR WHATSAPP
+    </button>
+
+
+</div>
+
+
+<!-- FOOTER -->
+
 <footer>
 
-    <strong>GUILLTAC EQUIPO TÁCTICO BOLIVIA</strong>
+    <strong>
+        GUILLTAC EQUIPO TÁCTICO BOLIVIA
+    </strong>
 
     <br><br>
 
@@ -496,98 +788,333 @@ footer{
     © 2026 GUILLTAC. Todos los derechos reservados.
 
 </footer>
+
+
+<!-- FUNCIONES -->
+
 <script>
+
+
+// NÚMERO DE WHATSAPP DE GUILLTAC
+
+const numeroWhatsApp = "59173272204";
+
+
+// CARRITO
 
 let carrito = [];
 
+
+// AGREGAR PRODUCTO
+
 function agregarAlCarrito(nombre, precio){
 
-    const productoExistente = carrito.find(
-        producto => producto.nombre === nombre
-    );
+    const productoExistente =
+        carrito.find(
+            producto => producto.nombre === nombre
+        );
+
 
     if(productoExistente){
 
-        producto.cantidad++;
+        productoExistente.cantidad++;
 
     }else{
 
         carrito.push({
+
             nombre: nombre,
             precio: precio,
             cantidad: 1
+
         });
 
     }
 
+
     actualizarCarrito();
 
-    alert("Producto agregado al carrito");
+    abrirCarrito();
+
 }
 
+
+// ACTUALIZAR CARRITO
 
 function actualizarCarrito(){
 
+    const contador =
+        document.getElementById("cart-count");
+
+    const lista =
+        document.getElementById("cart-items");
+
+    const totalElemento =
+        document.getElementById("cart-total");
+
+
     let cantidadTotal = 0;
 
+    let total = 0;
+
+
     carrito.forEach(producto => {
+
         cantidadTotal += producto.cantidad;
+
+        total +=
+            producto.precio *
+            producto.cantidad;
+
     });
 
-    document.getElementById("cart-count").textContent = cantidadTotal;
+
+    contador.textContent = cantidadTotal;
+
+    totalElemento.textContent =
+        "Bs " + total;
+
+
+    if(carrito.length === 0){
+
+        lista.innerHTML = `
+            <div class="empty-cart">
+                Tu carrito está vacío.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    lista.innerHTML = "";
+
+
+    carrito.forEach((producto,index) => {
+
+        const subtotal =
+            producto.precio *
+            producto.cantidad;
+
+
+        lista.innerHTML += `
+
+            <div class="cart-item">
+
+                <h4>
+                    ${producto.nombre}
+                </h4>
+
+                <div class="cart-item-info">
+
+                    <div class="quantity">
+
+                        <button
+                            onclick="cambiarCantidad(${index},-1)"
+                        >
+                            −
+                        </button>
+
+                        <strong>
+                            ${producto.cantidad}
+                        </strong>
+
+                        <button
+                            onclick="cambiarCantidad(${index},1)"
+                        >
+                            +
+                        </button>
+
+                        <button
+                            class="remove"
+                            onclick="eliminarProducto(${index})"
+                        >
+                            🗑️
+                        </button>
+
+                    </div>
+
+
+                    <strong>
+                        Bs ${subtotal}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
 
 }
 
 
+// CAMBIAR CANTIDAD
+
+function cambiarCantidad(index,cambio){
+
+    carrito[index].cantidad += cambio;
+
+
+    if(carrito[index].cantidad <= 0){
+
+        carrito.splice(index,1);
+
+    }
+
+
+    actualizarCarrito();
+
+}
+
+
+// ELIMINAR PRODUCTO
+
+function eliminarProducto(index){
+
+    carrito.splice(index,1);
+
+    actualizarCarrito();
+
+}
+
+
+// ABRIR CARRITO
+
 function abrirCarrito(){
+
+    document
+        .getElementById("cart-panel")
+        .classList.add("active");
+
+
+    document
+        .getElementById("overlay")
+        .classList.add("active");
+
+}
+
+
+// CERRAR CARRITO
+
+function cerrarCarrito(){
+
+    document
+        .getElementById("cart-panel")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("overlay")
+        .classList.remove("active");
+
+}
+
+
+// CONSULTA INDIVIDUAL POR WHATSAPP
+
+function consultarWhatsApp(nombre,precio){
+
+    const mensaje =
+        "Hola, quiero consultar por:%0A%0A" +
+        "📦 " + nombre + "%0A" +
+        "💰 Precio: Bs " + precio + "%0A%0A" +
+        "¿Está disponible?";
+
+
+    const url =
+        "https://wa.me/" +
+        numeroWhatsApp +
+        "?text=" +
+        mensaje;
+
+
+    window.open(url,"_blank");
+
+}
+
+
+// COMPRA COMPLETA POR WHATSAPP
+
+function comprarPorWhatsApp(){
 
     if(carrito.length === 0){
 
         alert("Tu carrito está vacío.");
 
         return;
+
     }
 
-    let mensaje = "🛒 PEDIDO GUILLTAC%0A%0A";
+
+    let mensaje =
+        "🛒 *NUEVO PEDIDO GUILLTAC*%0A%0A";
+
 
     let total = 0;
 
+
     carrito.forEach(producto => {
 
-        const subtotal = producto.precio * producto.cantidad;
+        const subtotal =
+            producto.precio *
+            producto.cantidad;
+
 
         mensaje +=
-        producto.nombre +
-        " x" +
-        producto.cantidad +
-        " — Bs " +
-        subtotal +
-        "%0A";
+            "📦 " +
+            producto.nombre +
+            "%0A";
+
+
+        mensaje +=
+            "Cantidad: " +
+            producto.cantidad +
+            "%0A";
+
+
+        mensaje +=
+            "Precio: Bs " +
+            producto.precio +
+            "%0A";
+
+
+        mensaje +=
+            "Subtotal: Bs " +
+            subtotal +
+            "%0A%0A";
+
 
         total += subtotal;
 
     });
 
-    mensaje +=
-    "%0A💰 TOTAL: Bs " +
-    total +
-    "%0A%0A";
 
     mensaje +=
-    "Hola, quiero realizar este pedido.";
+        "💰 *TOTAL: Bs " +
+        total +
+        "*%0A%0A";
 
-    const numero = "59173272204";
+
+    mensaje +=
+        "Hola, quiero realizar este pedido.";
+
 
     const url =
-    "https://wa.me/" +
-    numero +
-    "?text=" +
-    mensaje;
+        "https://wa.me/" +
+        numeroWhatsApp +
+        "?text=" +
+        mensaje;
 
-    window.open(url, "_blank");
+
+    window.open(url,"_blank");
 
 }
 
 </script>
+
+
 </body>
 </html>
