@@ -496,6 +496,98 @@ footer{
     © 2026 GUILLTAC. Todos los derechos reservados.
 
 </footer>
+<script>
 
+let carrito = [];
+
+function agregarAlCarrito(nombre, precio){
+
+    const productoExistente = carrito.find(
+        producto => producto.nombre === nombre
+    );
+
+    if(productoExistente){
+
+        producto.cantidad++;
+
+    }else{
+
+        carrito.push({
+            nombre: nombre,
+            precio: precio,
+            cantidad: 1
+        });
+
+    }
+
+    actualizarCarrito();
+
+    alert("Producto agregado al carrito");
+}
+
+
+function actualizarCarrito(){
+
+    let cantidadTotal = 0;
+
+    carrito.forEach(producto => {
+        cantidadTotal += producto.cantidad;
+    });
+
+    document.getElementById("cart-count").textContent = cantidadTotal;
+
+}
+
+
+function abrirCarrito(){
+
+    if(carrito.length === 0){
+
+        alert("Tu carrito está vacío.");
+
+        return;
+    }
+
+    let mensaje = "🛒 PEDIDO GUILLTAC%0A%0A";
+
+    let total = 0;
+
+    carrito.forEach(producto => {
+
+        const subtotal = producto.precio * producto.cantidad;
+
+        mensaje +=
+        producto.nombre +
+        " x" +
+        producto.cantidad +
+        " — Bs " +
+        subtotal +
+        "%0A";
+
+        total += subtotal;
+
+    });
+
+    mensaje +=
+    "%0A💰 TOTAL: Bs " +
+    total +
+    "%0A%0A";
+
+    mensaje +=
+    "Hola, quiero realizar este pedido.";
+
+    const numero = "59173272204";
+
+    const url =
+    "https://wa.me/" +
+    numero +
+    "?text=" +
+    mensaje;
+
+    window.open(url, "_blank");
+
+}
+
+</script>
 </body>
 </html>
