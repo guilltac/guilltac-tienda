@@ -761,15 +761,207 @@ footer{
 
 
     <button
-        class="whatsapp"
-        onclick="comprarPorWhatsApp()"
-    >
-        📱 COMPRAR POR WHATSAPP
-    </button>
-
+    class="whatsapp"
+    onclick="abrirFormularioCliente()"
+>
+    📱 COMPRAR POR WHATSAPP
+</button>
 
 </div>
 
+<!-- FORMULARIO CLIENTE -->
+
+<div class="overlay" id="client-overlay"></div>
+
+<div class="cart-panel" id="client-form">
+
+    <div class="cart-header">
+
+        <h2>
+            📋 Datos del pedido
+        </h2>
+
+        <button
+            class="close-cart"
+            onclick="cerrarFormularioCliente()"
+        >
+            ✕
+        </button>
+
+    </div>
+
+
+    <p style="color:#666; margin-bottom:20px;">
+        Completa tus datos para enviar el pedido por WhatsApp.
+    </p>
+
+
+    <label>
+        Nombre completo
+    </label>
+
+    <input
+        type="text"
+        id="cliente-nombre"
+        placeholder="Ej. Juan Pérez"
+        style="width:100%; padding:12px; margin:7px 0 16px; border:1px solid #ccc; border-radius:5px;"
+    >
+
+
+    <label>
+        Teléfono
+    </label>
+
+    <input
+        type="tel"
+        id="cliente-telefono"
+        placeholder="Ej. 71234567"
+        style="width:100%; padding:12px; margin:7px 0 16px; border:1px solid #ccc; border-radius:5px;"
+    >
+
+
+    <label>
+        Ciudad
+    </label>
+
+    <select
+        id="cliente-ciudad"
+        style="width:100%; padding:12px; margin:7px 0 16px; border:1px solid #ccc; border-radius:5px;"
+    >
+
+        <option value="">
+            Selecciona una ciudad
+        </option>
+
+        <option>
+            La Paz
+        </option>
+
+        <option>
+            El Alto
+        </option>
+
+        <option>
+            Santa Cruz
+        </option>
+
+        <option>
+            Cochabamba
+        </option>
+
+        <option>
+            Sucre
+        </option>
+
+        <option>
+            Tarija
+        </option>
+
+        <option>
+            Oruro
+        </option>
+
+        <option>
+            Potosí
+        </option>
+
+        <option>
+            Beni
+        </option>
+
+        <option>
+            Pando
+        </option>
+
+        <option>
+            Otra
+        </option>
+
+    </select>
+
+
+    <label>
+        Zona / dirección
+    </label>
+
+    <textarea
+        id="cliente-direccion"
+        placeholder="Indica dónde deseas recibir tu pedido"
+        style="width:100%; padding:12px; margin:7px 0 16px; border:1px solid #ccc; border-radius:5px; min-height:80px;"
+    ></textarea>
+
+
+    <label>
+        Forma de entrega
+    </label>
+
+    <select
+        id="cliente-entrega"
+        style="width:100%; padding:12px; margin:7px 0 16px; border:1px solid #ccc; border-radius:5px;"
+    >
+
+        <option value="">
+            Selecciona una opción
+        </option>
+
+        <option>
+            Envío
+        </option>
+
+        <option>
+            Recojo
+        </option>
+
+    </select>
+
+
+    <label>
+        Forma de pago
+    </label>
+
+    <select
+        id="cliente-pago"
+        style="width:100%; padding:12px; margin:7px 0 16px; border:1px solid #ccc; border-radius:5px;"
+    >
+
+        <option value="">
+            Selecciona una opción
+        </option>
+
+        <option>
+            QR
+        </option>
+
+        <option>
+            Transferencia bancaria
+        </option>
+
+        <option>
+            Efectivo
+        </option>
+
+    </select>
+
+
+    <label>
+        Observaciones
+    </label>
+
+    <textarea
+        id="cliente-observaciones"
+        placeholder="Información adicional (opcional)"
+        style="width:100%; padding:12px; margin:7px 0 20px; border:1px solid #ccc; border-radius:5px; min-height:80px;"
+    ></textarea>
+
+
+    <button
+        class="whatsapp"
+        onclick="enviarPedidoWhatsApp()"
+    >
+        📱 ENVIAR PEDIDO POR WHATSAPP
+    </button>
+
+</div>
 
 <!-- FOOTER -->
 
@@ -1113,6 +1305,203 @@ function comprarPorWhatsApp(){
 
 }
 
+    // ABRIR FORMULARIO DEL CLIENTE
+
+function abrirFormularioCliente(){
+
+    if(carrito.length === 0){
+
+        alert("Tu carrito está vacío.");
+
+        return;
+
+    }
+
+    document
+        .getElementById("client-form")
+        .classList.add("active");
+
+    document
+        .getElementById("client-overlay")
+        .classList.add("active");
+}
+
+
+// CERRAR FORMULARIO DEL CLIENTE
+
+function cerrarFormularioCliente(){
+
+    document
+        .getElementById("client-form")
+        .classList.remove("active");
+
+    document
+        .getElementById("client-overlay")
+        .classList.remove("active");
+
+}
+
+
+// ENVIAR PEDIDO A WHATSAPP
+
+function enviarPedidoWhatsApp(){
+
+    const nombre =
+        document.getElementById("cliente-nombre").value.trim();
+
+    const telefono =
+        document.getElementById("cliente-telefono").value.trim();
+
+    const ciudad =
+        document.getElementById("cliente-ciudad").value;
+
+    const direccion =
+        document.getElementById("cliente-direccion").value.trim();
+
+    const entrega =
+        document.getElementById("cliente-entrega").value;
+
+    const pago =
+        document.getElementById("cliente-pago").value;
+
+    const observaciones =
+        document.getElementById("cliente-observaciones").value.trim();
+
+
+    if(
+        nombre === "" ||
+        telefono === "" ||
+        ciudad === "" ||
+        direccion === "" ||
+        entrega === "" ||
+        pago === ""
+    ){
+
+        alert(
+            "Por favor completa todos los campos obligatorios."
+        );
+
+        return;
+
+    }
+
+
+    let mensaje =
+        "🛒 *NUEVO PEDIDO GUILLTAC*%0A%0A";
+
+
+    mensaje +=
+        "👤 *Cliente:* " +
+        nombre +
+        "%0A";
+
+
+    mensaje +=
+        "📱 *Teléfono:* " +
+        telefono +
+        "%0A";
+
+
+    mensaje +=
+        "📍 *Ciudad:* " +
+        ciudad +
+        "%0A";
+
+
+    mensaje +=
+        "🏠 *Dirección:* " +
+        direccion +
+        "%0A";
+
+
+    mensaje +=
+        "🚚 *Entrega:* " +
+        entrega +
+        "%0A";
+
+
+    mensaje +=
+        "💳 *Pago:* " +
+        pago +
+        "%0A%0A";
+
+
+    mensaje +=
+        "📦 *PRODUCTOS*%0A%0A";
+
+
+    let total = 0;
+
+
+    carrito.forEach(producto => {
+
+        const subtotal =
+            producto.precio *
+            producto.cantidad;
+
+
+        mensaje +=
+            "• " +
+            producto.nombre +
+            "%0A";
+
+
+        mensaje +=
+            "  Cantidad: " +
+            producto.cantidad +
+            "%0A";
+
+
+        mensaje +=
+            "  Precio: Bs " +
+            producto.precio +
+            "%0A";
+
+
+        mensaje +=
+            "  Subtotal: Bs " +
+            subtotal +
+            "%0A%0A";
+
+
+        total += subtotal;
+
+    });
+
+
+    mensaje +=
+        "💰 *TOTAL: Bs " +
+        total +
+        "*%0A%0A";
+
+
+    if(observaciones !== ""){
+
+        mensaje +=
+            "📝 *Observaciones:*%0A" +
+            observaciones +
+            "%0A%0A";
+
+    }
+
+
+    mensaje +=
+        "Hola, quiero confirmar este pedido.";
+
+
+    const url =
+        "https://wa.me/" +
+        numeroWhatsApp +
+        "?text=" +
+        mensaje;
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
 </script>
 
 
