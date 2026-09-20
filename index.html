@@ -7,7 +7,6 @@
 <title>GUILLTAC | Equipo Táctico Bolivia</title>
 
 <style>
-
 *{
     box-sizing:border-box;
     margin:0;
@@ -16,22 +15,20 @@
 
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#f2f3f1;
-    color:#171917;
+    background:#f2f2f2;
+    color:#222;
 }
 
-/* ENCABEZADO */
-
 header{
-    background:#111411;
+    background:#111;
     color:white;
-    padding:15px 6%;
+    padding:18px 6%;
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
     position:sticky;
     top:0;
-    z-index:100;
+    z-index:1000;
 }
 
 .logo{
@@ -40,15 +37,15 @@ header{
     gap:12px;
 }
 
-.logo-icon{
-    width:45px;
-    height:45px;
+.logo-mark{
+    width:48px;
+    height:48px;
     border:2px solid white;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:22px;
+    font-size:25px;
     font-weight:bold;
 }
 
@@ -57,339 +54,251 @@ header{
     letter-spacing:2px;
 }
 
-.logo span{
-    display:block;
-    font-size:10px;
-    color:#aaa;
-    letter-spacing:1px;
+.logo p{
+    font-size:11px;
+    color:#bbb;
+    margin-top:3px;
 }
 
 .cart{
-    background:#252925;
-    border:1px solid #555;
-    color:white;
+    background:#fff;
+    color:#111;
     padding:10px 16px;
-    border-radius:7px;
-    cursor:pointer;
+    border-radius:6px;
+    font-weight:bold;
 }
-
-/* PORTADA */
 
 .hero{
     min-height:430px;
-    background:
-    linear-gradient(
-        rgba(10,13,11,.82),
-        rgba(10,13,11,.82)
-    ),
-    linear-gradient(135deg,#1c241e,#343a35);
-
+    background:linear-gradient(135deg,#111,#292929);
     color:white;
-
     display:flex;
     align-items:center;
-
-    padding:70px 8%;
+    padding:60px 8%;
 }
 
 .hero-content{
     max-width:700px;
 }
 
-.hero small{
+.hero span{
+    font-size:13px;
     letter-spacing:3px;
-    color:#bfc5bf;
+    color:#aaa;
 }
 
 .hero h2{
-    font-size:clamp(40px,7vw,72px);
-    line-height:.95;
-    margin:20px 0;
+    font-size:52px;
+    line-height:1;
+    margin:18px 0;
 }
 
 .hero p{
+    color:#ccc;
     font-size:18px;
-    color:#d0d4d0;
-    max-width:600px;
+    line-height:1.6;
 }
 
-.hero-button{
+.btn{
     display:inline-block;
-    margin-top:30px;
-    padding:14px 24px;
-    background:white;
+    margin-top:28px;
+    padding:14px 25px;
+    background:#fff;
     color:#111;
     text-decoration:none;
-    border-radius:6px;
     font-weight:bold;
+    border-radius:5px;
 }
 
-/* CATEGORIAS */
-
-.categories{
-    background:white;
-    padding:25px 6%;
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    border-bottom:1px solid #ddd;
-}
-
-.categories button{
-    white-space:nowrap;
-    padding:10px 18px;
-    border-radius:25px;
-    border:1px solid #ccc;
-    background:white;
-    cursor:pointer;
-}
-
-.categories button:hover{
-    background:#111;
-    color:white;
-}
-
-/* CONTENIDO */
-
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:50px 6%;
+section{
+    padding:55px 7%;
 }
 
 .section-title{
-    margin-bottom:30px;
-}
-
-.section-title small{
-    letter-spacing:2px;
-    color:#777;
+    text-align:center;
+    margin-bottom:35px;
 }
 
 .section-title h2{
-    font-size:34px;
-    margin-top:6px;
+    font-size:32px;
 }
 
-/* PRODUCTOS */
+.section-title p{
+    color:#666;
+    margin-top:8px;
+}
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.category{
+    background:#111;
+    color:white;
+    padding:35px 20px;
+    text-align:center;
+    border-radius:8px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.category:hover{
+    transform:translateY(-4px);
+}
 
 .products{
     display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-
+    grid-template-columns:repeat(4,1fr);
     gap:22px;
 }
 
 .product{
     background:white;
-    border:1px solid #ddd;
-    border-radius:10px;
+    border-radius:8px;
     overflow:hidden;
-    transition:.2s;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
 }
 
-.product:hover{
-    transform:translateY(-4px);
-    box-shadow:0 8px 25px rgba(0,0,0,.12);
-}
-
-.product-image{
+.product-img{
     height:220px;
-    background:#d8dad7;
-
+    background:#ddd;
     display:flex;
     align-items:center;
     justify-content:center;
-
     color:#777;
-    font-size:12px;
-    letter-spacing:1px;
+    font-weight:bold;
 }
 
 .product-info{
     padding:18px;
 }
 
-.product-category{
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    color:#777;
-}
-
-.product h3{
-    margin:8px 0;
+.product-info h3{
     font-size:18px;
-}
-
-.product p{
-    color:#666;
-    font-size:14px;
-    min-height:40px;
+    margin-bottom:8px;
 }
 
 .price{
     font-size:22px;
     font-weight:bold;
-    margin-top:15px;
+    margin:12px 0;
 }
 
-.product button{
+.buy{
     width:100%;
-    margin-top:15px;
     padding:12px;
-    border:none;
-    background:#151815;
+    border:0;
+    background:#111;
     color:white;
-    border-radius:6px;
+    border-radius:5px;
     cursor:pointer;
+    font-weight:bold;
 }
 
-.product button:hover{
-    background:#303630;
-}
-
-/* G-TAC */
-
-.gtac{
-    background:#151815;
+.g-tac{
+    background:#171717;
     color:white;
-    padding:60px 8%;
-    margin-top:20px;
+    text-align:center;
 }
 
-.gtac-content{
-    max-width:800px;
-}
-
-.gtac h2{
-    font-size:40px;
-    margin:10px 0;
-}
-
-.gtac p{
-    color:#c6cbc6;
+.g-tac p{
+    max-width:700px;
+    margin:15px auto;
+    color:#ccc;
     line-height:1.6;
 }
 
-/* PIE */
-
 footer{
-    background:#0d0f0d;
+    background:#0b0b0b;
     color:#aaa;
     text-align:center;
-    padding:35px 20px;
+    padding:30px;
+    font-size:14px;
 }
 
-footer strong{
-    color:white;
-    letter-spacing:2px;
-}
+@media(max-width:900px){
 
-footer p{
-    margin-top:8px;
-    font-size:13px;
-}
+    .categories,
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-/* MOVIL */
+    .hero h2{
+        font-size:40px;
+    }
+}
 
 @media(max-width:600px){
 
     header{
-        padding:12px 4%;
+        padding:14px 5%;
     }
 
     .logo h1{
         font-size:19px;
     }
 
-    .logo-icon{
-        width:38px;
-        height:38px;
-    }
-
-    .cart{
-        padding:8px 10px;
-        font-size:12px;
-    }
-
     .hero{
-        min-height:400px;
-        padding:50px 7%;
+        min-height:380px;
+        padding:45px 7%;
     }
 
     .hero h2{
-        font-size:48px;
+        font-size:35px;
     }
 
-    .container{
-        padding:40px 5%;
+    .categories,
+    .products{
+        grid-template-columns:1fr;
     }
 
+    section{
+        padding:40px 6%;
+    }
 }
-
 </style>
 </head>
 
-
 <body>
-
 
 <header>
 
     <div class="logo">
 
-        <div class="logo-icon">
-            G
-        </div>
+        <div class="logo-mark">G</div>
 
         <div>
             <h1>GUILLTAC</h1>
-
-            <span>
-                EQUIPO TÁCTICO BOLIVIA
-            </span>
+            <p>EQUIPO TÁCTICO BOLIVIA</p>
         </div>
 
     </div>
 
-
-    <button class="cart">
-
+    <div class="cart">
         🛒 Carrito
-
-    </button>
+    </div>
 
 </header>
-
 
 
 <section class="hero">
 
     <div class="hero-content">
 
-        <small>
-            EQUIPAMIENTO TÁCTICO • APH • PROFESIONAL
-        </small>
+        <span>EQUIPAMIENTO PROFESIONAL</span>
 
-        <h2>
-            PREPARADOS<br>
-            PARA LA ACCIÓN.
-        </h2>
+        <h2>PREPARADOS<br>PARA LA ACCIÓN.</h2>
 
         <p>
-            Equipamiento táctico, primeros auxilios
-            y productos profesionales seleccionados
-            para quienes necesitan estar preparados.
+            Equipamiento táctico, APH y profesional
+            seleccionado para quienes necesitan
+            confianza, resistencia y funcionalidad.
         </p>
 
-        <a
-        href="#productos"
-        class="hero-button">
-
-            VER CATÁLOGO
-
+        <a href="#productos" class="btn">
+            VER PRODUCTOS
         </a>
 
     </div>
@@ -397,243 +306,196 @@ footer p{
 </section>
 
 
-
-<nav class="categories">
-
-    <button>Todos</button>
-
-    <button>Táctico</button>
-
-    <button>APH</button>
-
-    <button>Vestimenta</button>
-
-    <button>Calzado</button>
-
-    <button>Accesorios</button>
-
-    <button>G-TAC</button>
-
-</nav>
-
-
-
-<main class="container" id="productos">
-
+<section>
 
     <div class="section-title">
 
-        <small>
-            CATÁLOGO GUILLTAC
-        </small>
+        <h2>CATEGORÍAS</h2>
 
-        <h2>
-            Productos destacados
-        </h2>
+        <p>Encuentra el equipamiento que necesitas</p>
 
     </div>
 
 
+    <div class="categories">
 
-    <div class="products">
+        <div class="category">
+            EQUIPAMIENTO<br>TÁCTICO
+        </div>
 
+        <div class="category">
+            APH
+        </div>
 
-        <article class="product">
+        <div class="category">
+            VESTIMENTA
+        </div>
 
-            <div class="product-image">
-
-                FOTO DEL PRODUCTO
-
-            </div>
-
-
-            <div class="product-info">
-
-                <div class="product-category">
-                    Vestimenta
-                </div>
-
-                <h3>
-                    Pantalón Táctico Urbano
-                </h3>
-
-                <p>
-                    Pantalón táctico para uso
-                    profesional.
-                </p>
-
-                <div class="price">
-                    Bs 130
-                </div>
-
-                <button>
-                    AGREGAR AL CARRITO
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <article class="product">
-
-            <div class="product-image">
-
-                FOTO DEL PRODUCTO
-
-            </div>
-
-
-            <div class="product-info">
-
-                <div class="product-category">
-                    APH
-                </div>
-
-                <h3>
-                    Kit APH Individual
-                </h3>
-
-                <p>
-                    Equipamiento básico de
-                    primeros auxilios.
-                </p>
-
-                <div class="price">
-                    Bs 95
-                </div>
-
-                <button>
-                    AGREGAR AL CARRITO
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <article class="product">
-
-            <div class="product-image">
-
-                FOTO DEL PRODUCTO
-
-            </div>
-
-
-            <div class="product-info">
-
-                <div class="product-category">
-                    Accesorios
-                </div>
-
-                <h3>
-                    Linterna Táctica
-                </h3>
-
-                <p>
-                    Linterna para uso profesional.
-                </p>
-
-                <div class="price">
-                    Bs 85
-                </div>
-
-                <button>
-                    AGREGAR AL CARRITO
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <article class="product">
-
-            <div class="product-image">
-
-                FOTO DEL PRODUCTO
-
-            </div>
-
-
-            <div class="product-info">
-
-                <div class="product-category">
-                    Táctico
-                </div>
-
-                <h3>
-                    Mochila Táctica
-                </h3>
-
-                <p>
-                    Mochila para transporte de
-                    equipamiento.
-                </p>
-
-                <div class="price">
-                    Bs 180
-                </div>
-
-                <button>
-                    AGREGAR AL CARRITO
-                </button>
-
-            </div>
-
-        </article>
-
-
-    </div>
-
-</main>
-
-
-
-<section class="gtac">
-
-    <div class="gtac-content">
-
-        <small>
-            NUESTRA MARCA
-        </small>
-
-        <h2>
+        <div class="category">
             G-TAC
-        </h2>
-
-        <p>
-            Línea propia de GUILLTAC orientada al
-            desarrollo de equipamiento táctico,
-            APH y profesional.
-        </p>
+        </div>
 
     </div>
 
 </section>
 
 
+<section id="productos">
+
+    <div class="section-title">
+
+        <h2>PRODUCTOS DESTACADOS</h2>
+
+        <p>Equipamiento seleccionado por GUILLTAC</p>
+
+    </div>
+
+
+    <div class="products">
+
+
+        <div class="product">
+
+            <div class="product-img">
+                FOTO DEL PRODUCTO
+            </div>
+
+            <div class="product-info">
+
+                <h3>Pantalón Táctico Urbano</h3>
+
+                <p>
+                    Pantalón resistente para uso profesional.
+                </p>
+
+                <div class="price">
+                    Bs 130
+                </div>
+
+                <button class="buy">
+                    CONSULTAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <div class="product-img">
+                FOTO DEL PRODUCTO
+            </div>
+
+            <div class="product-info">
+
+                <h3>Kit APH Individual</h3>
+
+                <p>
+                    Equipamiento básico de atención prehospitalaria.
+                </p>
+
+                <div class="price">
+                    Bs 95
+                </div>
+
+                <button class="buy">
+                    CONSULTAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <div class="product-img">
+                FOTO DEL PRODUCTO
+            </div>
+
+            <div class="product-info">
+
+                <h3>Linterna Táctica</h3>
+
+                <p>
+                    Iluminación compacta para uso profesional.
+                </p>
+
+                <div class="price">
+                    Bs 85
+                </div>
+
+                <button class="buy">
+                    CONSULTAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <div class="product-img">
+                FOTO DEL PRODUCTO
+            </div>
+
+            <div class="product-info">
+
+                <h3>Mochila Táctica</h3>
+
+                <p>
+                    Mochila resistente para transporte de equipo.
+                </p>
+
+                <div class="price">
+                    Bs 180
+                </div>
+
+                <button class="buy">
+                    CONSULTAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<section class="g-tac">
+
+    <h2>G-TAC</h2>
+
+    <p>
+        Nuestra línea propia de equipamiento táctico,
+        desarrollada con enfoque en funcionalidad,
+        resistencia y uso profesional.
+    </p>
+
+</section>
+
 
 <footer>
 
-    <strong>
-        GUILLTAC
-    </strong>
+    <strong>GUILLTAC EQUIPO TÁCTICO BOLIVIA</strong>
 
-    <p>
-        Equipo Táctico Bolivia
-    </p>
+    <br><br>
 
-    <p>
-        Equipamiento táctico, APH y profesional.
-    </p>
+    Equipamiento táctico, APH y profesional.
+
+    <br><br>
+
+    © 2026 GUILLTAC. Todos los derechos reservados.
 
 </footer>
-
 
 </body>
 </html>
