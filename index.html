@@ -609,7 +609,7 @@ Productos
 
 <div
 class="product"
-data-category="tactico novedades"
+data-category="tactico novedades">
 
 <span class="badge badge-new">
 NUEVO
@@ -1826,10 +1826,11 @@ function filtrarCategoria(
             }
 
 
-            if(
-                producto.dataset.category ===
-                categoria
-            ){
+          if(
+    producto.dataset.category
+    .split(/\s+/)
+    .includes(categoria)
+){
 
                 producto.classList.remove(
                     "hidden"
