@@ -130,10 +130,37 @@ header{
     box-shadow:0 4px 12px rgba(0,0,0,.12);
 }
 
-.products{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:22px;
+.category{
+    background:white;
+    padding:22px 15px;
+    text-align:center;
+    border-radius:8px;
+    cursor:pointer;
+    border:1px solid #ddd;
+    transition:.2s;
+}
+
+.category:hover{
+    transform:translateY(-3px);
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.category-icon{
+    width:52px;
+    height:52px;
+    margin:0 auto 12px;
+    border:2px solid #222;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.category h3{
+    font-size:15px;
+}
 }
 
 .product{
@@ -488,45 +515,84 @@ Categorías
 
 <div class="categories">
 
-<div class="category"
-onclick="filtrarCategoria('todos')">
+    <div class="category"
+    onclick="filtrarCategoria('todos')">
 
-🛍️
-<h3>Todos</h3>
+        <div class="category-icon">▦</div>
 
-</div>
+        <h3>Todos</h3>
 
-<div class="category"
-onclick="filtrarCategoria('nuevo')">
+    </div>
 
-🆕
-<h3>Productos nuevos</h3>
 
-</div>
+    <div class="category"
+    onclick="filtrarCategoria('novedades')">
 
-<div class="category"
-onclick="filtrarCategoria('promo')">
+        <div class="category-icon">✦</div>
 
-🔥
-<h3>Promociones</h3>
+        <h3>Novedades</h3>
 
-</div>
+    </div>
 
-<div class="category"
-onclick="filtrarCategoria('usado')">
 
-♻️
-<h3>Usados / Uniformes</h3>
+    <div class="category"
+    onclick="filtrarCategoria('botas')">
 
-</div>
+        <div class="category-icon">🥾</div>
 
-<div class="category"
-onclick="filtrarCategoria('gtac')">
+        <h3>Botas</h3>
 
-⚡
-<h3>G-TAC</h3>
+    </div>
 
-</div>
+
+    <div class="category"
+    onclick="filtrarCategoria('tactico')">
+
+        <div class="category-icon">◈</div>
+
+        <h3>Equipo Táctico</h3>
+
+    </div>
+
+
+    <div class="category"
+    onclick="filtrarCategoria('uniformes')">
+
+        <div class="category-icon">▤</div>
+
+        <h3>Uniformes</h3>
+
+    </div>
+
+
+    <div class="category"
+    onclick="filtrarCategoria('aph')">
+
+        <div class="category-icon">✚</div>
+
+        <h3>APH</h3>
+
+    </div>
+
+
+    <div class="category"
+    onclick="filtrarCategoria('promo')">
+
+        <div class="category-icon">%</div>
+
+        <h3>Promociones</h3>
+
+    </div>
+
+
+    <div class="category"
+    onclick="filtrarCategoria('usado')">
+
+        <div class="category-icon">↻</div>
+
+        <h3>Usados</h3>
+
+    </div>
 
 </div>
 
