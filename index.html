@@ -796,10 +796,39 @@ footer{
     </p>
 
 
-    <label>
-        Nombre completo
-    </label>
+   <label>
+    Nombre
+</label>
 
+<input
+    type="text"
+    id="cliente-nombre"
+    placeholder="Ej. Juan"
+    style="width:100%; padding:12px; margin:7px 0 16px; border:1px solid #ccc; border-radius:5px;"
+>
+
+
+<label>
+    Apellido
+</label>
+
+<input
+    type="text"
+    id="cliente-apellido"
+    placeholder="Ej. Pérez"
+    style="width:100%; padding:12px; margin:7px 0 16px; border:1px solid #ccc; border-radius:5px;"
+>
+<label>
+    C.I.
+</label>
+
+<input
+    type="text"
+    id="cliente-ci"
+    placeholder="Ej. 12345678"
+    inputmode="numeric"
+    style="width:100%; padding:12px; margin:7px 0 16px; border:1px solid #ccc; border-radius:5px;"
+>
     <input
         type="text"
         id="cliente-nombre"
@@ -1349,9 +1378,15 @@ function enviarPedidoWhatsApp(){
     const nombre =
         document.getElementById("cliente-nombre").value.trim();
 
+    const apellido =
+    document.getElementById("cliente-apellido").value.trim();
+    
+    const ci =
+    document.getElementById("cliente-ci").value.trim();
+    
     const telefono =
         document.getElementById("cliente-telefono").value.trim();
-
+   
     const ciudad =
         document.getElementById("cliente-ciudad").value;
 
@@ -1369,12 +1404,16 @@ function enviarPedidoWhatsApp(){
 
 
     if(
-        nombre === "" ||
-        telefono === "" ||
-        ciudad === "" ||
-        direccion === "" ||
-        entrega === "" ||
-        pago === ""
+       if(
+    nombre === "" ||
+    apellido === "" ||
+    telefono === "" ||
+    ci === "" ||
+    ciudad === "" ||
+    direccion === "" ||
+    entrega === "" ||
+    pago === ""
+){
     ){
 
         alert(
@@ -1391,15 +1430,24 @@ function enviarPedidoWhatsApp(){
 
 
     mensaje +=
-        "👤 *Cliente:* " +
-        nombre +
-        "%0A";
+    "👤 *Nombre:* " +
+    nombre +
+    "%0A";
 
+mensaje +=
+    "👤 *Apellido:* " +
+    apellido +
+    "%0A";
 
-    mensaje +=
-        "📱 *Teléfono:* " +
-        telefono +
-        "%0A";
+mensaje +=
+    "📱 *Teléfono:* " +
+    telefono +
+    "%0A";
+
+mensaje +=
+    "🪪 *C.I.:* " +
+    ci +
+    "%0A";
 
 
     mensaje +=
