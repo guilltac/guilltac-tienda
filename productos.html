@@ -404,6 +404,136 @@ Producto enviado correctamente.
 const URL_SERVIDOR =
 "https://script.google.com/macros/s/AKfycbzSN6dszANppWHxfySG_QEjW8n57qFFeBwcAfaW7tI2WeZPWArCGBqhWQp-mUv0EwU-uQ/exec";
 
+    function subirFotoDrive(archivo) {
+
+    return new Promise(function(resolve, reject) {
+
+        if (!archivo) {
+
+            resolve("");
+
+            return;
+
+        }
+
+        const estadoFoto =
+            document.getElementById("estadoFoto");
+
+        estadoFoto.textContent =
+            "📷 Preparando fotografía...";
+
+
+        const lector =
+            new FileReader();
+
+
+        lector.onload = function(e) {
+
+            try {
+
+                const resultado =
+                    e.target.result;
+
+                const partes =
+                    resultado.split(",");
+
+                const base64 =
+                    partes[1];
+
+                const tipoArchivo =
+                    archivo.type ||
+                    "image/jpeg";
+
+                const nombreArchivo =
+                    Date.now() +
+                    "_" +
+                    archivo.name;
+
+
+                estadoFoto.textContent =
+                    "📤 Subiendo fotografía...";
+
+
+                /*
+                 * Por ahora utilizamos una petición
+                 * directa al Web App.
+                 */
+
+                fetch(
+                    URL_SERVIDOR,
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/x-www-form-urlencoded"
+                        },
+
+                        body:
+                            "accion=subirImagen" +
+                            "&base64=" +
+                            encodeURIComponent(base64) +
+                            "&nombreArchivo=" +
+                            encodeURIComponent(nombreArchivo) +
+                            "&tipoArchivo=" +
+                            encodeURIComponent(tipoArchivo)
+
+                    }
+
+                )
+                .then(function(respuesta){
+
+                    return respuesta.text();
+
+                })
+
+                .then(function(resultado){
+
+                    console.log(
+                        "Respuesta Drive:",
+                        resultado
+                    );
+
+                    estadoFoto.textContent =
+                        "📤 Respuesta recibida.";
+
+                    resolve(resultado);
+
+                })
+
+                .catch(function(error){
+
+                    estadoFoto.textContent =
+                        "❌ Error al subir fotografía.";
+
+                    reject(error);
+
+                });
+
+
+            } catch(error) {
+
+                reject(error);
+
+            }
+
+        };
+
+
+        lector.onerror =
+            function(error){
+
+                reject(error);
+
+            };
+
+
+        lector.readAsDataURL(archivo);
+
+    });
+
+}
 
 function guardarProducto(){
 
