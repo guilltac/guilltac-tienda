@@ -402,22 +402,31 @@ const URL_SERVIDOR =
 function guardarProducto(){
 
     const nombre =
-        document.getElementById("nombre").value.trim();
+        document
+        .getElementById("nombre")
+        .value
+        .trim();
 
     const precio =
-        document.getElementById("precio").value;
+        document
+        .getElementById("precio")
+        .value;
 
     const stock =
-        document.getElementById("stock").value;
+        document
+        .getElementById("stock")
+        .value;
 
     const descripcion =
-        document.getElementById("descripcion").value.trim();
+        document
+        .getElementById("descripcion")
+        .value
+        .trim();
 
     const estado =
-        document.getElementById("estado").value;
-
-    const archivoFoto =
-        document.getElementById("foto").files[0];
+        document
+        .getElementById("estado")
+        .value;
 
     const categorias =
         Array.from(
@@ -426,7 +435,9 @@ function guardarProducto(){
             )
         )
         .map(function(categoria){
+
             return categoria.value;
+
         })
         .join(",");
 
@@ -446,288 +457,152 @@ function guardarProducto(){
     }
 
 
-    /* =========================
-       SIN FOTO
-       ========================= */
+    const datos = {
 
-    if(!archivoFoto){
+        id: Date.now(),
 
-        enviarProducto("");
+        nombre: nombre,
 
-        return;
+        precio: precio,
 
-    }
+        stock: stock,
 
+        descripcion: descripcion,
 
-    /* =========================
-       LEER Y REDUCIR FOTO
-       ========================= */
+        categorias: categorias,
 
-    const lector =
-        new FileReader();
+        estado: estado,
 
-
-    lector.onload = function(event){
-
-        const imagen =
-            new Image();
-
-
-        imagen.onload = function(){
-
-            const MAX_ANCHO = 800;
-            const MAX_ALTO = 800;
-
-            let ancho =
-                imagen.width;
-
-            let alto =
-                imagen.height;
-
-
-            if(ancho > MAX_ANCHO){
-
-                alto =
-                    alto *
-                    (MAX_ANCHO / ancho);
-
-                ancho =
-                    MAX_ANCHO;
-
-            }
-
-
-            if(alto > MAX_ALTO){
-
-                ancho =
-                    ancho *
-                    (MAX_ALTO / alto);
-
-                alto =
-                    MAX_ALTO;
-
-            }
-
-
-            const canvas =
-                document.createElement("canvas");
-
-
-            canvas.width =
-                Math.round(ancho);
-
-            canvas.height =
-                Math.round(alto);
-
-
-            const contexto =
-                canvas.getContext("2d");
-
-
-            contexto.drawImage(
-                imagen,
-                0,
-                0,
-                canvas.width,
-                canvas.height
-            );
-
-
-            const fotoBase64 =
-                canvas.toDataURL(
-                    "image/jpeg",
-                    0.75
-                );
-
-
-            enviarProducto(
-                fotoBase64
-            );
-
-        };
-
-
-        imagen.src =
-            event.target.result;
+        foto: ""
 
     };
 
 
-    lector.onerror = function(){
-
-        alert(
-            "No se pudo leer la fotografía."
-        );
-
-    };
+    const formulario =
+        document.createElement("form");
 
 
-    lector.readAsDataURL(
-        archivoFoto
+    formulario.method =
+        "POST";
+
+
+    formulario.action =
+        URL_SERVIDOR;
+
+
+    formulario.target =
+        "guilltac_envio";
+
+
+    Object.keys(datos).forEach(
+        function(campo){
+
+            const input =
+                document.createElement("input");
+
+            input.type =
+                "hidden";
+
+            input.name =
+                campo;
+
+            input.value =
+                datos[campo];
+
+            formulario.appendChild(
+                input
+            );
+
+        }
     );
 
 
-    /* =========================
-       ENVIAR PRODUCTO
-       ========================= */
-
-    function enviarProducto(foto){
-
-        const datos = {
-
-            id: Date.now(),
-
-            nombre: nombre,
-
-            precio: precio,
-
-            stock: stock,
-
-            descripcion: descripcion,
-
-            categorias: categorias,
-
-            estado: estado,
-
-            foto: foto
-
-        };
+    const iframe =
+        document.createElement("iframe");
 
 
-        const formulario =
-            document.createElement("form");
+    iframe.name =
+        "guilltac_envio";
 
 
-        formulario.method =
-            "POST";
-
-        formulario.action =
-            URL_SERVIDOR;
-
-        formulario.target =
-            "guilltac_envio";
+    iframe.style.display =
+        "none";
 
 
-        Object.keys(datos).forEach(
-            function(campo){
+    document.body.appendChild(
+        iframe
+    );
 
-                const input =
-                    document.createElement("input");
 
-                input.type =
-                    "hidden";
+    document.body.appendChild(
+        formulario
+    );
 
-                input.name =
-                    campo;
 
-                input.value =
-                    datos[campo];
+    formulario.submit();
 
-                formulario.appendChild(
-                    input
-                );
 
-            }
+    const mensaje =
+        document.getElementById(
+            "mensaje"
         );
 
 
-        const iframe =
-            document.createElement("iframe");
+    mensaje.innerHTML =
+        "✅ PRODUCTO REGISTRADO CORRECTAMENTE<br><br>" +
+        "📦 Producto: " +
+        nombre +
+        "<br>" +
+        "💰 Precio: Bs " +
+        precio +
+        "<br>" +
+        "📦 Stock: " +
+        stock;
 
 
-        iframe.name =
-            "guilltac_envio";
-
-        iframe.style.display =
-            "none";
+    mensaje.style.display =
+        "block";
 
 
-        document.body.appendChild(
-            iframe
-        );
+    document
+    .getElementById("nombre")
+    .value = "";
 
-        document.body.appendChild(
-            formulario
-        );
+    document
+    .getElementById("precio")
+    .value = "";
 
+    document
+    .getElementById("stock")
+    .value = "";
 
-        formulario.submit();
+    document
+    .getElementById("descripcion")
+    .value = "";
 
-
-        /* =========================
-           MENSAJE
-           ========================= */
-
-        const mensaje =
-            document.getElementById(
-                "mensaje"
-            );
-
-
-        mensaje.innerHTML =
-            "✅ PRODUCTO REGISTRADO CORRECTAMENTE<br><br>" +
-            "📦 Producto: " +
-            nombre +
-            "<br>" +
-            "💰 Precio: Bs " +
-            precio +
-            "<br>" +
-            "📦 Stock: " +
-            stock +
-            (
-                foto
-                ? "<br>📷 Fotografía registrada"
-                : ""
-            );
+    document
+    .getElementById("estado")
+    .value =
+        "activo";
 
 
-        mensaje.style.display =
-            "block";
+    document
+    .getElementById("foto")
+    .value = "";
 
 
-        /* =========================
-           LIMPIAR FORMULARIO
-           ========================= */
+    document
+    .querySelectorAll(
+        'input[type="checkbox"]'
+    )
+    .forEach(function(caja){
 
-        document
-        .getElementById("nombre")
-        .value = "";
+        caja.checked = false;
 
-        document
-        .getElementById("precio")
-        .value = "";
-
-        document
-        .getElementById("stock")
-        .value = "";
-
-        document
-        .getElementById("descripcion")
-        .value = "";
-
-        document
-        .getElementById("estado")
-        .value =
-            "activo";
-
-        document
-        .getElementById("foto")
-        .value = "";
-
-
-        document
-        .querySelectorAll(
-            'input[type="checkbox"]'
-        )
-        .forEach(function(caja){
-
-            caja.checked = false;
-
-        });
-
-    }
+    });
 
 }
+    
 </script>
 
 
