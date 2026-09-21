@@ -547,9 +547,16 @@ function guardarProducto(){
     formulario.submit();
 
 
-    document
-    .getElementById("mensaje")
-    .style.display = "block";
+    const mensaje =
+    document.getElementById("mensaje");
+
+mensaje.innerHTML =
+    "✅ PRODUCTO REGISTRADO CORRECTAMENTE<br><br>" +
+    "📦 Producto: " + nombre + "<br>" +
+    "💰 Precio: Bs " + precio + "<br>" +
+    "📦 Stock: " + stock;
+
+mensaje.style.display = "block";
 
 
     document
