@@ -1191,19 +1191,17 @@ function cargarProductos(){
         "?callback=recibirProductos&t=" +
         Date.now();
 
-    script.onerror =
-        function(){
+    script.onerror = function(){
 
-            document.getElementById(
-                "productos"
-            ).innerHTML =
+        document.getElementById(
+            "productos"
+        ).innerHTML =
 
-            `<div class="loading">
-                No se pudieron cargar
-                los productos.
-            </div>`;
+        `<div class="loading">
+            No se pudieron cargar los productos.
+        </div>`;
 
-        };
+    };
 
     document.body.appendChild(script);
 
@@ -1230,17 +1228,14 @@ function recibirProductos(datos){
 function mostrarProductos(lista){
 
     const contenedor =
-        document.getElementById(
-            "productos"
-        );
+        document.getElementById("productos");
 
     contenedor.innerHTML = "";
 
     document.getElementById(
         "contador"
     ).textContent =
-        lista.length +
-        " producto(s)";
+        lista.length + " producto(s)";
 
 
     if(lista.length === 0){
@@ -1276,8 +1271,7 @@ function mostrarProductos(lista){
         let precioTexto =
             isNaN(precio)
             ? "Consultar"
-            : "Bs " +
-              precio.toFixed(2);
+            : "Bs " + precio.toFixed(2);
 
 
         let stock =
@@ -1296,6 +1290,7 @@ function mostrarProductos(lista){
 
 
         let imagen = "";
+
 
         if(producto.foto){
 
@@ -1359,15 +1354,14 @@ function mostrarProductos(lista){
 
                 <div class="product-buttons">
 
-
                     <button
-                    class="btn-cart"
-                    ${
-                        agotado
-                        ? "disabled"
-                        : ""
-                    }
-                    onclick="agregarCarrito('${producto.id}')">
+                        class="btn-cart"
+                        ${
+                            agotado
+                            ? "disabled"
+                            : ""
+                        }
+                        onclick="agregarCarrito('${producto.id}')">
 
                         ${
                             agotado
@@ -1379,13 +1373,12 @@ function mostrarProductos(lista){
 
 
                     <button
-                    class="btn-whatsapp"
-                    onclick="consultarProducto('${producto.id}')">
+                        class="btn-whatsapp"
+                        onclick="consultarProducto('${producto.id}')">
 
                         WhatsApp
 
                     </button>
-
 
                 </div>
 
@@ -1413,16 +1406,14 @@ function filtrarCategoria(
 ){
 
     document
-    .querySelectorAll(
-        ".category"
-    )
-    .forEach(elemento => {
+        .querySelectorAll(".category")
+        .forEach(elemento => {
 
-        elemento.classList.remove(
-            "active"
-        );
+            elemento.classList.remove(
+                "active"
+            );
 
-    });
+        });
 
 
     if(boton){
@@ -1443,53 +1434,43 @@ function filtrarCategoria(
     let visibles = 0;
 
 
-    tarjetas.forEach(
-        tarjeta => {
+    tarjetas.forEach(tarjeta => {
 
-            const categorias =
-                String(
-                    tarjeta.dataset.category
-                    || ""
-                )
-                .toLowerCase()
-                .split(
-                    /[,\s]+/
-                )
-                .filter(Boolean);
+        const categorias =
+            String(
+                tarjeta.dataset.category || ""
+            )
+            .toLowerCase()
+            .split(/[,\s]+/)
+            .filter(Boolean);
 
 
-            if(
-                categoria === "todos"
-                ||
-                categorias.includes(
-                    categoria
-                )
-            ){
+        if(
+            categoria === "todos" ||
+            categorias.includes(categoria)
+        ){
 
-                tarjeta.classList.remove(
-                    "hidden"
-                );
+            tarjeta.classList.remove(
+                "hidden"
+            );
 
-                visibles++;
+            visibles++;
 
-            }else{
+        }else{
 
-                tarjeta.classList.add(
-                    "hidden"
-                );
-
-            }
+            tarjeta.classList.add(
+                "hidden"
+            );
 
         }
-    );
+
+    });
 
 
     document.getElementById(
         "contador"
     ).textContent =
-        visibles +
-        " producto(s)";
-
+        visibles + " producto(s)";
 
 }
 
@@ -1502,9 +1483,7 @@ function agregarCarrito(id){
 
     const producto =
         productos.find(
-            p =>
-            String(p.id) ===
-            String(id)
+            p => String(p.id) === String(id)
         );
 
 
@@ -1517,9 +1496,7 @@ function agregarCarrito(id){
 
     const existente =
         carrito.find(
-            p =>
-            String(p.id) ===
-            String(id)
+            p => String(p.id) === String(id)
         );
 
 
@@ -1533,7 +1510,7 @@ function agregarCarrito(id){
 
             ...producto,
 
-            cantidad:1
+            cantidad: 1
 
         });
 
@@ -1553,16 +1530,15 @@ function actualizarCarrito(){
 
     const contador =
         carrito.reduce(
-            (total,p) =>
-            total + p.cantidad,
+            (total, p) =>
+                total + p.cantidad,
             0
         );
 
 
     document.getElementById(
         "cart-count"
-    ).textContent =
-        contador;
+    ).textContent = contador;
 
 
     mostrarCarrito();
@@ -1588,12 +1564,16 @@ function mostrarCarrito(){
     if(carrito.length === 0){
 
         contenedor.innerHTML =
-        "<p>El carrito está vacío.</p>";
+
+        `<div class="loading">
+            El carrito está vacío.
+        </div>`;
+
 
         document.getElementById(
             "carritoTotal"
         ).textContent =
-        "Total: Bs 0";
+            "Total: Bs 0";
 
         return;
 
@@ -1604,7 +1584,7 @@ function mostrarCarrito(){
 
 
     carrito.forEach(
-        (producto,index) => {
+        (producto, index) => {
 
             const precio =
                 parseFloat(
@@ -1629,46 +1609,37 @@ function mostrarCarrito(){
 
             item.innerHTML = `
 
-                <div class="cart-item-info">
+                <strong>
+                    ${producto.nombre}
+                </strong>
 
-                    <strong>
-                        ${producto.nombre}
-                    </strong>
-
+                <span>
                     Bs ${precio.toFixed(2)}
+                </span>
 
-                </div>
+                <button
+                    onclick="cambiarCantidad(${index}, -1)">
+                    -
+                </button>
 
+                <span>
+                    ${producto.cantidad}
+                </span>
 
-                <div class="cart-controls">
+                <button
+                    onclick="cambiarCantidad(${index}, 1)">
+                    +
+                </button>
 
-                    <button
-                    onclick="cambiarCantidad(${index},-1)">
-                        -
-                    </button>
-
-                    <span>
-                        ${producto.cantidad}
-                    </span>
-
-                    <button
-                    onclick="cambiarCantidad(${index},1)">
-                        +
-                    </button>
-
-                    <button
+                <button
                     onclick="eliminarCarrito(${index})">
-                        ×
-                    </button>
-
-                </div>
+                    ×
+                </button>
 
             `;
 
 
-            contenedor.appendChild(
-                item
-            );
+            contenedor.appendChild(item);
 
         }
     );
@@ -1724,6 +1695,7 @@ function eliminarCarrito(index){
         1
     );
 
+
     actualizarCarrito();
 
 }
@@ -1737,10 +1709,10 @@ function abrirCarrito(){
 
     mostrarCarrito();
 
+
     document.getElementById(
         "modalCarrito"
-    ).style.display =
-        "flex";
+    ).style.display = "flex";
 
 }
 
@@ -1753,8 +1725,7 @@ function cerrarCarrito(){
 
     document.getElementById(
         "modalCarrito"
-    ).style.display =
-        "none";
+    ).style.display = "none";
 
 }
 
@@ -1767,9 +1738,7 @@ function consultarProducto(id){
 
     const producto =
         productos.find(
-            p =>
-            String(p.id) ===
-            String(id)
+            p => String(p.id) === String(id)
         );
 
 
@@ -1807,7 +1776,7 @@ function consultarProducto(id){
 
 
 /* =========================
-   CHECKOUT
+   ABRIR CHECKOUT
 ========================= */
 
 function abrirCheckout(){
@@ -1828,8 +1797,7 @@ function abrirCheckout(){
 
     document.getElementById(
         "modalCheckout"
-    ).style.display =
-        "flex";
+    ).style.display = "flex";
 
 }
 
@@ -1842,8 +1810,7 @@ function cerrarCheckout(){
 
     document.getElementById(
         "modalCheckout"
-    ).style.display =
-        "none";
+    ).style.display = "none";
 
 }
 
@@ -1855,34 +1822,58 @@ function cerrarCheckout(){
 function enviarPedido(){
 
     const nombre =
-        document.getElementById("nombre").value.trim();
+        document.getElementById(
+            "nombre"
+        ).value.trim();
+
 
     const apellido =
-        document.getElementById("apellido").value.trim();
+        document.getElementById(
+            "apellido"
+        ).value.trim();
+
 
     const telefono =
-        document.getElementById("telefono").value.trim();
+        document.getElementById(
+            "telefono"
+        ).value.trim();
+
 
     const ci =
-        document.getElementById("ci").value.trim();
+        document.getElementById(
+            "ci"
+        ).value.trim();
+
 
     const departamento =
-        document.getElementById("departamento").value;
+        document.getElementById(
+            "departamento"
+        ).value;
+
 
     const direccion =
-        document.getElementById("direccion").value.trim();
+        document.getElementById(
+            "direccion"
+        ).value.trim();
+
 
     const entrega =
-        document.getElementById("entrega").value;
+        document.getElementById(
+            "entrega"
+        ).value;
+
 
     const pago =
-        document.getElementById("pago").value;
+        document.getElementById(
+            "pago"
+        ).value;
+
 
     const observaciones =
-        document.getElementById("observaciones").value.trim();
+        document.getElementById(
+            "observaciones"
+        ).value.trim();
 
-
-    // Verificar datos obligatorios
 
     if(
         !nombre ||
@@ -1900,10 +1891,9 @@ function enviarPedido(){
         );
 
         return;
+
     }
 
-
-    // Crear mensaje
 
     let mensaje =
         "🛒 *NUEVO PEDIDO GUILLTAC*\n\n";
@@ -1914,43 +1904,48 @@ function enviarPedido(){
         nombre +
         "\n";
 
+
     mensaje +=
         "👤 *Apellido:* " +
         apellido +
         "\n";
+
 
     mensaje +=
         "📱 *Teléfono:* " +
         telefono +
         "\n";
 
+
     mensaje +=
         "🪪 *C.I.:* " +
         ci +
         "\n";
+
 
     mensaje +=
         "📍 *Departamento:* " +
         departamento +
         "\n";
 
+
     mensaje +=
         "🏠 *Dirección:* " +
         direccion +
         "\n";
+
 
     mensaje +=
         "🚚 *Entrega:* " +
         entrega +
         "\n";
 
+
     mensaje +=
         "💳 *Pago:* " +
         pago +
         "\n\n";
 
-
-    // Productos
 
     mensaje +=
         "📦 *PRODUCTOS*\n\n";
@@ -1959,44 +1954,52 @@ function enviarPedido(){
     let total = 0;
 
 
-    carrito.forEach(producto => {
+    carrito.forEach(
+        producto => {
 
-        const precio =
-            parseFloat(producto.precio) || 0;
-
-        const cantidad =
-            producto.cantidad;
-
-        const subtotal =
-            precio * cantidad;
-
-        total += subtotal;
+            const precio =
+                parseFloat(
+                    producto.precio
+                ) || 0;
 
 
-        mensaje +=
-            "• " +
-            producto.nombre +
-            "\n";
-
-        mensaje +=
-            "  Cantidad: " +
-            cantidad +
-            "\n";
-
-        mensaje +=
-            "  Precio: Bs " +
-            precio.toFixed(2) +
-            "\n";
-
-        mensaje +=
-            "  Subtotal: Bs " +
-            subtotal.toFixed(2) +
-            "\n\n";
-
-    });
+            const cantidad =
+                producto.cantidad;
 
 
-    // Total
+            const subtotal =
+                precio * cantidad;
+
+
+            total += subtotal;
+
+
+            mensaje +=
+                "• " +
+                producto.nombre +
+                "\n";
+
+
+            mensaje +=
+                "  Cantidad: " +
+                cantidad +
+                "\n";
+
+
+            mensaje +=
+                "  Precio: Bs " +
+                precio.toFixed(2) +
+                "\n";
+
+
+            mensaje +=
+                "  Subtotal: Bs " +
+                subtotal.toFixed(2) +
+                "\n\n";
+
+        }
+    );
+
 
     mensaje +=
         "💰 *TOTAL: Bs " +
@@ -2004,28 +2007,30 @@ function enviarPedido(){
         "*\n\n";
 
 
-    // Observaciones
-
     mensaje +=
         "📝 *Observaciones:*\n";
 
+
     mensaje +=
-        observaciones || "Ninguna";
+        observaciones ||
+        "Ninguna";
+
 
     mensaje +=
         "\n\n";
+
 
     mensaje +=
         "Hola, quiero confirmar este pedido.";
 
 
-    // Abrir WhatsApp
-
     const url =
         "https://wa.me/" +
         WHATSAPP +
         "?text=" +
-        encodeURIComponent(mensaje);
+        encodeURIComponent(
+            mensaje
+        );
 
 
     window.open(
@@ -2034,7 +2039,7 @@ function enviarPedido(){
     );
 
 }
-    
+
 
 /* =========================
    INICIAR
