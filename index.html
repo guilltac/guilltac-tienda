@@ -1615,9 +1615,36 @@ function mostrarCarrito(){
 
 function cambiarCantidad(index, cambio){
 
-    carrito[index].cantidad += cambio;
+    const producto =
+        carrito[index];
 
-    if(carrito[index].cantidad <= 0){
+    if(!producto){
+        return;
+    }
+
+    const stock =
+        parseInt(producto.stock) || 0;
+
+    // Si intenta aumentar
+    if(cambio > 0){
+
+        if(producto.cantidad >= stock){
+
+            alert(
+                "No puedes superar el stock disponible: " +
+                stock +
+                " unidad(es)."
+            );
+
+            return;
+        }
+
+    }
+
+    producto.cantidad += cambio;
+
+    // Si llega a cero, eliminar
+    if(producto.cantidad <= 0){
 
         carrito.splice(index, 1);
 
@@ -1625,7 +1652,6 @@ function cambiarCantidad(index, cambio){
 
     actualizarCarrito();
 }
-
 
 /* =========================
    ELIMINAR
