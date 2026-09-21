@@ -1848,6 +1848,69 @@ pago + "\n" +
 
     }
 }
+
+   function actualizarEntrega(){
+
+    const departamento =
+        document.getElementById("departamento").value;
+
+    const entrega =
+        document.getElementById("entrega");
+
+    entrega.innerHTML = "";
+
+    const opcionInicial =
+        document.createElement("option");
+
+    opcionInicial.value = "";
+    opcionInicial.textContent =
+        "Seleccione una opción";
+
+    entrega.appendChild(opcionInicial);
+
+
+    if(departamento === "La Paz"){
+
+        const opcionesLaPaz = [
+            "Envío a domicilio",
+            "Entrega en punto acordado",
+            "Recojo en tienda"
+        ];
+
+        opcionesLaPaz.forEach(function(opcion){
+
+            const elemento =
+                document.createElement("option");
+
+            elemento.value = opcion;
+            elemento.textContent = opcion;
+
+            entrega.appendChild(elemento);
+
+        });
+
+    }else if(departamento !== ""){
+
+        const opcionesNacional = [
+            "Envío terrestre",
+            "Envío aéreo"
+        ];
+
+        opcionesNacional.forEach(function(opcion){
+
+            const elemento =
+                document.createElement("option");
+
+            elemento.value = opcion;
+            elemento.textContent = opcion;
+
+            entrega.appendChild(elemento);
+
+        });
+
+    }
+
+}
 /* =========================
    INICIAR
 ========================= */
