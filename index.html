@@ -1528,8 +1528,10 @@ function mostrarCarrito(){
             const precio =
                 parseFloat(producto.precio) || 0;
 
-            total +=
+            const subtotal =
                 precio * producto.cantidad;
+
+            total += subtotal;
 
             const item =
                 document.createElement("div");
@@ -1540,13 +1542,43 @@ function mostrarCarrito(){
 
                 '<strong>' +
                     producto.nombre +
-                '</strong> ' +
+                '</strong>' +
 
-                'Bs ' +
-                precio.toFixed(2) +
+                '<div style="margin-top:8px;">' +
 
-                ' × ' +
-                producto.cantidad;
+                    '<button onclick="cambiarCantidad(' +
+                        index +
+                        ', -1)">−</button>' +
+
+                    '<span style="margin:0 12px;">' +
+                        producto.cantidad +
+                    '</span>' +
+
+                    '<button onclick="cambiarCantidad(' +
+                        index +
+                        ', 1)">+</button>' +
+
+                '</div>' +
+
+                '<div style="margin-top:6px;">' +
+
+                    'Precio: Bs ' +
+                    precio.toFixed(2) +
+
+                    '<br>' +
+
+                    'Subtotal: Bs ' +
+                    subtotal.toFixed(2) +
+
+                '</div>' +
+
+                '<button onclick="eliminarCarrito(' +
+                    index +
+                ')" style="margin-top:6px;">' +
+
+                    'Eliminar' +
+
+                '</button>';
 
             contenedor.appendChild(item);
 
@@ -1557,8 +1589,6 @@ function mostrarCarrito(){
         "Total: Bs " +
         total.toFixed(2);
 }
-
-
 /* =========================
    CAMBIAR CANTIDAD
 ========================= */
