@@ -535,6 +535,151 @@ const URL_SERVIDOR =
 
 }
 
+function subirFotoDrive(archivo) {
+
+    return new Promise(function(resolve, reject) {
+
+        if (!archivo) {
+
+            resolve("");
+
+            return;
+
+        }
+
+        const lector =
+            new FileReader();
+
+        const estado =
+            document.getElementById(
+                "estadoFoto"
+            );
+
+        estado.textContent =
+            "📷 Preparando fotografía...";
+
+
+        lector.onload =
+            function(e) {
+
+                const partes =
+                    e.target.result.split(",");
+
+                const base64 =
+                    partes[1];
+
+
+                estado.textContent =
+                    "📤 Subiendo fotografía...";
+
+
+                fetch(
+                    URL_SERVIDOR,
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/x-www-form-urlencoded"
+
+                        },
+
+                        body:
+
+                            "accion=subirImagen" +
+
+                            "&base64=" +
+                            encodeURIComponent(base64) +
+
+                            "&nombreArchivo=" +
+                            encodeURIComponent(
+                                Date.now() +
+                                "_" +
+                                archivo.name
+                            ) +
+
+                            "&tipoArchivo=" +
+                            encodeURIComponent(
+                                archivo.type
+                            )
+
+                    }
+                )
+
+                .then(function(respuesta){
+
+                    return respuesta.text();
+
+                })
+
+                .then(function(texto){
+
+                    console.log(
+                        "Respuesta:",
+                        texto
+                    );
+
+
+                    const resultado =
+                        JSON.parse(texto);
+
+
+                    if(!resultado.ok){
+
+                        throw new Error(
+                            resultado.error ||
+                            "No se pudo subir la imagen."
+                        );
+
+                    }
+
+
+                    estado.textContent =
+                        "✅ Fotografía guardada correctamente.";
+
+                    resolve(
+                        resultado.url
+                    );
+
+                })
+
+                .catch(function(error){
+
+                    console.error(
+                        "Error al subir imagen:",
+                        error
+                    );
+
+                    estado.textContent =
+                        "❌ No se pudo guardar la fotografía.";
+
+                    reject(error);
+
+                });
+
+            };
+
+
+        lector.onerror =
+            function(){
+
+                reject(
+                    new Error(
+                        "No se pudo leer la fotografía."
+                    )
+                );
+
+            };
+
+
+        lector.readAsDataURL(archivo);
+
+    });
+
+}
+    
 function guardarProducto(){
 
     const nombre =
