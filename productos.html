@@ -458,7 +458,7 @@ function guardarProducto(){
                 "text/plain;charset=utf-8"
             },
 
-            body: JSON.stringify(datos)
+            body: new URLSearchParams(datos)
 
         }
     );
