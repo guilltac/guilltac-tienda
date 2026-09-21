@@ -8,35 +8,38 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>GUILLTAC | Equipo Táctico Bolivia</title>
+<title>GUILLTAC Equipo Táctico Bolivia</title>
 
 <style>
 
 *{
     box-sizing:border-box;
-    margin:0;
-    padding:0;
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
+    margin:0;
+    font-family:Arial, sans-serif;
     background:#f4f4f4;
     color:#222;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 header{
     background:#111;
     color:white;
+    padding:22px 20px;
     position:sticky;
     top:0;
     z-index:1000;
-    box-shadow:0 2px 10px rgba(0,0,0,.3);
+    box-shadow:0 2px 10px rgba(0,0,0,.25);
 }
 
-.header-container{
+.header-content{
     max-width:1200px;
     margin:auto;
-    padding:15px 20px;
     display:flex;
     align-items:center;
     justify-content:space-between;
@@ -44,95 +47,75 @@ header{
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.logo-circle{
-    width:50px;
-    height:50px;
-    border:2px solid white;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
     font-size:25px;
     font-weight:bold;
 }
 
-.logo-text h1{
-    font-size:21px;
-}
-
-.logo-text p{
+.logo span{
+    display:block;
     font-size:12px;
-    color:#bbb;
-    margin-top:3px;
+    color:#ccc;
+    margin-top:4px;
 }
 
-.cart-button{
-    background:#fff;
-    color:#111;
-    border:none;
-    padding:11px 16px;
+.header-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.header-button{
+    border:1px solid #555;
+    background:#222;
+    color:white;
+    padding:10px 14px;
     border-radius:6px;
     cursor:pointer;
-    font-weight:bold;
+    font-size:14px;
 }
 
-.hero{
-    background:#1b1b1b;
-    color:white;
-    padding:70px 20px;
-    text-align:center;
+.header-button:hover{
+    background:#333;
 }
 
-.hero h2{
-    font-size:38px;
-    margin-bottom:15px;
-}
+/* =========================
+   CONTENEDOR
+========================= */
 
-.hero p{
-    color:#ccc;
-    font-size:18px;
-}
-
-.container{
+main{
     max-width:1200px;
     margin:auto;
-    padding:35px 20px;
+    padding:25px 15px 60px;
 }
 
-.section-title{
+.titulo{
+    text-align:center;
     margin-bottom:25px;
 }
 
+.titulo h1{
+    margin-bottom:6px;
+}
+
+.titulo p{
+    margin:0;
+    color:#666;
+}
+
+/* =========================
+   CATEGORÍAS
+========================= */
+
 .categories{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:15px;
-    margin-bottom:40px;
+    grid-template-columns:
+        repeat(auto-fit,minmax(110px,1fr));
+    gap:12px;
+    margin-bottom:30px;
 }
 
 .category{
     background:white;
-    padding:25px 15px;
-    text-align:center;
-    border-radius:8px;
-    cursor:pointer;
-    border:1px solid #ddd;
-    transition:.2s;
-}
-
-.category:hover{
-    transform:translateY(-3px);
-    box-shadow:0 4px 12px rgba(0,0,0,.12);
-}
-
-.category{
-    background:white;
-    padding:22px 15px;
+    padding:18px 10px;
     text-align:center;
     border-radius:8px;
     cursor:pointer;
@@ -148,81 +131,105 @@ header{
 .category-icon{
     width:52px;
     height:52px;
-    margin:0 auto 12px;
+    margin:0 auto 10px;
     border:2px solid #222;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:25px;
+    font-size:24px;
     font-weight:bold;
 }
 
 .category h3{
-    font-size:15px;
+    font-size:14px;
+    margin:0;
 }
+
+/* =========================
+   PRODUCTOS
+========================= */
+
+.products{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fill,minmax(220px,1fr));
+    gap:20px;
 }
 
 .product{
     background:white;
-    border-radius:8px;
+    border-radius:10px;
     overflow:hidden;
-    border:1px solid #ddd;
-    position:relative;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+    transition:.2s;
+}
+
+.product:hover{
+    transform:translateY(-4px);
+    box-shadow:0 7px 18px rgba(0,0,0,.16);
+}
+
+.product.hidden{
+    display:none;
 }
 
 .product-image{
-    height:210px;
-    background:#ddd;
+    width:100%;
+    height:220px;
+    background:#e9e9e9;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#777;
-    font-weight:bold;
+    color:#888;
+    font-size:14px;
+    overflow:hidden;
 }
 
-.product-info{
-    padding:18px;
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
-.product-info h3{
-    margin-bottom:8px;
+.product-content{
+    padding:16px;
+}
+
+.product h3{
+    margin:0 0 8px;
+    font-size:18px;
 }
 
 .product-description{
     color:#666;
     font-size:14px;
     min-height:40px;
+    margin-bottom:10px;
 }
 
-.price{
-    font-size:22px;
+.product-price{
+    font-size:20px;
     font-weight:bold;
-    margin:14px 0;
+    margin-bottom:8px;
 }
 
-.old-price{
-    text-decoration:line-through;
-    color:#888;
-    font-size:15px;
-    margin-right:7px;
+.product-stock{
+    font-size:13px;
+    color:#555;
+    margin-bottom:12px;
 }
 
-.buttons{
+.product-buttons{
     display:flex;
     flex-direction:column;
     gap:8px;
 }
 
-button{
-    font-family:inherit;
-}
-
 .btn{
-    width:100%;
-    border:none;
-    padding:12px;
-    border-radius:5px;
+    border:0;
+    padding:11px;
+    border-radius:6px;
     cursor:pointer;
     font-weight:bold;
 }
@@ -232,220 +239,230 @@ button{
     color:white;
 }
 
-.btn-cart:hover{
-    background:#333;
-}
-
 .btn-whatsapp{
     background:#25D366;
     color:white;
 }
 
-.btn-whatsapp:hover{
-    background:#1da851;
-}
-
-.badge{
-    position:absolute;
-    top:10px;
-    left:10px;
-    padding:6px 9px;
-    border-radius:4px;
+.btn-disabled{
+    background:#aaa;
     color:white;
-    font-size:12px;
-    font-weight:bold;
+    cursor:not-allowed;
 }
 
-.badge-new{
-    background:#111;
+/* =========================
+   CARGANDO
+========================= */
+
+.loading{
+    text-align:center;
+    padding:40px;
+    color:#666;
 }
 
-.badge-promo{
-    background:#d71920;
+.error{
+    background:#fff3f3;
+    border:1px solid #e0aaaa;
+    padding:20px;
+    border-radius:8px;
+    text-align:center;
 }
 
-.badge-used{
-    background:#666;
-}
-
-.hidden{
-    display:none !important;
-}
-
-/* CARRITO */
-
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    display:none;
-    z-index:1999;
-}
-
-.overlay.active{
-    display:block;
-}
+/* =========================
+   CARRITO
+========================= */
 
 .cart-panel{
     position:fixed;
+    right:-420px;
     top:0;
-    right:-450px;
-    width:430px;
+    width:400px;
     max-width:95%;
-    height:100vh;
+    height:100%;
     background:white;
     z-index:2000;
+    box-shadow:-5px 0 20px rgba(0,0,0,.25);
     transition:.3s;
-    box-shadow:-4px 0 15px rgba(0,0,0,.25);
-    display:flex;
-    flex-direction:column;
+    padding:22px;
+    overflow-y:auto;
 }
 
-.cart-panel.active{
+.cart-panel.open{
     right:0;
 }
 
 .cart-header{
-    padding:18px;
-    background:#111;
-    color:white;
     display:flex;
     justify-content:space-between;
     align-items:center;
+    border-bottom:1px solid #ddd;
+    padding-bottom:12px;
+    margin-bottom:15px;
 }
 
 .close-cart{
+    border:0;
     background:none;
-    color:white;
-    border:none;
-    font-size:24px;
+    font-size:25px;
     cursor:pointer;
-}
-
-.cart-items{
-    flex:1;
-    overflow-y:auto;
-    padding:18px;
 }
 
 .cart-item{
     border-bottom:1px solid #ddd;
-    padding:15px 0;
+    padding:12px 0;
 }
 
-.cart-item h4{
-    margin-bottom:8px;
+.cart-item-name{
+    font-weight:bold;
 }
 
-.quantity{
+.cart-item-price{
+    margin:5px 0;
+}
+
+.cart-controls{
     display:flex;
     align-items:center;
-    gap:10px;
-    margin-top:10px;
+    gap:8px;
 }
 
-.quantity button{
+.cart-controls button{
+    border:1px solid #ccc;
+    background:white;
     width:30px;
     height:30px;
-    border:none;
-    background:#111;
-    color:white;
+    cursor:pointer;
     border-radius:4px;
-    cursor:pointer;
 }
 
-.remove{
-    margin-top:8px;
-    color:#c00;
-    background:none;
-    border:none;
-    cursor:pointer;
-}
-
-.cart-footer{
-    padding:18px;
-    border-top:1px solid #ddd;
-}
-
-.total{
-    font-size:22px;
+.cart-total{
+    font-size:20px;
     font-weight:bold;
-    margin-bottom:15px;
+    margin:20px 0;
 }
 
-/* FORMULARIO */
+/* =========================
+   FORMULARIO PEDIDO
+========================= */
 
-.form-content{
-    padding:20px;
-    overflow-y:auto;
+.checkout{
+    border-top:1px solid #ddd;
+    margin-top:20px;
+    padding-top:20px;
 }
 
-.form-content label{
+.checkout h3{
+    margin-top:0;
+}
+
+.checkout-group{
+    margin-bottom:12px;
+}
+
+.checkout-group label{
     display:block;
     font-weight:bold;
-    margin-top:12px;
+    margin-bottom:5px;
+    font-size:14px;
 }
 
-.form-content input,
-.form-content select,
-.form-content textarea{
+.checkout-group input,
+.checkout-group select,
+.checkout-group textarea{
     width:100%;
-    padding:11px;
-    margin-top:6px;
+    padding:10px;
     border:1px solid #ccc;
     border-radius:5px;
-    font-size:15px;
+    font-size:14px;
 }
 
-.form-content textarea{
-    min-height:80px;
-    resize:vertical;
+.checkout-group textarea{
+    min-height:70px;
 }
 
-.form-submit{
-    margin-top:20px;
-    background:#25D366;
-    color:white;
-    border:none;
-    padding:14px;
-    width:100%;
-    border-radius:5px;
-    font-weight:bold;
-    cursor:pointer;
+/* =========================
+   CARRITO VACÍO
+========================= */
+
+.empty-cart{
+    text-align:center;
+    color:#777;
+    padding:30px 0;
 }
 
-/* FOOTER */
+/* =========================
+   OVERLAY
+========================= */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:1500;
+    display:none;
+}
+
+.overlay.show{
+    display:block;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-    margin-top:50px;
     background:#111;
     color:white;
     text-align:center;
-    padding:30px 20px;
+    padding:25px 15px;
 }
 
 footer p{
-    color:#aaa;
-    margin-top:8px;
+    margin:5px;
+    color:#ccc;
 }
+
+/* =========================
+   MÓVIL
+========================= */
 
 @media(max-width:600px){
 
-    .hero h2{
-        font-size:28px;
+    .header-content{
+        flex-direction:column;
+        align-items:stretch;
+        text-align:center;
     }
 
-    .header-container{
-        padding:10px 12px;
+    .header-buttons{
+        justify-content:center;
     }
 
-    .logo-text h1{
+    .products{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+        gap:10px;
+    }
+
+    .product-image{
+        height:170px;
+    }
+
+    .product-content{
+        padding:11px;
+    }
+
+    .product h3{
+        font-size:15px;
+    }
+
+    .product-price{
         font-size:17px;
     }
 
-    .logo-circle{
-        width:42px;
-        height:42px;
+    .btn{
+        font-size:12px;
+        padding:9px;
     }
 
 }
@@ -454,49 +471,52 @@ footer p{
 
 </head>
 
+
 <body>
 
-<!-- HEADER -->
 
 <header>
 
-<div class="header-container">
+<div class="header-content">
 
 <div class="logo">
 
-<div class="logo-circle">
-G
-</div>
+GUILLTAC
 
-<div class="logo-text">
-
-<h1>GUILLTAC</h1>
-
-<p>Equipo Táctico Bolivia</p>
+<span>
+Equipamiento táctico, APH y profesional
+</span>
 
 </div>
 
-</div>
+
+<div class="header-buttons">
 
 <button
-class="cart-button"
-onclick="abrirCarrito()">
+class="header-button"
+onclick="abrirCarrito()"
+>
 
 🛒 Carrito
-(<span id="cart-count">0</span>)
+<span id="contadorCarrito">0</span>
 
 </button>
+
+</div>
 
 </div>
 
 </header>
 
 
-<!-- HERO -->
+<main>
 
-<section class="hero">
 
-<h2>GUILLTAC EQUIPO TÁCTICO BOLIVIA</h2>
+<section class="titulo">
+
+<h1>
+GUILLTAC Equipo Táctico Bolivia
+</h1>
 
 <p>
 Equipamiento táctico, APH y profesional
@@ -505,553 +525,208 @@ Equipamiento táctico, APH y profesional
 </section>
 
 
-<!-- CONTENIDO -->
+<section class="categories">
 
-<main class="container">
-
-<h2 class="section-title">
-Categorías
-</h2>
-
-<div class="categories">
-
-    <div class="category"
-    onclick="filtrarCategoria('todos')">
-
-        <div class="category-icon">▦</div>
-
-        <h3>Todos</h3>
-
-    </div>
-
-
-    <div class="category"
-    onclick="filtrarCategoria('novedades')">
-
-        <div class="category-icon">✦</div>
-
-        <h3>Novedades</h3>
-
-    </div>
-
-
-    <div class="category"
-    onclick="filtrarCategoria('botas')">
-
-        <div class="category-icon">🥾</div>
-
-        <h3>Botas</h3>
-
-    </div>
-
-
-    <div class="category"
-    onclick="filtrarCategoria('tactico')">
-
-        <div class="category-icon">◈</div>
-
-        <h3>Equipo Táctico</h3>
-
-    </div>
-
-
-    <div class="category"
-    onclick="filtrarCategoria('uniformes')">
-
-        <div class="category-icon">▤</div>
-
-        <h3>Uniformes</h3>
-
-    </div>
-
-
-    <div class="category"
-    onclick="filtrarCategoria('aph')">
-
-        <div class="category-icon">✚</div>
-
-        <h3>APH</h3>
-
-    </div>
-
-
-    <div class="category"
-    onclick="filtrarCategoria('promo')">
-
-        <div class="category-icon">%</div>
-
-        <h3>Promociones</h3>
-
-    </div>
-
-
-    <div class="category"
-    onclick="filtrarCategoria('usado')">
-
-        <div class="category-icon">↻</div>
-
-        <h3>Usados</h3>
-
-    </div>
-
-</div>
-
-
-<h2 class="section-title">
-Productos
-</h2>
-
-
-<div class="products">
-
-
-<!-- PRODUCTO 1 -->
 
 <div
-class="product"
-data-category="tactico novedades">
+class="category"
+onclick="filtrarCategoria('todos')"
+>
 
-<span class="badge badge-new">
-NUEVO
-</span>
-
-<div class="product-image">
-FOTO DEL PRODUCTO
+<div class="category-icon">
+▦
 </div>
 
-<div class="product-info">
-
-<h3>
-Pantalón Táctico Urbano
-</h3>
-
-<p class="product-description">
-Pantalón táctico para uso profesional.
-</p>
-
-<div class="price">
-Bs 130
-</div>
-
-<div class="buttons">
-
-<button
-class="btn btn-cart"
-onclick="agregarAlCarrito(
-'Pantalón Táctico Urbano',
-130
-)">
-
-🛒 AGREGAR AL CARRITO
-
-</button>
-
-<button
-class="btn btn-whatsapp"
-onclick="consultarWhatsApp(
-'Pantalón Táctico Urbano',
-130
-)">
-
-📱 CONSULTAR POR WHATSAPP
-
-</button>
+<h3>Todos</h3>
 
 </div>
 
-</div>
-
-</div>
-
-
-<!-- PRODUCTO 2 -->
 
 <div
-class="product"
-data-category="nuevo">
+class="category"
+onclick="filtrarCategoria('novedades')"
+>
 
-<span class="badge badge-new">
-NUEVO
-</span>
-
-<div class="product-image">
-FOTO DEL PRODUCTO
+<div class="category-icon">
+✦
 </div>
 
-<div class="product-info">
-
-<h3>
-Kit APH Individual
-</h3>
-
-<p class="product-description">
-Kit básico de atención prehospitalaria.
-</p>
-
-<div class="price">
-Bs 95
-</div>
-
-<div class="buttons">
-
-<button
-class="btn btn-cart"
-onclick="agregarAlCarrito(
-'Kit APH Individual',
-95
-)">
-
-🛒 AGREGAR AL CARRITO
-
-</button>
-
-<button
-class="btn btn-whatsapp"
-onclick="consultarWhatsApp(
-'Kit APH Individual',
-95
-)">
-
-📱 CONSULTAR POR WHATSAPP
-
-</button>
+<h3>Novedades</h3>
 
 </div>
 
-</div>
-
-</div>
-
-
-<!-- PRODUCTO 3 -->
 
 <div
-class="product"
-data-category="promo">
+class="category"
+onclick="filtrarCategoria('botas')"
+>
 
-<span class="badge badge-promo">
-PROMOCIÓN
-</span>
-
-<div class="product-image">
-FOTO DEL PRODUCTO
+<div class="category-icon">
+🥾
 </div>
 
-<div class="product-info">
-
-<h3>
-Combo Táctico
-</h3>
-
-<p class="product-description">
-Promoción especial de equipamiento táctico.
-</p>
-
-<div class="price">
-
-<span class="old-price">
-Bs 110
-</span>
-
-Bs 85
+<h3>Botas</h3>
 
 </div>
 
-<div class="buttons">
-
-<button
-class="btn btn-cart"
-onclick="agregarAlCarrito(
-'Combo Táctico',
-85
-)">
-
-🛒 AGREGAR AL CARRITO
-
-</button>
-
-<button
-class="btn btn-whatsapp"
-onclick="consultarWhatsApp(
-'Combo Táctico',
-85
-)">
-
-📱 CONSULTAR POR WHATSAPP
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- PRODUCTO 4 -->
 
 <div
-class="product"
-data-category="usado">
+class="category"
+onclick="filtrarCategoria('tactico')"
+>
 
-<span class="badge badge-used">
-USADO
-</span>
-
-<div class="product-image">
-FOTO DEL PRODUCTO
+<div class="category-icon">
+◈
 </div>
 
-<div class="product-info">
-
-<h3>
-Uniforme Táctico
-</h3>
-
-<p class="product-description">
-Uniforme usado en buen estado. Consultar talla y disponibilidad.
-</p>
-
-<div class="price">
-Bs 80
+<h3>Equipo Táctico</h3>
 
 </div>
 
-<div class="buttons">
-
-<button
-class="btn btn-cart"
-onclick="agregarAlCarrito(
-'Uniforme Táctico Usado',
-80
-)">
-
-🛒 AGREGAR AL CARRITO
-
-</button>
-
-<button
-class="btn btn-whatsapp"
-onclick="consultarWhatsApp(
-'Uniforme Táctico Usado',
-80
-)">
-
-📱 CONSULTAR POR WHATSAPP
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- PRODUCTO 5 -->
 
 <div
-class="product"
-data-category="gtac">
+class="category"
+onclick="filtrarCategoria('uniformes')"
+>
 
-<span class="badge badge-new">
-G-TAC
-</span>
-
-<div class="product-image">
-FOTO DEL PRODUCTO
+<div class="category-icon">
+▤
 </div>
 
-<div class="product-info">
-
-<h3>
-Producto G-TAC
-</h3>
-
-<p class="product-description">
-Línea propia de productos GUILLTAC.
-</p>
-
-<div class="price">
-Consultar
-</div>
-
-<div class="buttons">
-
-<button
-class="btn btn-whatsapp"
-onclick="consultarWhatsApp(
-'Producto G-TAC',
-0
-)">
-
-📱 CONSULTAR POR WHATSAPP
-
-</button>
+<h3>Uniformes</h3>
 
 </div>
 
-</div>
-
-</div>
-
-
-<!-- PRODUCTO 6 -->
 
 <div
-class="product"
-data-category="nuevo">
+class="category"
+onclick="filtrarCategoria('aph')"
+>
 
-<span class="badge badge-new">
-NUEVO
-</span>
-
-<div class="product-image">
-FOTO DEL PRODUCTO
+<div class="category-icon">
+✚
 </div>
 
-<div class="product-info">
-
-<h3>
-Mochila Táctica
-</h3>
-
-<p class="product-description">
-Mochila para uso táctico y profesional.
-</p>
-
-<div class="price">
-Bs 180
-</div>
-
-<div class="buttons">
-
-<button
-class="btn btn-cart"
-onclick="agregarAlCarrito(
-'Mochila Táctica',
-180
-)">
-
-🛒 AGREGAR AL CARRITO
-
-</button>
-
-<button
-class="btn btn-whatsapp"
-onclick="consultarWhatsApp(
-'Mochila Táctica',
-180
-)">
-
-📱 CONSULTAR POR WHATSAPP
-
-</button>
-
-</div>
-
-</div>
+<h3>APH</h3>
 
 </div>
 
 
+<div
+class="category"
+onclick="filtrarCategoria('promo')"
+>
+
+<div class="category-icon">
+%
 </div>
+
+<h3>Promociones</h3>
+
+</div>
+
+
+<div
+class="category"
+onclick="filtrarCategoria('usado')"
+>
+
+<div class="category-icon">
+↻
+</div>
+
+<h3>Usados</h3>
+
+</div>
+
+
+</section>
+
+
+<section>
+
+<div
+id="estadoCarga"
+class="loading"
+>
+
+Cargando productos...
+
+</div>
+
+
+<div
+id="productos"
+class="products"
+>
+</div>
+
+</section>
+
 
 </main>
 
 
-<!-- OVERLAY -->
+<!-- =========================
+     OVERLAY
+========================= -->
 
 <div
-class="overlay"
 id="overlay"
-onclick="cerrarPaneles()">
+class="overlay"
+onclick="cerrarCarrito()"
+>
 </div>
 
 
-<!-- CARRITO -->
+<!-- =========================
+     CARRITO
+========================= -->
 
-<div
+<aside
+id="cartPanel"
 class="cart-panel"
-id="cart-panel">
+>
+
 
 <div class="cart-header">
 
 <h2>
-🛒 Mi carrito
+Carrito
 </h2>
 
 <button
 class="close-cart"
-onclick="cerrarCarrito()">
-
-✕
-
+onclick="cerrarCarrito()"
+>
+×
 </button>
 
 </div>
 
 
 <div
-class="cart-items"
-id="cart-items">
-
+id="carritoItems"
+>
 </div>
 
-
-<div class="cart-footer">
-
-<div class="total">
-
-Total:
-Bs <span id="cart-total">0</span>
-
-</div>
-
-<button
-class="btn btn-whatsapp"
-onclick="abrirFormularioCliente()">
-
-📱 COMPRAR POR WHATSAPP
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- FORMULARIO CLIENTE -->
 
 <div
-class="cart-panel"
-id="client-form">
-
-<div class="cart-header">
-
-<h2>
-📋 Datos del pedido
-</h2>
-
-<button
-class="close-cart"
-onclick="cerrarFormularioCliente()">
-
-✕
-
-</button>
-
+id="carritoTotal"
+class="cart-total"
+>
+Total: Bs 0
 </div>
 
 
-<div class="form-content">
+<div class="checkout">
 
-<p style="color:#666; margin-bottom:10px;">
+<h3>
+Datos del pedido
+</h3>
 
-Completa tus datos para enviar el pedido.
 
-</p>
-
+<div class="checkout-group">
 
 <label>
 Nombre
@@ -1059,10 +734,13 @@ Nombre
 
 <input
 type="text"
-id="cliente-nombre"
-placeholder="Ej. Juan"
+id="nombreCliente"
 >
 
+</div>
+
+
+<div class="checkout-group">
 
 <label>
 Apellido
@@ -1070,10 +748,13 @@ Apellido
 
 <input
 type="text"
-id="cliente-apellido"
-placeholder="Ej. Pérez"
+id="apellidoCliente"
 >
 
+</div>
+
+
+<div class="checkout-group">
 
 <label>
 Teléfono
@@ -1081,10 +762,13 @@ Teléfono
 
 <input
 type="tel"
-id="cliente-telefono"
-placeholder="Ej. 71234567"
+id="telefonoCliente"
 >
 
+</div>
+
+
+<div class="checkout-group">
 
 <label>
 C.I.
@@ -1092,130 +776,139 @@ C.I.
 
 <input
 type="text"
-id="cliente-ci"
-placeholder="Ej. 12345678"
-inputmode="numeric"
+id="ciCliente"
 >
 
+</div>
+
+
+<div class="checkout-group">
 
 <label>
 Ciudad
 </label>
 
-<select id="cliente-ciudad">
+<input
+type="text"
+id="ciudadCliente"
+>
 
-<option value="">
-Seleccione una ciudad
-</option>
+</div>
 
-<option>La Paz</option>
-<option>El Alto</option>
-<option>Santa Cruz</option>
-<option>Cochabamba</option>
-<option>Sucre</option>
-<option>Tarija</option>
-<option>Oruro</option>
-<option>Potosí</option>
-<option>Beni</option>
-<option>Pando</option>
-<option>Otra</option>
 
-</select>
-
+<div class="checkout-group">
 
 <label>
 Zona / dirección
 </label>
 
-<textarea
-id="cliente-direccion"
-placeholder="Indique zona, calle, número, referencia, etc.">
-</textarea>
+<input
+type="text"
+id="direccionCliente"
+>
 
+</div>
+
+
+<div class="checkout-group">
 
 <label>
 Forma de entrega
 </label>
 
-<select id="cliente-entrega">
+<select id="entregaCliente">
 
 <option value="">
-Seleccione
+Seleccionar
 </option>
 
-<option>
-Envío
+<option value="Entrega a domicilio">
+Entrega a domicilio
 </option>
 
-<option>
-Recojo
+<option value="Punto de encuentro">
+Punto de encuentro
+</option>
+
+<option value="Envío por transporte">
+Envío por transporte
 </option>
 
 </select>
 
+</div>
+
+
+<div class="checkout-group">
 
 <label>
 Forma de pago
 </label>
 
-<select id="cliente-pago">
+<select id="pagoCliente">
 
 <option value="">
-Seleccione
+Seleccionar
 </option>
 
-<option>
+<option value="Efectivo">
+Efectivo
+</option>
+
+<option value="QR">
 QR
 </option>
 
-<option>
+<option value="Transferencia bancaria">
 Transferencia bancaria
-</option>
-
-<option>
-Efectivo
 </option>
 
 </select>
 
+</div>
+
+
+<div class="checkout-group">
 
 <label>
 Observaciones
 </label>
 
 <textarea
-id="cliente-observaciones"
-placeholder="Talla, color, consulta, etc.">
-</textarea>
+id="observacionesCliente"
+></textarea>
+
+</div>
 
 
 <button
-class="form-submit"
-onclick="enviarPedidoWhatsApp()">
+class="btn btn-whatsapp"
+onclick="enviarPedido()"
+>
 
-📱 ENVIAR PEDIDO POR WHATSAPP
+Enviar pedido por WhatsApp
 
 </button>
 
-</div>
 
 </div>
 
 
-<!-- FOOTER -->
+</aside>
+
 
 <footer>
 
-<h3>
-GUILLTAC EQUIPO TÁCTICO BOLIVIA
-</h3>
+<p>
+<strong>GUILLTAC</strong>
+</p>
 
 <p>
 Equipamiento táctico, APH y profesional
 </p>
 
 <p>
-© 2026 GUILLTAC
+Bolivia
 </p>
 
 </footer>
@@ -1223,601 +916,325 @@ Equipamiento táctico, APH y profesional
 
 <script>
 
-const numeroWhatsApp = "59173272204";
+
+/* =========================
+   CONFIGURACIÓN
+========================= */
+
+const URL_SERVIDOR =
+"https://script.google.com/macros/s/AKfycbzSN6dszANppWHxfySG_QEjW8n57qFFeBwcAfaW7tI2WeZPWArCGBqhWQp-mUv0EwU-uQ/exec";
+
+
+const WHATSAPP =
+"59173272204";
+
+
+let productos = [];
 
 let carrito = [];
 
 
 /* =========================
-   CARRITO
+   CARGAR PRODUCTOS
 ========================= */
 
-function agregarAlCarrito(nombre, precio){
+async function cargarProductos(){
 
-    const productoExistente =
-        carrito.find(
-            producto =>
-            producto.nombre === nombre
+    const contenedor =
+        document.getElementById(
+            "productos"
         );
 
-    if(productoExistente){
+    const estadoCarga =
+        document.getElementById(
+            "estadoCarga"
+        );
 
-        productoExistente.cantidad++;
+    try{
 
-    }else{
+        const respuesta =
+            await fetch(
+                URL_SERVIDOR
+            );
 
-        carrito.push({
+        if(!respuesta.ok){
 
-            nombre:nombre,
+            throw new Error(
+                "No se pudo conectar con el servidor."
+            );
 
-            precio:precio,
+        }
 
-            cantidad:1
+        productos =
+            await respuesta.json();
 
-        });
+
+        estadoCarga.style.display =
+            "none";
+
+
+        mostrarProductos();
+
+
+    }catch(error){
+
+        console.error(error);
+
+        estadoCarga.innerHTML =
+            `
+            <div class="error">
+
+            No se pudieron cargar los productos.
+
+            <br><br>
+
+            Verifica la conexión con la base de datos.
+
+            </div>
+            `;
 
     }
-
-    actualizarCarrito();
-
-    abrirCarrito();
 
 }
 
 
-function actualizarCarrito(){
+/* =========================
+   MOSTRAR PRODUCTOS
+========================= */
+
+function mostrarProductos(){
 
     const contenedor =
         document.getElementById(
-            "cart-items"
-        );
-
-    const contador =
-        document.getElementById(
-            "cart-count"
-        );
-
-    const totalElemento =
-        document.getElementById(
-            "cart-total"
+            "productos"
         );
 
 
-    contador.textContent =
-        carrito.reduce(
-            (total,producto) =>
-            total + producto.cantidad,
-            0
-        );
+    if(productos.length === 0){
+
+        contenedor.innerHTML =
+            `
+            <div class="loading">
+
+            No hay productos registrados.
+
+            </div>
+            `;
+
+        return;
+
+    }
 
 
     contenedor.innerHTML = "";
 
 
-    let total = 0;
+    productos.forEach(
+        function(producto){
 
-
-    if(carrito.length === 0){
-
-        contenedor.innerHTML =
-            "<p>Tu carrito está vacío.</p>";
-
-        totalElemento.textContent =
-            "0";
-
-        return;
-
-    }
-
-
-    carrito.forEach(
-        (producto,index) => {
-
-            const subtotal =
-                producto.precio *
-                producto.cantidad;
-
-            total += subtotal;
-
-
-            const item =
+            const tarjeta =
                 document.createElement(
-                    "div"
+                    "article"
                 );
 
-            item.className =
-                "cart-item";
+
+            tarjeta.className =
+                "product";
 
 
-            item.innerHTML = `
+            tarjeta.dataset.category =
+                producto.categorias || "";
 
-                <h4>
-                    ${producto.nombre}
-                </h4>
 
-                <p>
-                    Bs ${producto.precio}
-                </p>
+            const precio =
+                Number(producto.precio);
 
-                <div class="quantity">
 
-                    <button
-                    onclick="cambiarCantidad(${index},-1)">
-                    −
-                    </button>
+            let precioHTML;
 
-                    <strong>
-                    ${producto.cantidad}
-                    </strong>
 
-                    <button
-                    onclick="cambiarCantidad(${index},1)">
-                    +
-                    </button>
+            if(
+                producto.precio === "" ||
+                producto.precio === null ||
+                producto.precio === undefined
+            ){
+
+                precioHTML =
+                    "Consultar";
+
+            }else{
+
+                precioHTML =
+                    "Bs " +
+                    precio.toFixed(2);
+
+            }
+
+
+            let imagenHTML =
+                `
+                <div class="product-image">
+                    Sin fotografía
+                </div>
+                `;
+
+
+            if(producto.foto){
+
+                imagenHTML =
+                    `
+                    <div class="product-image">
+
+                        <img
+                        src="${producto.foto}"
+                        alt="${producto.nombre}"
+                        >
+
+                    </div>
+                    `;
+
+            }
+
+
+            const agotado =
+                producto.estado === "agotado" ||
+                Number(producto.stock) <= 0;
+
+
+            const stockTexto =
+                agotado
+                ? "Agotado"
+                : "Stock disponible: " +
+                  producto.stock;
+
+
+            tarjeta.innerHTML =
+                `
+
+                ${imagenHTML}
+
+                <div class="product-content">
+
+                    <h3>
+                        ${escaparHTML(producto.nombre)}
+                    </h3>
+
+                    <div class="product-description">
+
+                        ${escaparHTML(
+                            producto.descripcion || ""
+                        )}
+
+                    </div>
+
+                    <div class="product-price">
+
+                        ${precioHTML}
+
+                    </div>
+
+                    <div class="product-stock">
+
+                        ${stockTexto}
+
+                    </div>
+
+
+                    <div class="product-buttons">
+
+
+                        ${
+                            agotado
+
+                            ?
+
+                            `
+                            <button
+                            class="btn btn-disabled"
+                            disabled
+                            >
+                            Agotado
+                            </button>
+                            `
+
+                            :
+
+                            `
+                            <button
+                            class="btn btn-cart"
+                            onclick="agregarCarrito(${producto.id})"
+                            >
+                            Agregar al carrito
+                            </button>
+                            `
+                        }
+
+
+                        <button
+                        class="btn btn-whatsapp"
+                        onclick="consultarProducto(${producto.id})"
+                        >
+
+                        Consultar por WhatsApp
+
+                        </button>
+
+
+                    </div>
 
                 </div>
 
-                <p>
-                    Subtotal:
-                    <strong>
-                    Bs ${subtotal}
-                    </strong>
-                </p>
-
-                <button
-                class="remove"
-                onclick="eliminarProducto(${index})">
-
-                🗑️ Eliminar
-
-                </button>
-
-            `;
+                `;
 
 
-            contenedor.appendChild(item);
+            contenedor.appendChild(
+                tarjeta
+            );
 
         }
     );
 
-
-    totalElemento.textContent =
-        total;
-
-}
-
-
-function cambiarCantidad(index,cambio){
-
-    carrito[index].cantidad += cambio;
-
-
-    if(
-        carrito[index].cantidad <= 0
-    ){
-
-        carrito.splice(index,1);
-
-    }
-
-
-    actualizarCarrito();
-
-}
-
-
-function eliminarProducto(index){
-
-    carrito.splice(index,1);
-
-    actualizarCarrito();
-
 }
 
 
 /* =========================
-   ABRIR / CERRAR CARRITO
+   SEGURIDAD HTML
 ========================= */
 
-function abrirCarrito(){
+function escaparHTML(texto){
 
-    document
-        .getElementById("cart-panel")
-        .classList.add("active");
-
-    document
-        .getElementById("overlay")
-        .classList.add("active");
-
-}
-
-
-function cerrarCarrito(){
-
-    document
-        .getElementById("cart-panel")
-        .classList.remove("active");
-
-    document
-        .getElementById("overlay")
-        .classList.remove("active");
-
-}
-
-
-function cerrarPaneles(){
-
-    cerrarCarrito();
-
-    cerrarFormularioCliente();
+    return String(texto)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
 
 /* =========================
-   WHATSAPP PRODUCTO
-========================= */
-
-function consultarWhatsApp(
-    nombre,
-    precio
-){
-
-    let mensaje =
-        "Hola, quiero consultar por:%0A%0A";
-
-    mensaje +=
-        "📦 Producto: " +
-        nombre +
-        "%0A";
-
-
-    if(precio > 0){
-
-        mensaje +=
-            "💰 Precio: Bs " +
-            precio +
-            "%0A";
-
-    }
-
-
-    mensaje +=
-        "%0A¿Está disponible?";
-
-
-    const url =
-        "https://wa.me/" +
-        numeroWhatsApp +
-        "?text=" +
-        mensaje;
-
-
-    window.open(
-        url,
-        "_blank"
-    );
-
-}
-
-
-/* =========================
-   FORMULARIO
-========================= */
-
-function abrirFormularioCliente(){
-
-    if(carrito.length === 0){
-
-        alert(
-            "Tu carrito está vacío."
-        );
-
-        return;
-
-    }
-
-
-    document
-        .getElementById("cart-panel")
-        .classList.remove("active");
-
-
-    document
-        .getElementById("client-form")
-        .classList.add("active");
-
-
-    document
-        .getElementById("overlay")
-        .classList.add("active");
-
-}
-
-
-function cerrarFormularioCliente(){
-
-    document
-        .getElementById("client-form")
-        .classList.remove("active");
-
-
-    document
-        .getElementById("overlay")
-        .classList.remove("active");
-
-}
-
-
-/* =========================
-   ENVIAR PEDIDO
-========================= */
-
-function enviarPedidoWhatsApp(){
-
-    const nombre =
-        document
-        .getElementById(
-            "cliente-nombre"
-        )
-        .value
-        .trim();
-
-
-    const apellido =
-        document
-        .getElementById(
-            "cliente-apellido"
-        )
-        .value
-        .trim();
-
-
-    const telefono =
-        document
-        .getElementById(
-            "cliente-telefono"
-        )
-        .value
-        .trim();
-
-
-    const ci =
-        document
-        .getElementById(
-            "cliente-ci"
-        )
-        .value
-        .trim();
-
-
-    const ciudad =
-        document
-        .getElementById(
-            "cliente-ciudad"
-        )
-        .value;
-
-
-    const direccion =
-        document
-        .getElementById(
-            "cliente-direccion"
-        )
-        .value
-        .trim();
-
-
-    const entrega =
-        document
-        .getElementById(
-            "cliente-entrega"
-        )
-        .value;
-
-
-    const pago =
-        document
-        .getElementById(
-            "cliente-pago"
-        )
-        .value;
-
-
-    const observaciones =
-        document
-        .getElementById(
-            "cliente-observaciones"
-        )
-        .value
-        .trim();
-
-
-    if(
-
-        nombre === "" ||
-
-        apellido === "" ||
-
-        telefono === "" ||
-
-        ci === "" ||
-
-        ciudad === "" ||
-
-        direccion === "" ||
-
-        entrega === "" ||
-
-        pago === ""
-
-    ){
-
-        alert(
-            "Por favor completa todos los campos obligatorios."
-        );
-
-        return;
-
-    }
-
-
-    let mensaje =
-        "🛒 *NUEVO PEDIDO GUILLTAC*%0A%0A";
-
-
-    mensaje +=
-        "👤 *Nombre:* " +
-        nombre +
-        "%0A";
-
-
-    mensaje +=
-        "👤 *Apellido:* " +
-        apellido +
-        "%0A";
-
-
-    mensaje +=
-        "📱 *Teléfono:* " +
-        telefono +
-        "%0A";
-
-
-    mensaje +=
-        "🪪 *C.I.:* " +
-        ci +
-        "%0A";
-
-
-    mensaje +=
-        "📍 *Ciudad:* " +
-        ciudad +
-        "%0A";
-
-
-    mensaje +=
-        "🏠 *Dirección:* " +
-        direccion +
-        "%0A";
-
-
-    mensaje +=
-        "🚚 *Entrega:* " +
-        entrega +
-        "%0A";
-
-
-    mensaje +=
-        "💳 *Pago:* " +
-        pago +
-        "%0A%0A";
-
-
-    mensaje +=
-        "📦 *PRODUCTOS*%0A%0A";
-
-
-    let total = 0;
-
-
-    carrito.forEach(
-        producto => {
-
-            const subtotal =
-                producto.precio *
-                producto.cantidad;
-
-
-            mensaje +=
-                "• " +
-                producto.nombre +
-                "%0A";
-
-
-            mensaje +=
-                "  Cantidad: " +
-                producto.cantidad +
-                "%0A";
-
-
-            mensaje +=
-                "  Precio: Bs " +
-                producto.precio +
-                "%0A";
-
-
-            mensaje +=
-                "  Subtotal: Bs " +
-                subtotal +
-                "%0A%0A";
-
-
-            total += subtotal;
-
-        }
-    );
-
-
-    mensaje +=
-        "💰 *TOTAL: Bs " +
-        total +
-        "*%0A%0A";
-
-
-    if(
-        observaciones !== ""
-    ){
-
-        mensaje +=
-            "📝 *Observaciones:*%0A" +
-            observaciones +
-            "%0A%0A";
-
-    }
-
-
-    mensaje +=
-        "Hola, quiero confirmar este pedido.";
-
-
-    const url =
-        "https://wa.me/" +
-        numeroWhatsApp +
-        "?text=" +
-        mensaje;
-
-
-    window.open(
-        url,
-        "_blank"
-    );
-
-}
-
-
-/* =========================
-   FILTRO CATEGORÍAS
+   FILTRAR CATEGORÍAS
 ========================= */
 
 function filtrarCategoria(
     categoria
 ){
 
-    const productos =
+    const tarjetas =
         document.querySelectorAll(
             ".product"
         );
 
 
-    productos.forEach(
-        producto => {
+    tarjetas.forEach(
+        function(tarjeta){
 
             if(
                 categoria === "todos"
             ){
 
-                producto.classList.remove(
+                tarjeta.classList.remove(
                     "hidden"
                 );
 
@@ -1826,19 +1243,27 @@ function filtrarCategoria(
             }
 
 
-          if(
-    producto.dataset.category
-    .split(/\s+/)
-    .includes(categoria)
-){
+            const categorias =
+                (
+                    tarjeta.dataset.category
+                    || ""
+                )
+                .split(/\s*,\s*|\s+/);
 
-                producto.classList.remove(
+
+            if(
+                categorias.includes(
+                    categoria
+                )
+            ){
+
+                tarjeta.classList.remove(
                     "hidden"
                 );
 
             }else{
 
-                producto.classList.add(
+                tarjeta.classList.add(
                     "hidden"
                 );
 
@@ -1847,26 +1272,620 @@ function filtrarCategoria(
         }
     );
 
+}
 
-    window.scrollTo({
 
-        top:
-        document
-        .querySelector(
-            ".products"
-        )
-        .offsetTop - 100,
+/* =========================
+   WHATSAPP PRODUCTO
+========================= */
 
-        behavior:"smooth"
+function consultarProducto(id){
 
-    });
+    const producto =
+        productos.find(
+            function(item){
+
+                return String(item.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if(!producto){
+
+        return;
+
+    }
+
+
+    const mensaje =
+        "Hola, quiero consultar por este producto:%0A%0A" +
+
+        "Producto: " +
+        producto.nombre +
+
+        "%0A" +
+
+        "Precio: " +
+        (
+            producto.precio
+            ? "Bs " + producto.precio
+            : "Consultar"
+        );
+
+
+    window.open(
+        "https://wa.me/" +
+        WHATSAPP +
+        "?text=" +
+        mensaje,
+        "_blank"
+    );
 
 }
 
 
-actualizarCarrito();
+/* =========================
+   AGREGAR AL CARRITO
+========================= */
+
+function agregarCarrito(id){
+
+    const producto =
+        productos.find(
+            function(item){
+
+                return String(item.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if(!producto){
+
+        return;
+
+    }
+
+
+    const existente =
+        carrito.find(
+            function(item){
+
+                return String(item.id) ===
+                    String(id);
+
+            }
+        );
+
+
+    if(existente){
+
+        if(
+            existente.cantidad <
+            Number(producto.stock)
+        ){
+
+            existente.cantidad++;
+
+        }
+
+    }else{
+
+        carrito.push({
+
+            id: producto.id,
+
+            nombre: producto.nombre,
+
+            precio: Number(
+                producto.precio
+            ),
+
+            stock: Number(
+                producto.stock
+            ),
+
+            cantidad: 1
+
+        });
+
+    }
+
+
+    actualizarCarrito();
+
+    abrirCarrito();
+
+}
+
+
+/* =========================
+   ACTUALIZAR CARRITO
+========================= */
+
+function actualizarCarrito(){
+
+    const contenedor =
+        document.getElementById(
+            "carritoItems"
+        );
+
+
+    const contador =
+        document.getElementById(
+            "contadorCarrito"
+        );
+
+
+    const totalElemento =
+        document.getElementById(
+            "carritoTotal"
+        );
+
+
+    if(carrito.length === 0){
+
+        contenedor.innerHTML =
+            `
+            <div class="empty-cart">
+
+            Tu carrito está vacío.
+
+            </div>
+            `;
+
+        totalElemento.innerHTML =
+            "Total: Bs 0";
+
+        contador.textContent =
+            "0";
+
+        return;
+
+    }
+
+
+    contenedor.innerHTML =
+        "";
+
+
+    let total = 0;
+
+    let cantidadTotal = 0;
+
+
+    carrito.forEach(
+        function(item,index){
+
+            const subtotal =
+                item.precio *
+                item.cantidad;
+
+
+            total += subtotal;
+
+            cantidadTotal +=
+                item.cantidad;
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "cart-item";
+
+
+            div.innerHTML =
+                `
+
+                <div class="cart-item-name">
+
+                    ${escaparHTML(item.nombre)}
+
+                </div>
+
+
+                <div class="cart-item-price">
+
+                    Bs ${item.precio.toFixed(2)}
+
+                </div>
+
+
+                <div class="cart-controls">
+
+                    <button
+                    onclick="cambiarCantidad(${index},-1)"
+                    >
+                    −
+                    </button>
+
+                    <span>
+                    ${item.cantidad}
+                    </span>
+
+                    <button
+                    onclick="cambiarCantidad(${index},1)"
+                    >
+                    +
+                    </button>
+
+                    <button
+                    onclick="eliminarDelCarrito(${index})"
+                    >
+                    ×
+                    </button>
+
+                </div>
+
+                `;
+
+
+            contenedor.appendChild(
+                div
+            );
+
+        }
+    );
+
+
+    totalElemento.innerHTML =
+        "Total: Bs " +
+        total.toFixed(2);
+
+
+    contador.textContent =
+        cantidadTotal;
+
+}
+
+
+/* =========================
+   CAMBIAR CANTIDAD
+========================= */
+
+function cambiarCantidad(
+    index,
+    cambio
+){
+
+    const item =
+        carrito[index];
+
+
+    if(!item){
+
+        return;
+
+    }
+
+
+    const nuevaCantidad =
+        item.cantidad +
+        cambio;
+
+
+    if(nuevaCantidad <= 0){
+
+        carrito.splice(
+            index,
+            1
+        );
+
+    }else if(
+        nuevaCantidad <=
+        item.stock
+    ){
+
+        item.cantidad =
+            nuevaCantidad;
+
+    }
+
+
+    actualizarCarrito();
+
+}
+
+
+/* =========================
+   ELIMINAR
+========================= */
+
+function eliminarDelCarrito(
+    index
+){
+
+    carrito.splice(
+        index,
+        1
+    );
+
+    actualizarCarrito();
+
+}
+
+
+/* =========================
+   ABRIR CARRITO
+========================= */
+
+function abrirCarrito(){
+
+    document
+    .getElementById(
+        "cartPanel"
+    )
+    .classList.add("open");
+
+
+    document
+    .getElementById(
+        "overlay"
+    )
+    .classList.add("show");
+
+}
+
+
+/* =========================
+   CERRAR CARRITO
+========================= */
+
+function cerrarCarrito(){
+
+    document
+    .getElementById(
+        "cartPanel"
+    )
+    .classList.remove("open");
+
+
+    document
+    .getElementById(
+        "overlay"
+    )
+    .classList.remove("show");
+
+}
+
+
+/* =========================
+   ENVIAR PEDIDO
+========================= */
+
+function enviarPedido(){
+
+    if(carrito.length === 0){
+
+        alert(
+            "Agrega al menos un producto al carrito."
+        );
+
+        return;
+
+    }
+
+
+    const nombre =
+        document
+        .getElementById(
+            "nombreCliente"
+        )
+        .value
+        .trim();
+
+
+    const apellido =
+        document
+        .getElementById(
+            "apellidoCliente"
+        )
+        .value
+        .trim();
+
+
+    const telefono =
+        document
+        .getElementById(
+            "telefonoCliente"
+        )
+        .value
+        .trim();
+
+
+    const ci =
+        document
+        .getElementById(
+            "ciCliente"
+        )
+        .value
+        .trim();
+
+
+    const ciudad =
+        document
+        .getElementById(
+            "ciudadCliente"
+        )
+        .value
+        .trim();
+
+
+    const direccion =
+        document
+        .getElementById(
+            "direccionCliente"
+        )
+        .value
+        .trim();
+
+
+    const entrega =
+        document
+        .getElementById(
+            "entregaCliente"
+        )
+        .value;
+
+
+    const pago =
+        document
+        .getElementById(
+            "pagoCliente"
+        )
+        .value;
+
+
+    const observaciones =
+        document
+        .getElementById(
+            "observacionesCliente"
+        )
+        .value
+        .trim();
+
+
+    if(
+        nombre === "" ||
+        apellido === "" ||
+        telefono === "" ||
+        ci === "" ||
+        ciudad === "" ||
+        direccion === "" ||
+        entrega === "" ||
+        pago === ""
+    ){
+
+        alert(
+            "Completa todos los datos del pedido."
+        );
+
+        return;
+
+    }
+
+
+    let mensaje =
+        "🛒 *PEDIDO GUILLTAC*%0A%0A";
+
+
+    mensaje +=
+        "*Cliente:* " +
+        nombre +
+        " " +
+        apellido +
+        "%0A";
+
+
+    mensaje +=
+        "*Teléfono:* " +
+        telefono +
+        "%0A";
+
+
+    mensaje +=
+        "*C.I.:* " +
+        ci +
+        "%0A";
+
+
+    mensaje +=
+        "*Ciudad:* " +
+        ciudad +
+        "%0A";
+
+
+    mensaje +=
+        "*Dirección:* " +
+        direccion +
+        "%0A";
+
+
+    mensaje +=
+        "*Entrega:* " +
+        entrega +
+        "%0A";
+
+
+    mensaje +=
+        "*Pago:* " +
+        pago +
+        "%0A%0A";
+
+
+    mensaje +=
+        "*PRODUCTOS:*%0A";
+
+
+    let total = 0;
+
+
+    carrito.forEach(
+        function(item){
+
+            const subtotal =
+                item.precio *
+                item.cantidad;
+
+
+            total += subtotal;
+
+
+            mensaje +=
+                "• " +
+                item.nombre +
+                " x" +
+                item.cantidad +
+                " — Bs " +
+                subtotal.toFixed(2) +
+                "%0A";
+
+        }
+    );
+
+
+    mensaje +=
+        "%0A*TOTAL: Bs " +
+        total.toFixed(2) +
+        "*";
+
+
+    if(observaciones){
+
+        mensaje +=
+            "%0A%0A*Observaciones:* " +
+            observaciones;
+
+    }
+
+
+    window.open(
+        "https://wa.me/" +
+        WHATSAPP +
+        "?text=" +
+        mensaje,
+        "_blank"
+    );
+
+}
+
+
+/* =========================
+   INICIAR
+========================= */
+
+cargarProductos();
+
 
 </script>
+
 
 </body>
 
