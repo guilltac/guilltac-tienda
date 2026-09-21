@@ -1453,6 +1453,9 @@ function agregarCarrito(id){
         return;
     }
 
+    const stock =
+        parseInt(producto.stock) || 0;
+
     const existente =
         carrito.find(
             p => String(p.id) === String(id)
@@ -1460,9 +1463,27 @@ function agregarCarrito(id){
 
     if(existente){
 
+        if(existente.cantidad >= stock){
+
+            alert(
+                "No hay más unidades disponibles de este producto."
+            );
+
+            return;
+        }
+
         existente.cantidad++;
 
     }else{
+
+        if(stock <= 0){
+
+            alert(
+                "Este producto no tiene stock disponible."
+            );
+
+            return;
+        }
 
         carrito.push({
 
@@ -1476,7 +1497,6 @@ function agregarCarrito(id){
 
     actualizarCarrito();
 }
-
 
 /* =========================
    ACTUALIZAR CARRITO
