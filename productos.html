@@ -401,25 +401,21 @@ const URL_SERVIDOR =
 
 function guardarProducto(){
 
-
     const nombre =
         document
         .getElementById("nombre")
         .value
         .trim();
 
-
     const precio =
         document
         .getElementById("precio")
         .value;
 
-
     const stock =
         document
         .getElementById("stock")
         .value;
-
 
     const descripcion =
         document
@@ -427,11 +423,15 @@ function guardarProducto(){
         .value
         .trim();
 
-
     const estado =
         document
         .getElementById("estado")
         .value;
+
+    const archivoFoto =
+        document
+        .getElementById("foto")
+        .files[0];
 
 
     const categorias =
@@ -463,139 +463,214 @@ function guardarProducto(){
     }
 
 
-    const datos = {
+    /*
+     * Si no hay fotografía,
+     * registramos el producto normalmente.
+     */
 
-        id: Date.now(),
+    if(!archivoFoto){
 
-        nombre: nombre,
+        enviarProducto("");
 
-        precio: precio,
+        return;
 
-        stock: stock,
+    }
 
-        descripcion: descripcion,
 
-        categorias: categorias,
+    /*
+     * Convertimos la fotografía
+     * a Base64.
+     */
 
-        estado: estado,
+    const lector =
+        new FileReader();
 
-        foto: ""
+
+    lector.onload = function(){
+
+        enviarProducto(
+            lector.result
+        );
 
     };
 
 
-    const formulario =
-        document.createElement("form");
+    lector.onerror = function(){
+
+        alert(
+            "No se pudo leer la fotografía."
+        );
+
+    };
 
 
-    formulario.method = "POST";
-
-
-    formulario.action =
-        URL_SERVIDOR;
-
-
-    formulario.target =
-        "guilltac_envio";
-
-
-    Object.keys(datos).forEach(
-        function(campo){
-
-            const input =
-                document.createElement("input");
-
-
-            input.type = "hidden";
-
-
-            input.name = campo;
-
-
-            input.value =
-                datos[campo];
-
-
-            formulario.appendChild(input);
-
-        }
+    lector.readAsDataURL(
+        archivoFoto
     );
 
 
-    const iframe =
-        document.createElement("iframe");
+    function enviarProducto(foto){
+
+        const datos = {
+
+            id: Date.now(),
+
+            nombre: nombre,
+
+            precio: precio,
+
+            stock: stock,
+
+            descripcion: descripcion,
+
+            categorias: categorias,
+
+            estado: estado,
+
+            foto: foto
+
+        };
 
 
-    iframe.name =
-        "guilltac_envio";
+        const formulario =
+            document.createElement("form");
 
 
-    iframe.style.display =
-        "none";
+        formulario.method =
+            "POST";
 
 
-    document.body.appendChild(
-        iframe
-    );
+        formulario.action =
+            URL_SERVIDOR;
 
 
-    document.body.appendChild(
-        formulario
-    );
+        formulario.target =
+            "guilltac_envio";
 
 
-    formulario.submit();
+        Object.keys(datos).forEach(
+            function(campo){
+
+                const input =
+                    document.createElement(
+                        "input"
+                    );
+
+                input.type =
+                    "hidden";
+
+                input.name =
+                    campo;
+
+                input.value =
+                    datos[campo];
+
+                formulario.appendChild(
+                    input
+                );
+
+            }
+        );
 
 
-    const mensaje =
-    document.getElementById("mensaje");
-
-mensaje.innerHTML =
-    "✅ PRODUCTO REGISTRADO CORRECTAMENTE<br><br>" +
-    "📦 Producto: " + nombre + "<br>" +
-    "💰 Precio: Bs " + precio + "<br>" +
-    "📦 Stock: " + stock;
-
-mensaje.style.display = "block";
+        const iframe =
+            document.createElement(
+                "iframe"
+            );
 
 
-    document
-    .getElementById("nombre")
-    .value = "";
+        iframe.name =
+            "guilltac_envio";
 
 
-    document
-    .getElementById("precio")
-    .value = "";
+        iframe.style.display =
+            "none";
 
 
-    document
-    .getElementById("stock")
-    .value = "";
+        document.body.appendChild(
+            iframe
+        );
 
 
-    document
-    .getElementById("descripcion")
-    .value = "";
+        document.body.appendChild(
+            formulario
+        );
 
 
-    document
-    .getElementById("estado")
-    .value = "activo";
+        formulario.submit();
 
 
-    document
-    .querySelectorAll(
-        'input[type="checkbox"]'
-    )
-    .forEach(function(caja){
+        const mensaje =
+            document.getElementById(
+                "mensaje"
+            );
 
-        caja.checked = false;
 
-    });
+        mensaje.innerHTML =
+            "✅ PRODUCTO REGISTRADO CORRECTAMENTE<br><br>" +
+            "📦 Producto: " +
+            nombre +
+            "<br>" +
+            "💰 Precio: Bs " +
+            precio +
+            "<br>" +
+            "📦 Stock: " +
+            stock +
+            (
+                foto
+                ? "<br>📷 Fotografía registrada"
+                : ""
+            );
+
+
+        mensaje.style.display =
+            "block";
+
+
+        document
+        .getElementById("nombre")
+        .value = "";
+
+
+        document
+        .getElementById("precio")
+        .value = "";
+
+
+        document
+        .getElementById("stock")
+        .value = "";
+
+
+        document
+        .getElementById("descripcion")
+        .value = "";
+
+
+        document
+        .getElementById("estado")
+        .value =
+            "activo";
+
+
+        document
+        .getElementById("foto")
+        .value = "";
+
+
+        document
+        .querySelectorAll(
+            'input[type="checkbox"]'
+        )
+        .forEach(function(caja){
+
+            caja.checked = false;
+
+        });
+
+    }
 
 }
-
 
 </script>
 
