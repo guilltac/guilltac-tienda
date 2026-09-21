@@ -2003,75 +2003,185 @@ function cerrarCheckout(){
 function enviarPedido(){
 
     const nombre =
-        document.getElementById(
-            "nombre"
-        ).value.trim();
-
+        document.getElementById("nombre").value.trim();
 
     const apellido =
-        document.getElementById(
-            "apellido"
-        ).value.trim();
-
+        document.getElementById("apellido").value.trim();
 
     const telefono =
-        document.getElementById(
-            "telefono"
-        ).value.trim();
-
+        document.getElementById("telefono").value.trim();
 
     const ci =
-        document.getElementById(
-            "ci"
-        ).value.trim();
+        document.getElementById("ci").value.trim();
 
-
-    const ciudad =
-        document.getElementById(
-            "ciudad"
-        ).value.trim();
-
+    const departamento =
+        document.getElementById("departamento").value;
 
     const direccion =
-        document.getElementById(
-            "direccion"
-        ).value.trim();
-
+        document.getElementById("direccion").value.trim();
 
     const entrega =
-        document.getElementById(
-            "entrega"
-        ).value;
-
+        document.getElementById("entrega").value;
 
     const pago =
-        document.getElementById(
-            "pago"
-        ).value;
-
+        document.getElementById("pago").value;
 
     const observaciones =
-        document.getElementById(
-            "observaciones"
-        ).value.trim();
+        document.getElementById("observaciones").value.trim();
 
+
+    // Verificar datos obligatorios
 
     if(
         !nombre ||
         !apellido ||
         !telefono ||
-        !ci
+        !ci ||
+        !departamento ||
+        !direccion ||
+        !entrega ||
+        !pago
     ){
 
         alert(
-            "Por favor completa los datos principales."
+            "Por favor completa todos los datos del pedido."
         );
 
         return;
-
     }
 
 
+    // Crear mensaje
+
+    let mensaje =
+        "🛒 *NUEVO PEDIDO GUILLTAC*\n\n";
+
+
+    mensaje +=
+        "👤 *Nombre:* " +
+        nombre +
+        "\n";
+
+    mensaje +=
+        "👤 *Apellido:* " +
+        apellido +
+        "\n";
+
+    mensaje +=
+        "📱 *Teléfono:* " +
+        telefono +
+        "\n";
+
+    mensaje +=
+        "🪪 *C.I.:* " +
+        ci +
+        "\n";
+
+    mensaje +=
+        "📍 *Departamento:* " +
+        departamento +
+        "\n";
+
+    mensaje +=
+        "🏠 *Dirección:* " +
+        direccion +
+        "\n";
+
+    mensaje +=
+        "🚚 *Entrega:* " +
+        entrega +
+        "\n";
+
+    mensaje +=
+        "💳 *Pago:* " +
+        pago +
+        "\n\n";
+
+
+    // Productos
+
+    mensaje +=
+        "📦 *PRODUCTOS*\n\n";
+
+
+    let total = 0;
+
+
+    carrito.forEach(producto => {
+
+        const precio =
+            parseFloat(producto.precio) || 0;
+
+        const cantidad =
+            producto.cantidad;
+
+        const subtotal =
+            precio * cantidad;
+
+        total += subtotal;
+
+
+        mensaje +=
+            "• " +
+            producto.nombre +
+            "\n";
+
+        mensaje +=
+            "  Cantidad: " +
+            cantidad +
+            "\n";
+
+        mensaje +=
+            "  Precio: Bs " +
+            precio.toFixed(2) +
+            "\n";
+
+        mensaje +=
+            "  Subtotal: Bs " +
+            subtotal.toFixed(2) +
+            "\n\n";
+
+    });
+
+
+    // Total
+
+    mensaje +=
+        "💰 *TOTAL: Bs " +
+        total.toFixed(2) +
+        "*\n\n";
+
+
+    // Observaciones
+
+    mensaje +=
+        "📝 *Observaciones:*\n";
+
+    mensaje +=
+        observaciones || "Ninguna";
+
+    mensaje +=
+        "\n\n";
+
+    mensaje +=
+        "Hola, quiero confirmar este pedido.";
+
+
+    // Abrir WhatsApp
+
+    const url =
+        "https://wa.me/" +
+        WHATSAPP +
+        "?text=" +
+        encodeURIComponent(mensaje);
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
     let mensaje =
         "🛒 *PEDIDO GUILLTAC*%0A%0A";
 
