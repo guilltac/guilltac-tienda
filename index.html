@@ -993,10 +993,11 @@ Continuar pedido por WhatsApp
 
             <label>Nombre</label>
 
-            <input
-                id="nombre"
-                type="text"
-                placeholder="Ingrese su nombre">
+        <input
+    type="text"
+    id="nombre"
+    oninput="this.value=this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]/g,'')"
+>
 
         </div>
 
@@ -1006,9 +1007,10 @@ Continuar pedido por WhatsApp
             <label>Apellido</label>
 
             <input
-                id="apellido"
-                type="text"
-                placeholder="Ingrese su apellido">
+    type="text"
+    id="apellido"
+    oninput="this.value=this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]/g,'')"
+>
 
         </div>
 
@@ -1018,9 +1020,11 @@ Continuar pedido por WhatsApp
             <label>Teléfono</label>
 
             <input
-                id="telefono"
-                type="tel"
-                placeholder="Ingrese su número de teléfono">
+    type="tel"
+    id="telefono"
+    inputmode="numeric"
+    oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+>
 
         </div>
 
@@ -1030,10 +1034,11 @@ Continuar pedido por WhatsApp
             <label>C.I.</label>
 
             <input
-                id="ci"
-                type="text"
-                placeholder="Ingrese su carnet de identidad">
-
+    type="text"
+    id="ci"
+    inputmode="numeric"
+    oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+>
         </div>
 
 
