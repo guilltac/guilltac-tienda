@@ -1721,6 +1721,9 @@ function enviarPedido(){
 
     const pago =
         document.getElementById("pago").value;
+   
+   const policia =
+    document.getElementById("policia").value;
 
     const observaciones =
         document.getElementById("observaciones").value.trim();
@@ -1798,8 +1801,17 @@ function enviarPedido(){
         "🚚 *Entrega:* " +
         entrega + "\n" +
 
-        "💳 *Pago:* " +
-        pago + "\n\n" +
+       "💳 *Pago:* " +
+pago + "\n" +
+
+"👮 *Funcionario policial:* " +
+(policia === "si" ? "Sí" : "No") + "\n" +
+
+(policia === "si"
+    ? "💵 *Beneficio policial:* 5%\n" +
+      "📌 *Devolución:* Se verificará la identidad al momento de la entrega. " +
+      "Si corresponde, se devolverá en efectivo el importe del 5%.\n\n"
+    : "\n") +
 
         "📦 *PRODUCTOS*\n" +
 
