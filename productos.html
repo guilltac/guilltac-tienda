@@ -680,7 +680,7 @@ function subirFotoDrive(archivo) {
 
 }
     
-function guardarProducto(){
+async function guardarProducto(){
 
     const nombre =
         document
@@ -708,6 +708,12 @@ function guardarProducto(){
         document
         .getElementById("estado")
         .value;
+
+    const foto =
+        document
+        .getElementById("foto")
+        .files[0];
+
 
     const categorias =
         Array.from(
@@ -738,6 +744,57 @@ function guardarProducto(){
     }
 
 
+    const mensaje =
+        document.getElementById(
+            "mensaje"
+        );
+
+    const estadoFoto =
+        document.getElementById(
+            "estadoFoto"
+        );
+
+
+    /* =========================
+       SUBIR FOTOGRAFÍA
+       ========================= */
+
+    let urlFoto = "";
+
+
+    if(foto){
+
+        try {
+
+            estadoFoto.textContent =
+                "📤 Subiendo fotografía...";
+
+            urlFoto =
+                await subirFotoDrive(
+                    foto
+                );
+
+        } catch(error) {
+
+            console.error(
+                error
+            );
+
+            alert(
+                "No se pudo guardar la fotografía."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    /* =========================
+       DATOS DEL PRODUCTO
+       ========================= */
+
     const datos = {
 
         id: Date.now(),
@@ -754,10 +811,14 @@ function guardarProducto(){
 
         estado: estado,
 
-        foto: ""
+        foto: urlFoto
 
     };
 
+
+    /* =========================
+       ENVIAR PRODUCTO
+       ========================= */
 
     const formulario =
         document.createElement("form");
@@ -779,7 +840,9 @@ function guardarProducto(){
         function(campo){
 
             const input =
-                document.createElement("input");
+                document.createElement(
+                    "input"
+                );
 
             input.type =
                 "hidden";
@@ -823,27 +886,39 @@ function guardarProducto(){
     formulario.submit();
 
 
-    const mensaje =
-        document.getElementById(
-            "mensaje"
-        );
-
+    /* =========================
+       MENSAJE
+       ========================= */
 
     mensaje.innerHTML =
         "✅ PRODUCTO REGISTRADO CORRECTAMENTE<br><br>" +
+
         "📦 Producto: " +
         nombre +
         "<br>" +
+
         "💰 Precio: Bs " +
         precio +
         "<br>" +
+
         "📦 Stock: " +
-        stock;
+        stock +
+        "<br>" +
+
+        (
+            urlFoto
+            ? "📷 Fotografía guardada en Drive"
+            : "📷 Sin fotografía"
+        );
 
 
     mensaje.style.display =
         "block";
 
+
+    /* =========================
+       LIMPIAR FORMULARIO
+       ========================= */
 
     document
     .getElementById("nombre")
@@ -872,6 +947,10 @@ function guardarProducto(){
     .value = "";
 
 
+    estadoFoto.textContent =
+        "";
+
+
     document
     .querySelectorAll(
         'input[type="checkbox"]'
@@ -883,7 +962,6 @@ function guardarProducto(){
     });
 
 }
-    
 </script>
 
 
