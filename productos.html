@@ -392,6 +392,26 @@ function guardarProducto(){
         .getElementById("stock")
         .value;
 
+    const descripcion =
+        document
+        .getElementById("descripcion")
+        .value
+        .trim();
+
+    const estado =
+        document
+        .getElementById("estado")
+        .value;
+
+    const categorias =
+        Array.from(
+            document.querySelectorAll(
+                'input[type="checkbox"]:checked'
+            )
+        )
+        .map(c => c.value)
+        .join(",");
+
     if(
         nombre === "" ||
         precio === "" ||
@@ -406,9 +426,48 @@ function guardarProducto(){
 
     }
 
-    alert(
-        "Producto registrado correctamente."
+    const datos = {
+
+        id: Date.now(),
+
+        nombre: nombre,
+
+        precio: precio,
+
+        stock: stock,
+
+        descripcion: descripcion,
+
+        categorias: categorias,
+
+        estado: estado,
+
+        foto: ""
+
+    };
+
+    fetch(
+        "https://script.google.com/macros/s/AKfycbzSN6dszANppWHxfySG_QEjW8n57qFFeBwcAfaW7tI2WeZPWArCGBqhWQp-mUv0EwU-uQ/exec",
+        {
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+                "Content-Type":
+                "text/plain;charset=utf-8"
+            },
+
+            body: JSON.stringify(datos)
+
+        }
     );
+
+    alert(
+        "Producto enviado correctamente."
+    );
+
+}
 
 }
 
