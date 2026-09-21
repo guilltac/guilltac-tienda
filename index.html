@@ -1155,10 +1155,59 @@ Continuar pedido por WhatsApp
                 </option>
 
             </select>
+           
+        </div>  
 
-        </div>
+         <label for="policia">¿Es funcionario policial?</label>
 
+<select id="policia" onchange="mostrarAvisoPolicial()">
+    <option value="no">No</option>
+    <option value="si">Sí, soy funcionario policial</option>
+</select>
 
+<div id="avisoPolicial" style="display:none; margin-top:8px; font-size:13px;">
+    <strong>Descuento policial: 5%</strong><br>
+    Se verificará la identidad al momento de la entrega.
+    Si corresponde, se devolverá en efectivo el importe del descuento.
+
+   <div>
+
+    <label for="policia">
+        ¿Es funcionario policial?
+    </label>
+
+    <select
+        id="policia"
+        onchange="mostrarAvisoPolicial()"
+    >
+        <option value="no">
+            No
+        </option>
+
+        <option value="si">
+            Sí, soy funcionario policial
+        </option>
+
+    </select>
+
+    <div
+        id="avisoPolicial"
+        style="display:none; margin-top:8px; font-size:13px;"
+    >
+
+        <strong>
+            Descuento policial: 5%
+        </strong>
+
+        <br>
+
+        Se verificará la identidad al momento de la entrega.
+        Si corresponde, se devolverá en efectivo el importe del descuento.
+
+    </div>
+
+</div>
+</div>
         <div class="form-group">
 
             <label>Observaciones</label>
@@ -1797,6 +1846,24 @@ function enviarPedido(){
         "_blank"
     );
 
+}
+   function mostrarAvisoPolicial(){
+
+    const policia =
+        document.getElementById("policia").value;
+
+    const aviso =
+        document.getElementById("avisoPolicial");
+
+    if(policia === "si"){
+
+        aviso.style.display = "block";
+
+    }else{
+
+        aviso.style.display = "none";
+
+    }
 }
 /* =========================
    INICIAR
