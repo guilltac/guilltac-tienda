@@ -1738,59 +1738,45 @@ function enviarPedido(){
 
     const mensaje =
 
-    String.fromCodePoint(0x1F6D2) +
-    " *NUEVO PEDIDO GUILLTAC*\n\n" +
+        "🛒 *NUEVO PEDIDO GUILLTAC*\n\n" +
 
-    String.fromCodePoint(0x1F464) +
-    " *Nombre:* " +
-    nombre + "\n" +
+        "👤 *Nombre:* " +
+        nombre + "\n" +
 
-    String.fromCodePoint(0x1F464) +
-    " *Apellido:* " +
-    apellido + "\n" +
+        "👤 *Apellido:* " +
+        apellido + "\n" +
 
-    String.fromCodePoint(0x1F4F1) +
-    " *Teléfono:* " +
-    telefono + "\n" +
+        "📱 *Teléfono:* " +
+        telefono + "\n" +
 
-    String.fromCodePoint(0x1FAAA) +
-    " *C.I.:* " +
-    ci + "\n" +
+        "🪪 *C.I.:* " +
+        ci + "\n" +
 
-    String.fromCodePoint(0x1F4CD) +
-    " *Departamento:* " +
-    departamento + "\n" +
+        "📍 *Departamento:* " +
+        departamento + "\n" +
 
-    String.fromCodePoint(0x1F3E0) +
-    " *Dirección:* " +
-    direccion + "\n" +
+        "🏠 *Dirección:* " +
+        direccion + "\n" +
 
-    String.fromCodePoint(0x1F69A) +
-    " *Entrega:* " +
-    entrega + "\n" +
+        "🚚 *Entrega:* " +
+        entrega + "\n" +
 
-    String.fromCodePoint(0x1F4B3) +
-    " *Pago:* " +
-    pago + "\n\n" +
+        "💳 *Pago:* " +
+        pago + "\n\n" +
 
-    String.fromCodePoint(0x1F4E6) +
-    " *PRODUCTOS*\n" +
+        "📦 *PRODUCTOS*\n" +
 
-    productosTexto +
+        productosTexto +
 
-    "\n" +
+        "\n💰 *TOTAL: Bs " +
+        subtotal.toFixed(2) +
+        "*\n\n" +
 
-    String.fromCodePoint(0x1F4B0) +
-    " *TOTAL: Bs " +
-    subtotal.toFixed(2) +
-    "*\n\n" +
+        "📝 *Observaciones:*\n" +
 
-    String.fromCodePoint(0x1F5D2) +
-    " *Observaciones:*\n" +
+        (observaciones || "Ninguna") +
 
-    (observaciones || "Ninguna") +
-
-    "\n\nHola, quiero confirmar este pedido.";
+        "\n\nHola, quiero confirmar este pedido.";
 
 
     const url =
@@ -1807,7 +1793,6 @@ function enviarPedido(){
     );
 
 }
-
 /* =========================
    INICIAR
 ========================= */
