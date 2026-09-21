@@ -1109,26 +1109,13 @@ Continuar pedido por WhatsApp
 
             <label>Forma de entrega</label>
 
-            <select id="entrega">
+           <select id="entrega" onchange="actualizarEntrega()">
 
-                <option value="">
-                    Seleccione una opción
-                </option>
+    <option value="">
+        Seleccione una opción
+    </option>
 
-                <option value="Entrega a domicilio">
-                    Entrega a domicilio
-                </option>
-
-                <option value="Punto de encuentro">
-                    Punto de encuentro
-                </option>
-
-                <option value="Envío por transporte">
-                    Envío por transporte
-                </option>
-
-            </select>
-
+</select>
         </div>
 
 
@@ -1843,7 +1830,24 @@ pago + "\n" +
 
 }
 
-  
+  function mostrarAvisoPolicial(){
+
+    const policia =
+        document.getElementById("policia").value;
+
+    const aviso =
+        document.getElementById("avisoPolicial");
+
+    if(policia === "si"){
+
+        aviso.style.display = "block";
+
+    }else{
+
+        aviso.style.display = "none";
+
+    }
+}
 /* =========================
    INICIAR
 ========================= */
