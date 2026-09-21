@@ -1225,12 +1225,11 @@ function cargarProductos(){
         "?callback=recibirProductos&t=" +
         Date.now();
 
-    script.onerror = function(){
+   script.onerror = function(){
 
-        document.getElementById("productos").innerHTML =
-            '<div class="loading">No se pudieron cargar los productos.</div>';
+    console.log("Error al cargar productos desde el servidor.");
 
-    };
+};
 
     document.body.appendChild(script);
 }
