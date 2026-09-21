@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>GUILLTAC - Productos</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f2f2f2;
+    color:#222;
+}
+
+.header{
+    background:#151515;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.header h1{
+    margin:0;
+}
+
+.header p{
+    color:#bbb;
+}
+
+.container{
+    max-width:1100px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.btn{
+    border:0;
+    padding:12px 18px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.btn-add{
+    background:#222;
+    color:white;
+}
+
+.btn-back{
+    background:#ddd;
+    color:#222;
+}
+
+.panel{
+    background:white;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:25px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(250px,1fr)
+        );
+    gap:18px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-weight:bold;
+}
+
+input,
+textarea,
+select{
+    padding:11px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.categories{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.category-option{
+    border:1px solid #ccc;
+    padding:10px 14px;
+    border-radius:6px;
+    background:#f8f8f8;
+}
+
+.category-option input{
+    margin-right:6px;
+}
+
+.save{
+    margin-top:25px;
+    background:#222;
+    color:white;
+    width:100%;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+<h1>GUILLTAC</h1>
+
+<p>Administración de productos</p>
+
+</header>
+
+
+<main class="container">
+
+
+<div class="top">
+
+<h2>Productos</h2>
+
+<button
+class="btn btn-back"
+onclick="location.href='admin.html'"
+>
+← Volver
+</button>
+
+</div>
+
+
+<section class="panel">
+
+<h2>Agregar producto</h2>
+
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label>
+Nombre del producto
+</label>
+
+<input
+type="text"
+id="nombre"
+placeholder="Ej. Bota Táctica Urbana"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Precio (Bs)
+</label>
+
+<input
+type="number"
+id="precio"
+placeholder="0"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Stock
+</label>
+
+<input
+type="number"
+id="stock"
+placeholder="0"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Estado
+</label>
+
+<select id="estado">
+
+<option value="activo">
+Activo
+</option>
+
+<option value="agotado">
+Agotado
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Descripción
+</label>
+
+<textarea
+id="descripcion"
+placeholder="Descripción del producto..."
+></textarea>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Categorías
+</label>
+
+<div class="categories">
+
+
+<label class="category-option">
+<input
+type="checkbox"
+value="novedades"
+>
+Novedades
+</label>
+
+
+<label class="category-option">
+<input
+type="checkbox"
+value="botas"
+>
+Botas
+</label>
+
+
+<label class="category-option">
+<input
+type="checkbox"
+value="tactico"
+>
+Equipo Táctico
+</label>
+
+
+<label class="category-option">
+<input
+type="checkbox"
+value="uniformes"
+>
+Uniformes
+</label>
+
+
+<label class="category-option">
+<input
+type="checkbox"
+value="aph"
+>
+APH
+</label>
+
+
+<label class="category-option">
+<input
+type="checkbox"
+value="promo"
+>
+Promociones
+</label>
+
+
+<label class="category-option">
+<input
+type="checkbox"
+value="usado"
+>
+Usados
+</label>
+
+
+</div>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Fotografía del producto
+</label>
+
+<input
+type="file"
+id="foto"
+accept="image/*"
+>
+
+</div>
+
+
+</div>
+
+
+<button
+class="btn save"
+onclick="guardarProducto()"
+>
+Guardar producto
+</button>
+
+
+</section>
+
+
+</main>
+
+
+<script>
+
+function guardarProducto(){
+
+    const nombre =
+        document
+        .getElementById("nombre")
+        .value
+        .trim();
+
+    const precio =
+        document
+        .getElementById("precio")
+        .value;
+
+    const stock =
+        document
+        .getElementById("stock")
+        .value;
+
+    if(
+        nombre === "" ||
+        precio === "" ||
+        stock === ""
+    ){
+
+        alert(
+            "Completa nombre, precio y stock."
+        );
+
+        return;
+
+    }
+
+    alert(
+        "Producto registrado correctamente."
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
