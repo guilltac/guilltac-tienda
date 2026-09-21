@@ -1689,150 +1689,98 @@ function enviarPedido(){
         document.getElementById("observaciones").value.trim();
 
 
-    if(
-        !nombre ||
-        !apellido ||
-        !telefono ||
-        !ci ||
-        !departamento ||
-        !direccion ||
-        !entrega ||
-        !pago
-    ){
+    if(!nombre || !apellido || !telefono || !ci ||
+       !departamento || !direccion){
 
-        alert(
-            "Por favor completa todos los datos del pedido."
-        );
+        alert("Por favor completa todos los campos obligatorios.");
 
         return;
     }
 
 
-    let mensaje =
-        "🛒 *NUEVO PEDIDO GUILLTAC*\n\n";
+    let subtotal = 0;
+
+    let productosTexto = "";
 
 
-    mensaje +=
-        "👤 *Nombre:* " +
-        nombre +
-        "\n";
+    carrito.forEach(function(producto){
+
+        const precio =
+            parseFloat(producto.precio) || 0;
+
+        const cantidad =
+            producto.cantidad || 1;
+
+        const totalProducto =
+            precio * cantidad;
+
+        subtotal += totalProducto;
 
 
-    mensaje +=
-        "👤 *Apellido:* " +
-        apellido +
-        "\n";
+        productosTexto +=
+
+            "\n• " +
+            producto.nombre +
+
+            "\n  Cantidad: " +
+            cantidad +
+
+            "\n  Precio: Bs " +
+            precio.toFixed(2) +
+
+            "\n  Subtotal: Bs " +
+            totalProducto.toFixed(2) +
+
+            "\n";
+
+    });
 
 
-    mensaje +=
-        "📱 *Teléfono:* " +
-        telefono +
-        "\n";
+    const mensaje =
 
+        "\uD83D\uDED2 *NUEVO PEDIDO GUILLTAC*\n\n" +
 
-    mensaje +=
-        "🪪 *C.I.:* " +
-        ci +
-        "\n";
+        "\uD83D\uDC64 *Nombre:* " +
+        nombre + "\n" +
 
+        "\uD83D\uDC64 *Apellido:* " +
+        apellido + "\n" +
 
-    mensaje +=
-        "📍 *Departamento:* " +
-        departamento +
-        "\n";
+        "\uD83D\uDCF1 *Teléfono:* " +
+        telefono + "\n" +
 
+        "\uD83E\uDEAA *C.I.:* " +
+        ci + "\n" +
 
-    mensaje +=
-        "🏠 *Dirección:* " +
-        direccion +
-        "\n";
+        "\uD83D\uDCCD *Departamento:* " +
+        departamento + "\n" +
 
+        "\uD83C\uDFE0 *Dirección:* " +
+        direccion + "\n" +
 
-    mensaje +=
-        "🚚 *Entrega:* " +
-        entrega +
-        "\n";
+        "\uD83D\uDE9A *Entrega:* " +
+        entrega + "\n" +
 
+        "\uD83D\uDCB3 *Pago:* " +
+        pago + "\n\n" +
 
-    mensaje +=
-        "💳 *Pago:* " +
-        pago +
-        "\n\n";
+        "\uD83D\uDCE6 *PRODUCTOS*\n" +
 
+        productosTexto +
 
-    mensaje +=
-        "📦 *PRODUCTOS*\n\n";
+        "\n\uD83D\uDCB0 *TOTAL: Bs " +
+        subtotal.toFixed(2) +
+        "*\n\n" +
 
+        "\uD83D\uDDD2 *Observaciones:*\n" +
 
-    let total = 0;
+        (observaciones || "Ninguna") +
 
-
-    carrito.forEach(
-        producto => {
-
-            const precio =
-                parseFloat(producto.precio) || 0;
-
-            const cantidad =
-                producto.cantidad;
-
-            const subtotal =
-                precio * cantidad;
-
-            total += subtotal;
-
-
-            mensaje +=
-                "• " +
-                producto.nombre +
-                "\n";
-
-
-            mensaje +=
-                "  Cantidad: " +
-                cantidad +
-                "\n";
-
-
-            mensaje +=
-                "  Precio: Bs " +
-                precio.toFixed(2) +
-                "\n";
-
-
-            mensaje +=
-                "  Subtotal: Bs " +
-                subtotal.toFixed(2) +
-                "\n\n";
-
-        }
-    );
-
-
-    mensaje +=
-        "💰 *TOTAL: Bs " +
-        total.toFixed(2) +
-        "*\n\n";
-
-
-    mensaje +=
-        "📝 *Observaciones:*\n";
-
-
-    mensaje +=
-        observaciones ||
-        "Ninguna";
-
-
-    mensaje +=
-        "\n\n";
-
-
-    mensaje +=
-        "Hola, quiero confirmar este pedido.";
+        "\n\nHola, quiero confirmar este pedido.";
 
 
     const url =
+
         "https://wa.me/" +
         WHATSAPP +
         "?text=" +
@@ -1843,8 +1791,8 @@ function enviarPedido(){
         url,
         "_blank"
     );
-}
 
+}
 
 /* =========================
    INICIAR
