@@ -1121,27 +1121,29 @@ Continuar pedido por WhatsApp
 
         <div class="form-group">
 
-            <label>Forma de pago</label>
+    <label>Forma de pago</label>
 
-            <select id="pago">
+    <select id="pago">
 
-                <option value="">
-                    Seleccione una opción
-                </option>
+        <option value="">
+            Seleccione una opción
+        </option>
 
-                <option value="Efectivo">
-                    Efectivo
-                </option>
+        <option value="Efectivo">
+            Efectivo
+        </option>
 
-                <option value="QR">
-                    QR
-                </option>
+        <option value="QR">
+            QR
+        </option>
 
-                <option value="Transferencia bancaria">
-                    Transferencia bancaria
-                </option>
+        <option value="Transferencia bancaria">
+            Transferencia bancaria
+        </option>
 
-            </select>
+    </select>
+
+</div>
            
         <div class="form-group">
 
@@ -1951,13 +1953,21 @@ pago + "\n" +
     }
 }
 
-   function actualizarEntrega(){
+  function actualizarEntrega(){
 
     const departamento =
         document.getElementById("departamento").value;
 
     const entrega =
         document.getElementById("entrega");
+
+    const pago =
+        document.getElementById("pago");
+
+
+    /* =========================
+       ACTUALIZAR FORMA DE ENTREGA
+       ========================= */
 
     entrega.innerHTML = "";
 
@@ -1991,6 +2001,28 @@ pago + "\n" +
 
         });
 
+
+        /* =========================
+           PAGOS PARA LA PAZ
+           ========================= */
+
+        pago.innerHTML = "";
+
+        pago.innerHTML +=
+            '<option value="">Seleccione una opción</option>';
+
+        pago.innerHTML +=
+            '<option value="Efectivo">Efectivo</option>';
+
+        pago.innerHTML +=
+            '<option value="QR">QR</option>';
+
+        pago.innerHTML +=
+            '<option value="Transferencia bancaria">' +
+            'Transferencia bancaria' +
+            '</option>';
+
+
     }else if(departamento !== ""){
 
         const opcionesNacional = [
@@ -2009,6 +2041,24 @@ pago + "\n" +
             entrega.appendChild(elemento);
 
         });
+
+
+        /* =========================
+           PAGOS FUERA DE LA PAZ
+           ========================= */
+
+        pago.innerHTML = "";
+
+        pago.innerHTML +=
+            '<option value="">Seleccione una opción</option>';
+
+        pago.innerHTML +=
+            '<option value="QR">QR</option>';
+
+        pago.innerHTML +=
+            '<option value="Transferencia bancaria">' +
+            'Transferencia bancaria' +
+            '</option>';
 
     }
 
