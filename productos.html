@@ -5,10 +5,8 @@
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>GUILLTAC - Productos</title>
 
@@ -20,93 +18,59 @@ content="width=device-width, initial-scale=1.0"
 
 body{
     margin:0;
-    font-family:Arial,sans-serif;
-    background:#f2f2f2;
+    font-family:Arial, sans-serif;
+    background:#f4f4f4;
     color:#222;
 }
 
-.header{
-    background:#151515;
+header{
+    background:#111;
     color:white;
     padding:20px;
-    text-align:center;
 }
 
-.header h1{
+header h1{
     margin:0;
+    font-size:24px;
 }
 
-.header p{
-    color:#bbb;
+header p{
+    margin:6px 0 0;
+    color:#ccc;
 }
 
-.container{
-    max-width:1100px;
+main{
+    max-width:900px;
     margin:30px auto;
     padding:0 20px;
 }
 
-.top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    margin-bottom:25px;
-}
-
-.btn{
-    border:0;
-    padding:12px 18px;
-    border-radius:6px;
-    cursor:pointer;
-    font-size:15px;
-}
-
-.btn-add{
-    background:#222;
-    color:white;
-}
-
-.btn-back{
-    background:#ddd;
-    color:#222;
-}
-
-.panel{
+.formulario{
     background:white;
-    border:1px solid #ddd;
-    border-radius:10px;
     padding:25px;
+    border-radius:10px;
+    box-shadow:0 3px 12px rgba(0,0,0,.12);
 }
 
-.form-grid{
-    display:grid;
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(250px,1fr)
-        );
-    gap:18px;
+h2{
+    margin-top:0;
 }
 
-.form-group{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
+.grupo{
+    margin-bottom:18px;
 }
 
-.form-group.full{
-    grid-column:1/-1;
-}
-
-label{
+.grupo label{
+    display:block;
     font-weight:bold;
+    margin-bottom:7px;
 }
 
 input,
 textarea,
 select{
-    padding:11px;
+    width:100%;
+    padding:12px;
     border:1px solid #ccc;
     border-radius:6px;
     font-size:15px;
@@ -117,28 +81,62 @@ textarea{
     resize:vertical;
 }
 
-.categories{
-    display:flex;
-    flex-wrap:wrap;
+.categorias{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
     gap:10px;
 }
 
 .category-option{
     border:1px solid #ccc;
-    padding:10px 14px;
+    padding:12px;
     border-radius:6px;
-    background:#f8f8f8;
+    cursor:pointer;
+    font-weight:normal !important;
 }
 
 .category-option input{
-    margin-right:6px;
+    width:auto;
+    margin-right:8px;
 }
 
-.save{
-    margin-top:25px;
-    background:#222;
-    color:white;
+button{
     width:100%;
+    padding:14px;
+    background:#111;
+    color:white;
+    border:0;
+    border-radius:7px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#333;
+}
+
+.volver{
+    display:inline-block;
+    margin-bottom:20px;
+    color:#111;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.volver:hover{
+    text-decoration:underline;
+}
+
+.mensaje{
+    display:none;
+    margin-top:15px;
+    padding:12px;
+    border-radius:6px;
+    background:#e8f5e9;
+    color:#176b2c;
+    text-align:center;
+    font-weight:bold;
 }
 
 </style>
@@ -149,7 +147,7 @@ textarea{
 <body>
 
 
-<header class="header">
+<header>
 
 <h1>GUILLTAC</h1>
 
@@ -158,34 +156,24 @@ textarea{
 </header>
 
 
-<main class="container">
+<main>
 
-
-<div class="top">
-
-<h2>Productos</h2>
-
-<button
-class="btn btn-back"
-onclick="location.href='admin.html'"
+<a
+href="admin.html"
+class="volver"
 >
-← Volver
-</button>
-
-</div>
+← Volver al panel
+</a>
 
 
-<section class="panel">
+<section class="formulario">
 
 <h2>Agregar producto</h2>
 
 
-<div class="form-grid">
+<div class="grupo">
 
-
-<div class="form-group">
-
-<label>
+<label for="nombre">
 Nombre del producto
 </label>
 
@@ -198,39 +186,42 @@ placeholder="Ej. Bota Táctica Urbana"
 </div>
 
 
-<div class="form-group">
+<div class="grupo">
 
-<label>
+<label for="precio">
 Precio (Bs)
 </label>
 
 <input
 type="number"
 id="precio"
+min="0"
+step="0.01"
 placeholder="0"
 >
 
 </div>
 
 
-<div class="form-group">
+<div class="grupo">
 
-<label>
+<label for="stock">
 Stock
 </label>
 
 <input
 type="number"
 id="stock"
+min="0"
 placeholder="0"
 >
 
 </div>
 
 
-<div class="form-group">
+<div class="grupo">
 
-<label>
+<label for="estado">
 Estado
 </label>
 
@@ -249,9 +240,9 @@ Agotado
 </div>
 
 
-<div class="form-group full">
+<div class="grupo">
 
-<label>
+<label for="descripcion">
 Descripción
 </label>
 
@@ -263,75 +254,97 @@ placeholder="Descripción del producto..."
 </div>
 
 
-<div class="form-group full">
+<div class="grupo">
 
 <label>
 Categorías
 </label>
 
-<div class="categories">
+
+<div class="categorias">
 
 
 <label class="category-option">
+
 <input
 type="checkbox"
 value="novedades"
 >
+
 Novedades
+
 </label>
 
 
 <label class="category-option">
+
 <input
 type="checkbox"
 value="botas"
 >
+
 Botas
+
 </label>
 
 
 <label class="category-option">
+
 <input
 type="checkbox"
 value="tactico"
 >
+
 Equipo Táctico
+
 </label>
 
 
 <label class="category-option">
+
 <input
 type="checkbox"
 value="uniformes"
 >
+
 Uniformes
+
 </label>
 
 
 <label class="category-option">
+
 <input
 type="checkbox"
 value="aph"
 >
+
 APH
+
 </label>
 
 
 <label class="category-option">
+
 <input
 type="checkbox"
 value="promo"
 >
+
 Promociones
+
 </label>
 
 
 <label class="category-option">
+
 <input
 type="checkbox"
 value="usado"
 >
+
 Usados
+
 </label>
 
 
@@ -340,9 +353,9 @@ Usados
 </div>
 
 
-<div class="form-group full">
+<div class="grupo">
 
-<label>
+<label for="foto">
 Fotografía del producto
 </label>
 
@@ -355,15 +368,22 @@ accept="image/*"
 </div>
 
 
-</div>
-
-
 <button
-class="btn save"
+type="button"
 onclick="guardarProducto()"
 >
+
 Guardar producto
+
 </button>
+
+
+<div
+id="mensaje"
+class="mensaje"
+>
+Producto enviado correctamente.
+</div>
 
 
 </section>
@@ -374,7 +394,13 @@ Guardar producto
 
 <script>
 
+
+const URL_SERVIDOR =
+"https://script.google.com/macros/s/AKfycbzSN6dszANppWHxfySG_QEjW8n57qFFeBwcAfaW7tI2WeZPWArCGBqhWQp-mUv0EwU-uQ/exec";
+
+
 function guardarProducto(){
+
 
     const nombre =
         document
@@ -382,15 +408,18 @@ function guardarProducto(){
         .value
         .trim();
 
+
     const precio =
         document
         .getElementById("precio")
         .value;
 
+
     const stock =
         document
         .getElementById("stock")
         .value;
+
 
     const descripcion =
         document
@@ -398,10 +427,12 @@ function guardarProducto(){
         .value
         .trim();
 
+
     const estado =
         document
         .getElementById("estado")
         .value;
+
 
     const categorias =
         Array.from(
@@ -409,8 +440,13 @@ function guardarProducto(){
                 'input[type="checkbox"]:checked'
             )
         )
-        .map(c => c.value)
+        .map(function(categoria){
+
+            return categoria.value;
+
+        })
         .join(",");
+
 
     if(
         nombre === "" ||
@@ -425,6 +461,7 @@ function guardarProducto(){
         return;
 
     }
+
 
     const datos = {
 
@@ -446,30 +483,112 @@ function guardarProducto(){
 
     };
 
-    fetch(
-        "https://script.google.com/macros/s/AKfycbzSN6dszANppWHxfySG_QEjW8n57qFFeBwcAfaW7tI2WeZPWArCGBqhWQp-mUv0EwU-uQ/exec",
-        {
-            method: "POST",
 
-            mode: "no-cors",
+    const formulario =
+        document.createElement("form");
 
-            headers: {
-                "Content-Type":
-                "text/plain;charset=utf-8"
-            },
 
-            body: new URLSearchParams(datos)
+    formulario.method = "POST";
+
+
+    formulario.action =
+        URL_SERVIDOR;
+
+
+    formulario.target =
+        "guilltac_envio";
+
+
+    Object.keys(datos).forEach(
+        function(campo){
+
+            const input =
+                document.createElement("input");
+
+
+            input.type = "hidden";
+
+
+            input.name = campo;
+
+
+            input.value =
+                datos[campo];
+
+
+            formulario.appendChild(input);
 
         }
     );
 
-    alert(
-        "Producto enviado correctamente."
+
+    const iframe =
+        document.createElement("iframe");
+
+
+    iframe.name =
+        "guilltac_envio";
+
+
+    iframe.style.display =
+        "none";
+
+
+    document.body.appendChild(
+        iframe
     );
 
-}
+
+    document.body.appendChild(
+        formulario
+    );
+
+
+    formulario.submit();
+
+
+    document
+    .getElementById("mensaje")
+    .style.display = "block";
+
+
+    document
+    .getElementById("nombre")
+    .value = "";
+
+
+    document
+    .getElementById("precio")
+    .value = "";
+
+
+    document
+    .getElementById("stock")
+    .value = "";
+
+
+    document
+    .getElementById("descripcion")
+    .value = "";
+
+
+    document
+    .getElementById("estado")
+    .value = "activo";
+
+
+    document
+    .querySelectorAll(
+        'input[type="checkbox"]'
+    )
+    .forEach(function(caja){
+
+        caja.checked = false;
+
+    });
 
 }
+
 
 </script>
 
