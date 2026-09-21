@@ -1218,20 +1218,47 @@ let carrito = [];
 
 function cargarProductos(){
 
-    const script = document.createElement("script");
-
-    script.src =
+    fetch(
         URL_SERVIDOR +
-        "?callback=recibirProductos&t=" +
-        Date.now();
+        "?t=" +
+        Date.now()
+    )
 
-   script.onerror = function(){
+    .then(function(respuesta){
 
-    console.log("Error al cargar productos desde el servidor.");
+        if(!respuesta.ok){
 
-};
+            throw new Error(
+                "Error HTTP: " +
+                respuesta.status
+            );
 
-    document.body.appendChild(script);
+        }
+
+        return respuesta.json();
+
+    })
+
+    .then(function(datos){
+
+        recibirProductos(datos);
+
+    })
+
+    .catch(function(error){
+
+        console.error(
+            "Error al cargar productos:",
+            error
+        );
+
+        document.getElementById("productos").innerHTML =
+            '<div class="loading">' +
+            'No se pudieron cargar los productos.' +
+            '</div>';
+
+    });
+
 }
 
 
