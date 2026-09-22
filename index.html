@@ -1328,16 +1328,26 @@ function mostrarProductos(lista){
 
         let imagen = "";
 
-        if(producto.foto){
+       if(producto.foto){
 
-            imagen =
-                '<img src="' +
-                producto.foto +
-                '" alt="' +
-                (producto.nombre || "") +
-                '">';
+    let urlImagen = producto.foto;
 
-        }else{
+    const coincidencia = producto.foto.match(/[?&]id=([^&]+)/);
+
+    if(coincidencia){
+        urlImagen =
+            "https://lh3.googleusercontent.com/d/" +
+            coincidencia[1];
+    }
+
+    imagen =
+        '<img src="' +
+        urlImagen +
+        '" alt="' +
+        (producto.nombre || "") +
+        '">';
+
+}else{
 
             imagen = '<span>◈</span>';
 
