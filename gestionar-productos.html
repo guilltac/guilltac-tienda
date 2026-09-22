@@ -790,14 +790,104 @@ function editarProducto(id){
 
 }
 
-
 function eliminarProducto(id){
 
-    alert(
-        "Eliminar producto ID: " + id
-    );
+    const producto =
+        productos.find(function(p){
+
+            return String(p.id) === String(id);
+
+        });
+
+
+    if(!producto){
+
+        alert("No se encontró el producto.");
+        return;
+
+    }
+
+
+    const confirmar =
+        confirm(
+            "¿Está seguro de eliminar este producto?\n\n" +
+            producto.nombre +
+            "\n\nEsta acción eliminará el producto de la tienda."
+        );
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+    const formulario =
+        document.createElement("form");
+
+    formulario.method = "POST";
+    formulario.action = URL_SERVIDOR;
+    formulario.target = "iframeEliminar";
+    formulario.style.display = "none";
+
+
+    const accion =
+        document.createElement("input");
+
+    accion.type = "hidden";
+    accion.name = "accion";
+    accion.value = "eliminarProducto";
+
+
+    const campoId =
+        document.createElement("input");
+
+    campoId.type = "hidden";
+    campoId.name = "id";
+    campoId.value = id;
+
+
+    formulario.appendChild(accion);
+    formulario.appendChild(campoId);
+
+
+    let iframe =
+        document.getElementById("iframeEliminar");
+
+
+    if(!iframe){
+
+        iframe =
+            document.createElement("iframe");
+
+        iframe.name = "iframeEliminar";
+        iframe.id = "iframeEliminar";
+        iframe.style.display = "none";
+
+        document.body.appendChild(iframe);
+
+    }
+
+
+    document.body.appendChild(formulario);
+
+    formulario.submit();
+
+
+    alert("✅ Producto eliminado correctamente.");
+
+
+    setTimeout(function(){
+
+        formulario.remove();
+
+        cargarProductos();
+
+    }, 1500);
 
 }
+
 function cancelarEdicion(){
 
     document
