@@ -1292,7 +1292,63 @@ header{
         display:block;
         object-fit:contain;
     }
+/* =====================================
+   RHINO - CATEGORÍAS EN CELULAR
+===================================== */
 
+@media(max-width:500px){
+
+    /* Panel de categorías */
+    .sidebar{
+        width:100%;
+        padding:12px;
+        margin:0;
+    }
+
+    .sidebar h2{
+        font-size:17px;
+        margin-bottom:10px;
+        padding-bottom:8px;
+    }
+
+    /* Categorías en cuadrícula */
+    .categories{
+        display:grid;
+        grid-template-columns:repeat(2, 1fr);
+        gap:7px;
+    }
+
+    /* Botones más pequeños */
+    .category{
+        min-height:46px;
+        padding:7px 8px;
+        margin:0;
+
+        display:flex;
+        align-items:center;
+
+        font-size:12px;
+        line-height:1.2;
+
+        border-radius:5px;
+    }
+
+    /* Iconos */
+    .category-icon{
+        width:28px;
+        height:28px;
+        min-width:28px;
+
+        margin-right:7px;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        font-size:15px;
+    }
+
+}
 }   
 </style>
 
