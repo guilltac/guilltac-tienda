@@ -196,7 +196,79 @@ main{
     }
 
 }
+/* =========================
+   EDITOR DE PRODUCTOS
+========================= */
 
+.editor-producto{
+    margin-top:25px;
+}
+
+.campo{
+    margin-bottom:18px;
+}
+
+.campo label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.campo input[type="text"],
+.campo input[type="number"],
+.campo select,
+.campo textarea{
+    width:100%;
+    padding:11px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
+
+.campo textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.categorias-editar{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(150px,1fr));
+    gap:8px;
+}
+
+.categorias-editar label{
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-weight:normal;
+}
+
+.categorias-editar input{
+    margin-right:6px;
+}
+
+.botones-editor{
+    display:flex;
+    gap:10px;
+}
+
+.botones-editor button{
+    border:0;
+    padding:12px 18px;
+    border-radius:6px;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.guardar-edicion{
+    background:#315f24;
+}
+
+.cancelar-edicion{
+    background:#555;
+}
 </style>
 
 </head>
@@ -249,6 +321,162 @@ main{
 
 </section>
 
+<!-- =========================
+     EDITAR PRODUCTO
+========================= -->
+
+<section
+    class="panel editor-producto"
+    id="editorProducto"
+    style="display:none;"
+>
+
+    <h2>✏️ Editar producto</h2>
+
+    <input
+        type="hidden"
+        id="editarId"
+    >
+
+
+    <div class="campo">
+        <label>Nombre del producto</label>
+
+        <input
+            type="text"
+            id="editarNombre"
+        >
+    </div>
+
+
+    <div class="campo">
+        <label>Precio (Bs)</label>
+
+        <input
+            type="number"
+            id="editarPrecio"
+            min="0"
+            step="0.01"
+        >
+    </div>
+
+
+    <div class="campo">
+        <label>Stock</label>
+
+        <input
+            type="number"
+            id="editarStock"
+            min="0"
+        >
+    </div>
+
+
+    <div class="campo">
+
+        <label>Estado</label>
+
+        <select id="editarEstado">
+
+            <option value="activo">
+                Activo
+            </option>
+
+            <option value="agotado">
+                Agotado
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div class="campo">
+
+        <label>Descripción</label>
+
+        <textarea
+            id="editarDescripcion"
+        ></textarea>
+
+    </div>
+
+
+    <div class="campo">
+
+        <label>Categorías</label>
+
+        <div class="categorias-editar">
+
+            <label>
+                <input type="checkbox"
+                       value="novedades">
+                Novedades
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       value="botas">
+                Botas
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       value="tactico">
+                Equipo Táctico
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       value="uniformes">
+                Uniformes
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       value="aph">
+                APH
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       value="promo">
+                Promociones
+            </label>
+
+            <label>
+                <input type="checkbox"
+                       value="usado">
+                Usados
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <div class="botones-editor">
+
+        <button
+            type="button"
+            class="guardar-edicion"
+            onclick="guardarEdicion()"
+        >
+            💾 Guardar cambios
+        </button>
+
+        <button
+            type="button"
+            class="cancelar-edicion"
+            onclick="cancelarEdicion()"
+        >
+            Cancelar
+        </button>
+
+    </div>
+
+</section>
+    
 </main>
 
 
@@ -446,9 +674,119 @@ function escapar(valor){
 
 function editarProducto(id){
 
-    alert(
-        "Editar producto ID: " + id
-    );
+    const producto =
+        productos.find(function(p){
+
+            return String(p.id) === String(id);
+
+        });
+
+
+    if(!producto){
+
+        alert(
+            "No se encontró el producto."
+        );
+
+        return;
+
+    }
+
+
+    /* ID */
+
+    document
+        .getElementById("editarId")
+        .value =
+        producto.id;
+
+
+    /* NOMBRE */
+
+    document
+        .getElementById("editarNombre")
+        .value =
+        producto.nombre || "";
+
+
+    /* PRECIO */
+
+    document
+        .getElementById("editarPrecio")
+        .value =
+        producto.precio || "";
+
+
+    /* STOCK */
+
+    document
+        .getElementById("editarStock")
+        .value =
+        producto.stock || "";
+
+
+    /* ESTADO */
+
+    document
+        .getElementById("editarEstado")
+        .value =
+        producto.estado || "activo";
+
+
+    /* DESCRIPCIÓN */
+
+    document
+        .getElementById("editarDescripcion")
+        .value =
+        producto.descripcion || "";
+
+
+    /* CATEGORÍAS */
+
+    const categoriasProducto =
+        String(
+            producto.categorias || ""
+        )
+        .split(",")
+        .map(function(categoria){
+
+            return categoria.trim();
+
+        });
+
+
+    document
+        .querySelectorAll(
+            ".categorias-editar input[type='checkbox']"
+        )
+        .forEach(function(caja){
+
+            caja.checked =
+                categoriasProducto.includes(
+                    caja.value
+                );
+
+        });
+
+
+    /* MOSTRAR EDITOR */
+
+    const editor =
+        document.getElementById(
+            "editorProducto"
+        );
+
+    editor.style.display =
+        "block";
+
+
+    /* BAJAR AUTOMÁTICAMENTE
+       HASTA EL FORMULARIO */
+
+    editor.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
 
 }
 
@@ -460,7 +798,25 @@ function eliminarProducto(id){
     );
 
 }
+function cancelarEdicion(){
 
+    document
+        .getElementById(
+            "editorProducto"
+        )
+        .style.display =
+        "none";
+
+}
+
+
+function guardarEdicion(){
+
+    alert(
+        "En el siguiente paso conectaremos Guardar cambios con Google Sheets."
+    );
+
+}
 
 /* CARGAR AL ABRIR */
 
