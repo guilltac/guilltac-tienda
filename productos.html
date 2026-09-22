@@ -646,9 +646,10 @@ function subirFotoDrive(archivo) {
                     estado.textContent =
                         "✅ Fotografía guardada correctamente.";
 
-                    resolve(
-                        resultado.url
-                    );
+                   resolve(
+    "https://drive.google.com/uc?export=view&id=" +
+    resultado.id
+);
 
                 })
 
