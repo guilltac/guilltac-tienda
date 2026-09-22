@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>RHINO TACTICAL ARMOR - Gestionar productos</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f2f2f2;
+    color:#222;
+}
+
+header{
+    background:#111;
+    color:#fff;
+    padding:20px;
+    text-align:center;
+}
+
+header h1{
+    margin:0;
+    font-size:25px;
+}
+
+header p{
+    margin:7px 0 0;
+    color:#bbb;
+}
+
+main{
+    max-width:1100px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+.volver{
+    display:inline-block;
+    margin-bottom:20px;
+    padding:10px 16px;
+    background:#222;
+    color:#fff;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.panel{
+    background:#fff;
+    border-radius:10px;
+    padding:25px;
+    box-shadow:0 3px 12px rgba(0,0,0,.12);
+}
+
+.panel-superior{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.panel-superior h2{
+    margin:0;
+}
+
+.actualizar{
+    border:0;
+    border-radius:6px;
+    padding:10px 15px;
+    background:#315f24;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.producto{
+    display:grid;
+    grid-template-columns:80px 1fr auto;
+    align-items:center;
+    gap:18px;
+
+    padding:15px 0;
+    border-bottom:1px solid #ddd;
+}
+
+.producto:last-child{
+    border-bottom:0;
+}
+
+.producto-imagen{
+    width:75px;
+    height:75px;
+
+    border-radius:7px;
+    overflow:hidden;
+
+    background:#e5e5e5;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.producto-imagen img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.producto-datos h3{
+    margin:0 0 7px;
+}
+
+.producto-datos p{
+    margin:4px 0;
+    color:#666;
+    font-size:14px;
+}
+
+.acciones{
+    display:flex;
+    gap:8px;
+}
+
+.acciones button{
+    border:0;
+    border-radius:6px;
+    padding:9px 12px;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.editar{
+    background:#315f24;
+}
+
+.eliminar{
+    background:#8c2020;
+}
+
+.mensaje{
+    text-align:center;
+    padding:30px;
+    color:#777;
+}
+
+
+/* CELULAR */
+
+@media(max-width:600px){
+
+    main{
+        padding:0 12px;
+        margin-top:18px;
+    }
+
+    .panel{
+        padding:15px;
+    }
+
+    .panel-superior{
+        align-items:flex-start;
+    }
+
+    .producto{
+        grid-template-columns:60px 1fr;
+        gap:10px;
+    }
+
+    .producto-imagen{
+        width:58px;
+        height:58px;
+    }
+
+    .acciones{
+        grid-column:1 / -1;
+    }
+
+    .acciones button{
+        flex:1;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<header>
+
+    <h1>RHINO TACTICAL ARMOR</h1>
+
+    <p>Gestión de productos</p>
+
+</header>
+
+
+<main>
+
+<a
+    href="admin.html"
+    class="volver"
+>
+    ← Volver al panel
+</a>
+
+
+<section class="panel">
+
+    <div class="panel-superior">
+
+        <h2>Productos registrados</h2>
+
+        <button
+            class="actualizar"
+            onclick="cargarProductos()"
+        >
+            ↻ Actualizar
+        </button>
+
+    </div>
+
+
+    <div id="listaProductos">
+
+        <div class="mensaje">
+            Cargando productos...
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<script>
+
+const URL_SERVIDOR =
+"https://script.google.com/macros/s/AKfycbw5LfmoztRCz4AMONfpoPYPL8uqcalm4OrOSMXgzW0IRFccgAfXvdCIYJySEZMV94pO0g/exec";
+
+
+let productos = [];
+
+
+/* =========================
+   CARGAR PRODUCTOS
+========================= */
+
+function cargarProductos(){
+
+    const lista =
+        document.getElementById(
+            "listaProductos"
+        );
+
+    lista.innerHTML =
+        '<div class="mensaje">Cargando productos...</div>';
+
+
+    fetch(URL_SERVIDOR)
+
+    .then(function(respuesta){
+
+        return respuesta.json();
+
+    })
+
+    .then(function(datos){
+
+        productos = datos;
+
+        mostrarProductos();
+
+    })
+
+    .catch(function(error){
+
+        console.error(error);
+
+        lista.innerHTML =
+            '<div class="mensaje">❌ No se pudieron cargar los productos.</div>';
+
+    });
+
+}
+
+
+/* =========================
+   MOSTRAR PRODUCTOS
+========================= */
+
+function mostrarProductos(){
+
+    const lista =
+        document.getElementById(
+            "listaProductos"
+        );
+
+
+    if(!productos.length){
+
+        lista.innerHTML =
+            '<div class="mensaje">No hay productos registrados.</div>';
+
+        return;
+
+    }
+
+
+    lista.innerHTML = "";
+
+
+    productos.forEach(function(producto){
+
+        const contenedor =
+            document.createElement("div");
+
+        contenedor.className =
+            "producto";
+
+
+        /* FOTO */
+
+        let fotoHTML = "📦";
+
+        if(producto.foto){
+
+            let urlImagen =
+                producto.foto;
+
+            const coincidencia =
+                producto.foto.match(
+                    /[?&]id=([^&]+)/
+                );
+
+            if(coincidencia){
+
+                urlImagen =
+                    "https://lh3.googleusercontent.com/d/" +
+                    coincidencia[1];
+
+            }
+
+            fotoHTML =
+                '<img src="' +
+                urlImagen +
+                '" alt="">';
+
+        }
+
+
+        contenedor.innerHTML =
+
+            '<div class="producto-imagen">' +
+                fotoHTML +
+            '</div>' +
+
+            '<div class="producto-datos">' +
+
+                '<h3>' +
+                    escapar(producto.nombre) +
+                '</h3>' +
+
+                '<p><strong>Precio:</strong> Bs ' +
+                    escapar(producto.precio) +
+                '</p>' +
+
+                '<p><strong>Stock:</strong> ' +
+                    escapar(producto.stock) +
+                '</p>' +
+
+                '<p><strong>Estado:</strong> ' +
+                    escapar(producto.estado) +
+                '</p>' +
+
+            '</div>' +
+
+            '<div class="acciones">' +
+
+                '<button class="editar" onclick="editarProducto(\'' +
+                    String(producto.id) +
+                '\')">' +
+                    '✏️ Editar' +
+                '</button>' +
+
+                '<button class="eliminar" onclick="eliminarProducto(\'' +
+                    String(producto.id) +
+                '\')">' +
+                    '🗑️ Eliminar' +
+                '</button>' +
+
+            '</div>';
+
+
+        lista.appendChild(
+            contenedor
+        );
+
+    });
+
+}
+
+
+/* =========================
+   SEGURIDAD DE TEXTO
+========================= */
+
+function escapar(valor){
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        valor == null
+        ? ""
+        : String(valor);
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================
+   BOTONES
+   Los activaremos después
+========================= */
+
+function editarProducto(id){
+
+    alert(
+        "Editar producto ID: " + id
+    );
+
+}
+
+
+function eliminarProducto(id){
+
+    alert(
+        "Eliminar producto ID: " + id
+    );
+
+}
+
+
+/* CARGAR AL ABRIR */
+
+cargarProductos();
+
+</script>
+
+</body>
+
+</html>
