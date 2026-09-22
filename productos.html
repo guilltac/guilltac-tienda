@@ -138,7 +138,133 @@ button:hover{
     text-align:center;
     font-weight:bold;
 }
+/* =========================
+   LISTA DE PRODUCTOS ADMIN
+========================= */
 
+.lista-admin{
+    margin-top:25px;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 3px 12px rgba(0,0,0,.12);
+}
+
+.lista-titulo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.lista-titulo h2{
+    margin:0;
+}
+
+.btn-actualizar{
+    width:auto;
+    padding:9px 15px;
+    background:#315f24;
+}
+
+.btn-actualizar:hover{
+    background:#24491a;
+}
+
+.producto-admin{
+    display:grid;
+    grid-template-columns:70px 1fr auto;
+    align-items:center;
+    gap:15px;
+
+    padding:12px 0;
+    border-bottom:1px solid #ddd;
+}
+
+.producto-admin:last-child{
+    border-bottom:0;
+}
+
+.producto-admin img{
+    width:65px;
+    height:65px;
+    object-fit:cover;
+    border-radius:6px;
+    background:#eee;
+}
+
+.producto-admin h3{
+    margin:0 0 5px;
+    font-size:16px;
+}
+
+.producto-admin p{
+    margin:3px 0;
+    font-size:13px;
+    color:#666;
+}
+
+.acciones-producto{
+    display:flex;
+    gap:6px;
+}
+
+.btn-editar,
+.btn-eliminar{
+    width:auto;
+    padding:8px 10px;
+    font-size:12px;
+}
+
+.btn-editar{
+    background:#315f24;
+}
+
+.btn-eliminar{
+    background:#8b1e1e;
+}
+
+.btn-editar:hover{
+    background:#24491a;
+}
+
+.btn-eliminar:hover{
+    background:#641414;
+}
+
+.cargando{
+    color:#777;
+    text-align:center;
+}
+
+
+/* CELULAR */
+
+@media(max-width:600px){
+
+    .lista-admin{
+        padding:15px;
+    }
+
+    .producto-admin{
+        grid-template-columns:55px 1fr;
+    }
+
+    .producto-admin img{
+        width:50px;
+        height:50px;
+    }
+
+    .acciones-producto{
+        grid-column:1 / -1;
+    }
+
+    .acciones-producto button{
+        flex:1;
+    }
+
+}
 </style>
 
 </head>
@@ -149,7 +275,7 @@ button:hover{
 
 <header>
 
-<h1>GUILLTAC</h1>
+<h1>RHINO TACTICAL ARMOR</h1>
 
 <p>Administración de productos</p>
 
@@ -168,8 +294,7 @@ class="volver"
 
 <section class="formulario">
 
-<h2>Agregar producto</h2>
-
+<h2 id="tituloFormulario">Agregar producto</h2>
 
 <div class="grupo">
 
@@ -394,6 +519,29 @@ Producto enviado correctamente.
 
 </section>
 
+<section class="lista-admin">
+
+    <div class="lista-titulo">
+        <h2>Productos registrados</h2>
+
+        <button
+            type="button"
+            class="btn-actualizar"
+            onclick="cargarProductosAdmin()"
+        >
+            ↻ Actualizar
+        </button>
+    </div>
+
+    <div id="listaProductosAdmin">
+
+        <p class="cargando">
+            Cargando productos...
+        </p>
+
+    </div>
+
+</section>
 
 </main>
 
