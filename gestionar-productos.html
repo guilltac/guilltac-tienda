@@ -812,9 +812,118 @@ function cancelarEdicion(){
 
 function guardarEdicion(){
 
-    alert(
-        "En el siguiente paso conectaremos Guardar cambios con Google Sheets."
-    );
+    const id =
+        document.getElementById("editarId").value;
+
+    const nombre =
+        document.getElementById("editarNombre").value.trim();
+
+    const precio =
+        document.getElementById("editarPrecio").value;
+
+    const stock =
+        document.getElementById("editarStock").value;
+
+    const estado =
+        document.getElementById("editarEstado").value;
+
+    const descripcion =
+        document.getElementById("editarDescripcion").value.trim();
+
+
+    if(!nombre){
+
+        alert("Escribe el nombre del producto.");
+        return;
+
+    }
+
+
+    const categorias = [];
+
+    document
+        .querySelectorAll(
+            ".categorias-editar input[type='checkbox']:checked"
+        )
+        .forEach(function(caja){
+
+            categorias.push(caja.value);
+
+        });
+
+
+    const formulario =
+        document.createElement("form");
+
+    formulario.method = "POST";
+    formulario.action = URL_SERVIDOR;
+    formulario.target = "iframeEdicion";
+    formulario.style.display = "none";
+
+
+    const datos = {
+
+        accion: "editarProducto",
+        id: id,
+        nombre: nombre,
+        precio: precio,
+        stock: stock,
+        descripcion: descripcion,
+        categorias: categorias.join(","),
+        estado: estado
+
+    };
+
+
+    Object.keys(datos).forEach(function(clave){
+
+        const input =
+            document.createElement("input");
+
+        input.type = "hidden";
+        input.name = clave;
+        input.value = datos[clave];
+
+        formulario.appendChild(input);
+
+    });
+
+
+    let iframe =
+        document.getElementById("iframeEdicion");
+
+
+    if(!iframe){
+
+        iframe =
+            document.createElement("iframe");
+
+        iframe.name = "iframeEdicion";
+        iframe.id = "iframeEdicion";
+        iframe.style.display = "none";
+
+        document.body.appendChild(iframe);
+
+    }
+
+
+    document.body.appendChild(formulario);
+
+    formulario.submit();
+
+
+    alert("✅ Cambios enviados correctamente.");
+
+
+    setTimeout(function(){
+
+        formulario.remove();
+
+        cancelarEdicion();
+
+        cargarProductos();
+
+    }, 1500);
 
 }
 
