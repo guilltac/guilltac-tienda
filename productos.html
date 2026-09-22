@@ -404,9 +404,11 @@ Producto enviado correctamente.
     const URL_SERVIDOR =
     "https://script.google.com/macros/s/AKfycbw5LfmoztRCz4AMONfpoPYPL8uqcalm4OrOSMXgzW0IRFccgAfXvdCIYJySEZMV94pO0g/exec";
 
-    function subirFotoDrive(archivo) {
+    function subirFotoDrive_PRUEBA(archivo) {
+        
 alert("LA FUNCIÓN DE SUBIDA SE ESTÁ EJECUTANDO");
-    return new Promise(function(resolve, reject) {
+    
+        return new Promise(function(resolve, reject) {
 
         if (!archivo) {
 
@@ -775,7 +777,7 @@ async function guardarProducto(){
                 "📤 Subiendo fotografía...";
 
             urlFoto =
-                await subirFotoDrive(
+                await subirFotoDrive_PRUEBA(
                     foto
                 );
 
