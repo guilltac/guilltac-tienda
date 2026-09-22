@@ -707,7 +707,50 @@ header{
     .product-buttons{
         flex-direction:column;
     }
+.rhino-topbar{
+    display:none;
+}
 
+.header-content{
+    flex-direction:column;
+    align-items:stretch;
+
+    gap:10px;
+
+    padding:10px 12px;
+}
+
+.logo-area{
+    justify-content:center;
+}
+
+.brand-mark{
+    width:65px;
+    height:60px;
+}
+
+.brand-text h1{
+    font-size:18px;
+    letter-spacing:1px;
+    white-space:normal;
+}
+
+.brand-text p{
+    font-size:8px;
+    letter-spacing:1px;
+}
+
+.header-actions{
+    width:100%;
+}
+
+.search-box{
+    flex:1;
+}
+
+.cart-button{
+    padding:11px;
+}
 }
 
 /* =========================
@@ -920,7 +963,204 @@ header{
     background:#1f9d48;
     color:#fff;
 }
-   
+ /* =========================
+   HEADER RHINO
+========================= */
+
+header{
+    background:
+        linear-gradient(
+            180deg,
+            rgba(3,7,5,.98),
+            rgba(7,12,8,.98)
+        );
+
+    padding:0;
+
+    border-bottom:1px solid rgba(103,200,50,.35);
+}
+
+.rhino-topbar{
+    max-width:1400px;
+    margin:auto;
+
+    min-height:34px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:6px 25px;
+
+    color:#999;
+
+    font-size:11px;
+    letter-spacing:2px;
+
+    border-bottom:1px solid #1d271e;
+}
+
+.admin-link{
+    color:#ccc;
+    text-decoration:none;
+    letter-spacing:0;
+    font-size:13px;
+}
+
+.admin-link:hover{
+    color:#7ddd42;
+}
+
+
+.header-content{
+    max-width:1400px;
+    margin:auto;
+
+    min-height:100px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:30px;
+
+    padding:12px 25px;
+}
+
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:16px;
+
+    min-width:0;
+}
+
+
+.brand-mark{
+    width:90px;
+    height:78px;
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.brand-mark img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+}
+
+
+.brand-text h1{
+    color:#fff;
+
+    font-size:29px;
+    letter-spacing:3px;
+
+    white-space:nowrap;
+}
+
+.brand-text p{
+    color:#aaa;
+
+    font-size:11px;
+    letter-spacing:2px;
+
+    margin-top:7px;
+}
+
+
+.header-actions{
+    display:flex;
+    align-items:center;
+
+    gap:16px;
+
+    flex:1;
+    justify-content:flex-end;
+}
+
+
+.search-box{
+    width:min(360px,100%);
+
+    height:43px;
+
+    display:flex;
+
+    border:1px solid #344235;
+
+    border-radius:6px;
+
+    overflow:hidden;
+
+    background:#101511;
+}
+
+
+.search-box input{
+    flex:1;
+
+    min-width:0;
+
+    border:0;
+    outline:0;
+
+    padding:0 14px;
+
+    background:transparent;
+
+    color:#fff;
+
+    font-size:14px;
+}
+
+
+.search-box input::placeholder{
+    color:#777;
+}
+
+
+.search-box span{
+    width:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#315f24;
+
+    color:#fff;
+
+    font-size:23px;
+}
+
+
+.cart-button{
+    background:#142211;
+
+    color:#fff;
+
+    border:1px solid #5cb631;
+
+    padding:12px 17px;
+
+    border-radius:6px;
+
+    white-space:nowrap;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.cart-button:hover{
+    background:#25491d;
+}  
 </style>
 
 </head>
@@ -934,38 +1174,62 @@ header{
 
 <header>
 
-<div class="header-content">
+    <div class="rhino-topbar">
+        <span>DISCIPLINA&nbsp;&nbsp;|&nbsp;&nbsp;EQUIPO&nbsp;&nbsp;|&nbsp;&nbsp;PREPARACIÓN&nbsp;&nbsp;|&nbsp;&nbsp;SIEMPRE LISTOS</span>
 
-<div class="logo-area">
+        <a href="admin.html" class="admin-link">
+            ⚙ Administrador
+        </a>
+    </div>
 
-<div class="brand-mark">
-    <img src="logo-rhino.png" alt="RHINO TACTICAL ARMOR">
-</div>
+    <div class="header-content">
 
-<div>
-<h1>RHINO TACTICAL ARMOR</h1>
+        <div class="logo-area">
 
-<p>
-EQUIPAMIENTO TÁCTICO · APH · PROFESIONAL
-</p>
-</div>
+            <div class="brand-mark">
+                <img
+                    src="logo-rhino.png"
+                    alt="RHINO TACTICAL ARMOR"
+                >
+            </div>
 
-</div>
+            <div class="brand-text">
+                <h1>RHINO TACTICAL ARMOR</h1>
+
+                <p>
+                    EQUIPAMIENTO TÁCTICO · APH · PROFESIONAL
+                </p>
+            </div>
+
+        </div>
 
 
-<button
-class="cart-button"
-onclick="abrirCarrito()">
+        <div class="header-actions">
 
-🛒 Carrito
-<span id="cart-count">0</span>
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="buscadorProductos"
+                    placeholder="Buscar productos..."
+                    oninput="buscarProductos()"
+                >
 
-</button>
+                <span>⌕</span>
+            </div>
 
-</div>
+            <button
+                class="cart-button"
+                onclick="abrirCarrito()"
+            >
+                🛒 Carrito
+                <span id="cart-count">0</span>
+            </button>
+
+        </div>
+
+    </div>
 
 </header>
-
 
 <!-- =========================
      CONTENEDOR
@@ -1691,7 +1955,47 @@ function filtrarCategoria(categoria, boton){
         visibles + " producto(s)";
 }
 
+/* =========================
+   BUSCADOR DE PRODUCTOS
+========================= */
 
+function buscarProductos(){
+
+    const texto =
+        document
+        .getElementById("buscadorProductos")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const resultados =
+        productos.filter(function(producto){
+
+            const nombre =
+                String(
+                    producto.nombre || ""
+                ).toLowerCase();
+
+            const descripcion =
+                String(
+                    producto.descripcion || ""
+                ).toLowerCase();
+
+            const categorias =
+                String(
+                    producto.categorias || ""
+                ).toLowerCase();
+
+            return (
+                nombre.includes(texto) ||
+                descripcion.includes(texto) ||
+                categorias.includes(texto)
+            );
+
+        });
+
+    mostrarProductos(resultados);
+}
 /* =========================
    AGREGAR AL CARRITO
 ========================= */
