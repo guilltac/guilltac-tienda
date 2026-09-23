@@ -2798,7 +2798,9 @@ function abrirDetalleProducto(id){
         producto.nombre || "Producto";
 
     document.getElementById("detalleDescripcion").textContent =
-        producto.descripcion || "";
+    producto.descripcionDetallada ||
+    producto.descripcion ||
+    "Sin descripción detallada disponible.";
 
     const precio = parseFloat(producto.precio);
 
