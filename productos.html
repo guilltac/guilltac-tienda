@@ -1053,7 +1053,96 @@ const foto5 =
         }
 
     }
+    if(foto2){
 
+    try {
+
+        estadoFoto.textContent =
+            "📤 Subiendo fotografía 2...";
+
+        urlFoto2 =
+            await subirFotoDrive(foto2);
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert(
+            "No se pudo guardar la fotografía 2."
+        );
+
+        return;
+    }
+}
+
+
+if(foto3){
+
+    try {
+
+        estadoFoto.textContent =
+            "📤 Subiendo fotografía 3...";
+
+        urlFoto3 =
+            await subirFotoDrive(foto3);
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert(
+            "No se pudo guardar la fotografía 3."
+        );
+
+        return;
+    }
+}
+
+
+if(foto4){
+
+    try {
+
+        estadoFoto.textContent =
+            "📤 Subiendo fotografía 4...";
+
+        urlFoto4 =
+            await subirFotoDrive(foto4);
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert(
+            "No se pudo guardar la fotografía 4."
+        );
+
+        return;
+    }
+}
+
+
+if(foto5){
+
+    try {
+
+        estadoFoto.textContent =
+            "📤 Subiendo fotografía 5...";
+
+        urlFoto5 =
+            await subirFotoDrive(foto5);
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert(
+            "No se pudo guardar la fotografía 5."
+        );
+
+        return;
+    }
+}
 
     /* =========================
        DATOS DEL PRODUCTO
