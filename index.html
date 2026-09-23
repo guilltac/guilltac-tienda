@@ -2813,7 +2813,87 @@ function abrirDetalleProducto(id){
         stock > 0
         ? "Stock disponible: " + stock
         : "Agotado";
+/* FOTOGRAFÍAS DEL PRODUCTO */
 
+const fotos = [
+    producto.foto,
+    producto.foto2,
+    producto.foto3,
+    producto.foto4,
+    producto.foto5
+].filter(function(foto){
+    return foto && foto.trim() !== "";
+});
+
+
+function convertirFoto(url){
+
+    const coincidencia =
+        url.match(/[?&]id=([^&]+)/);
+
+    if(coincidencia){
+
+        return "https://lh3.googleusercontent.com/d/" +
+            coincidencia[1];
+
+    }
+
+    return url;
+}
+
+
+const fotoPrincipal =
+    document.getElementById("detalleFotoPrincipal");
+
+const miniaturas =
+    document.getElementById("detalleMiniaturas");
+
+fotoPrincipal.innerHTML = "";
+miniaturas.innerHTML = "";
+
+
+if(fotos.length > 0){
+
+    const primeraFoto =
+        convertirFoto(fotos[0]);
+
+    fotoPrincipal.innerHTML =
+        '<img src="' +
+        primeraFoto +
+        '" style="width:100%;height:100%;object-fit:contain;">';
+
+
+    fotos.forEach(function(foto){
+
+        const url =
+            convertirFoto(foto);
+
+        const miniatura =
+            document.createElement("img");
+
+        miniatura.src = url;
+
+        miniatura.style.width = "65px";
+        miniatura.style.height = "65px";
+        miniatura.style.objectFit = "cover";
+        miniatura.style.cursor = "pointer";
+        miniatura.style.borderRadius = "5px";
+        miniatura.style.border = "1px solid #5bb42d";
+
+        miniatura.onclick = function(){
+
+            fotoPrincipal.innerHTML =
+                '<img src="' +
+                url +
+                '" style="width:100%;height:100%;object-fit:contain;">';
+
+        };
+
+        miniaturas.appendChild(miniatura);
+
+    });
+
+}
     document.getElementById("modalProducto").style.display =
         "flex";
 }
