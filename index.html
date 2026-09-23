@@ -2780,7 +2780,50 @@ function cerrarCarrito(){
         "none";
 }
 
+/* =========================
+   DETALLES DEL PRODUCTO
+========================= */
 
+function abrirDetalleProducto(id){
+
+    const producto = productos.find(
+        p => String(p.id) === String(id)
+    );
+
+    if(!producto){
+        return;
+    }
+
+    document.getElementById("detalleNombre").textContent =
+        producto.nombre || "Producto";
+
+    document.getElementById("detalleDescripcion").textContent =
+        producto.descripcion || "";
+
+    const precio = parseFloat(producto.precio);
+
+    document.getElementById("detallePrecio").textContent =
+        isNaN(precio)
+        ? "Consultar precio"
+        : "Bs " + precio.toFixed(2);
+
+    const stock = parseInt(producto.stock) || 0;
+
+    document.getElementById("detalleStock").textContent =
+        stock > 0
+        ? "Stock disponible: " + stock
+        : "Agotado";
+
+    document.getElementById("modalProducto").style.display =
+        "flex";
+}
+
+
+function cerrarDetalleProducto(){
+
+    document.getElementById("modalProducto").style.display =
+        "none";
+}
 /* =========================
    CONSULTAR PRODUCTO
 ========================= */
