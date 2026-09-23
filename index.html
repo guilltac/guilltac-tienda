@@ -2669,7 +2669,169 @@ pago + "\n" +
 
         "\n\nHola, quiero confirmar este pedido.";
 
+     /* =========================
+   REGISTRAR PEDIDO
+========================= */
 
+const ahora = new Date();
+
+const idPedido =
+    "RTA-" +
+    ahora.getFullYear() +
+    "-" +
+    ahora.getTime();
+
+const fechaPedido =
+    ahora.toLocaleString("es-BO");
+
+const vencimiento = new Date(
+    ahora.getTime() + (24 * 60 * 60 * 1000)
+);
+
+const productosPedido =
+    carrito.map(function(producto){
+
+        return (
+            producto.nombre +
+            " x" +
+            producto.cantidad +
+            " - Bs " +
+            (
+                (parseFloat(producto.precio) || 0) *
+                producto.cantidad
+            ).toFixed(2)
+        );
+
+    }).join(" | ");
+
+const datosPedido =
+    new URLSearchParams();
+
+datosPedido.append("accion", "crearPedido");
+
+datosPedido.append(
+    "id_pedido",
+    idPedido
+);
+
+datosPedido.append(
+    "fecha_pedido",
+    fechaPedido
+);
+
+datosPedido.append(
+    "cliente",
+    nombre + " " + apellido
+);
+
+datosPedido.append(
+    "telefono",
+    telefono
+);
+
+datosPedido.append(
+    "ci",
+    ci
+);
+
+datosPedido.append(
+    "departamento",
+    departamento
+);
+
+datosPedido.append(
+    "direccion",
+    direccion
+);
+
+datosPedido.append(
+    "productos",
+    productosPedido
+);
+
+datosPedido.append(
+    "subtotal_productos",
+    subtotal.toFixed(2)
+);
+
+datosPedido.append(
+    "tipo_descuento",
+    policia === "si"
+        ? "BENEFICIO POLICIAL 5%"
+        : ""
+);
+
+datosPedido.append(
+    "descuento",
+    "0"
+);
+
+datosPedido.append(
+    "total_venta",
+    subtotal.toFixed(2)
+);
+
+datosPedido.append(
+    "costo_envio",
+    "0"
+);
+
+datosPedido.append(
+    "total_a_cobrar",
+    subtotal.toFixed(2)
+);
+
+datosPedido.append(
+    "metodo_pago",
+    pago
+);
+
+datosPedido.append(
+    "estado_pago",
+    "PENDIENTE"
+);
+
+datosPedido.append(
+    "estado_pedido",
+    "PEDIDO RECIBIDO"
+);
+
+datosPedido.append(
+    "tipo_entrega",
+    entrega
+);
+
+datosPedido.append(
+    "vencimiento_pago",
+    vencimiento.toLocaleString("es-BO")
+);
+
+datosPedido.append(
+    "ultima_actualizacion",
+    fechaPedido
+);
+
+datosPedido.append(
+    "observaciones",
+    observaciones
+);
+
+fetch(
+    URL_SERVIDOR,
+    {
+        method: "POST",
+        body: datosPedido
+    }
+)
+.catch(function(error){
+
+    console.error(
+        "Error al registrar pedido:",
+        error
+    );
+
+});
+     
     const url =
 
         "https://wa.me/" +
