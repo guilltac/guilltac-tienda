@@ -2392,7 +2392,12 @@ function mostrarProductos(lista){
                 '</div>' +
 
                 '<div class="product-buttons">' +
-
+                    '<button class="btn-cart" ' +
+    'onclick="abrirDetalleProducto(\'' +
+    producto.id +
+    '\')">' +
+    '👁 Ver detalles' +
+'</button>' +
                     '<button class="btn-cart" ' +
                         (
                             agotado
