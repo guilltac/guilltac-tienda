@@ -1810,7 +1810,120 @@ Cargando productos...
 
 </div>
 
+<!-- =========================
+     MODAL DETALLES PRODUCTO
+========================= -->
 
+<div id="modalProducto" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2 id="detalleNombre">
+                Detalles del producto
+            </h2>
+
+            <button
+                class="close"
+                onclick="cerrarDetalleProducto()">
+                ×
+            </button>
+
+        </div>
+
+        <!-- FOTO PRINCIPAL -->
+
+        <div
+            id="detalleFotoPrincipal"
+            style="
+                width:100%;
+                height:350px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#080b09;
+                border:1px solid #303a31;
+                border-radius:8px;
+                overflow:hidden;
+                margin-bottom:12px;
+            ">
+        </div>
+
+
+        <!-- MINIATURAS -->
+
+        <div
+            id="detalleMiniaturas"
+            style="
+                display:flex;
+                gap:8px;
+                flex-wrap:wrap;
+                margin-bottom:18px;
+            ">
+        </div>
+
+
+        <!-- INFORMACIÓN -->
+
+        <div id="detalleDescripcion"
+             style="margin-bottom:15px;">
+        </div>
+
+        <div
+            id="detallePrecio"
+            style="
+                font-size:24px;
+                font-weight:bold;
+                color:#6fe53c;
+                margin-bottom:8px;
+            ">
+        </div>
+
+        <div
+            id="detalleStock"
+            style="margin-bottom:18px;">
+        </div>
+
+
+        <!-- BOTONES -->
+
+        <div
+            style="
+                display:flex;
+                gap:10px;
+            ">
+
+            <button
+                id="detalleAgregar"
+                class="btn-cart"
+                style="
+                    flex:1;
+                    padding:13px;
+                    border-radius:6px;
+                    cursor:pointer;
+                ">
+                🛒 Agregar al carrito
+            </button>
+
+            <button
+                id="detalleWhatsapp"
+                class="btn-whatsapp"
+                style="
+                    flex:1;
+                    padding:13px;
+                    border:0;
+                    border-radius:6px;
+                    cursor:pointer;
+                ">
+                WhatsApp
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 <!-- =========================
      MODAL CARRITO
 ========================= -->
